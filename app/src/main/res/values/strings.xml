@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Brunchify</string>
+    <string name="welcomescreenonetext1">Connecting mutually relevant,\n opportunistic people on 1:1 brunch</string>
+    <string name="welcomescreenonetext2">Swipe to see \n how this works</string>
+    <string name="welcomescreentwotext1">Sign Up for the Week</string>
+    <string name="welcomescreentwotext2">Each Monday, you can sign up \n for the week with \n times and locations that work for \n you.</string>
+    <string name="welcomescreenthreetext1">We\'ll send an intro!</string>
+    <string name="welcomescreenthreetext2"> You get introduced to your match. \n Use this to break the ice and \n coordinate the exact meeting \n location.</string>
+    <string name="welcomescreenfourtext1">Meet your new connection </string>
+    <string name="welcomescreenfourtext2">Commit to making your connection \n - mutual respect and reliability is \n what makes our community special</string>
+    <string name="welcomescreenfivetext1">Give Feedback!</string>
+    <string name="welcomescreenfivetext2">Your feedback about the meeting \n helps us provide you with more \n relevant matches.</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="start">GOT IT</string>
+    <string name="alreadyknow"><u>I already know this person</u></string>
+    <string name="notice">* The responses are used to suggest relevant \n matches to you. This doesnt necessarily mean you \n you will get matched to the person shown</string>
+    <string name="editprofiletext">Edit Profile</string>
+    <string name="editpastmeetups">Past Meetups</string>
+    <string name="neighbourhoodtext">Which neighbourhoods \n can you meet in?</string>
+</resources>

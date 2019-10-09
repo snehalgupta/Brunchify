@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/logoimgview"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/invite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07" />
+
+    <TextView
+        android:id="@+id/invitetext"
+        android:layout_width="180dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/avenir"
+        android:src="@drawable/text_logo"
+        android:text="Invite your Friends"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/colorBlackdark"
+        android:textSize="20dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logoimgview" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@color/colorBlack"
+        app:layout_constraintTop_toBottomOf="@id/invitetext"
+        tools:layout_editor_absoluteX="24dp" />
+
+    <TextView
+        android:id="@+id/email1"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="288dp"
+        android:fontFamily="@font/avenir"
+        android:src="@drawable/text_logo"
+        android:text="Email:"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlackdark"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.101"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="288dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.804"
+        app:layout_constraintLeft_toLeftOf="@id/email1"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/email2"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="228dp"
+        android:fontFamily="@font/avenir"
+        android:src="@drawable/text_logo"
+        android:text="Email:"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlackdark"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="@id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/email1"
+        app:layout_constraintVertical_bias="0.619" />
+
+    <EditText
+        android:id="@+id/editt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="232dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.84"
+
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/invitebutton"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:layout_marginBottom="172dp"
+        android:background="@drawable/capsule"
+        android:fontFamily="@font/avenir"
+        android:src="@drawable/text_logo"
+        android:text="Invite"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/colorwhite"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.416"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/backbutton"
+        android:layout_width="110dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginRight="160dp"
+        android:background="@drawable/capsule"
+        android:fontFamily="@font/avenir"
+        android:src="@drawable/text_logo"
+        android:text="Back"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/colorwhite"
+        android:textSize="20dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/invitebutton" />
+
+</android.support.constraint.ConstraintLayout>

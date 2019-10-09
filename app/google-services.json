@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "175531861860",
+    "firebase_url": "https://my-project-brunchify.firebaseio.com",
+    "project_id": "my-project-brunchify",
+    "storage_bucket": "my-project-brunchify.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:175531861860:android:f8caca04edb88e59283c71",
+        "android_client_info": {
+          "package_name": "teamcool.mandeep.brunchify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "175531861860-moffbgh6gtikbi4h32ve65rav6i9j04d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "teamcool.mandeep.brunchify",
+            "certificate_hash": "a17417428ac5d7a1c1f268656ccb6cb07920127b"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCP7piikCeJg1VPyqq5TZmFD3xZN2XalOs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
