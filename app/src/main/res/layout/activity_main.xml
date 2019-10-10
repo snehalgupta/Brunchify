@@ -1,16 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context="Activities.Select_Options">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+    </androidx.viewpager.widget.ViewPager>
+
+    <Button
+        android:id="@+id/Btn_Next"
+        android:layout_width="5dp"
         android:layout_height="wrap_content"
-        android:text="CANDYYYYYY"
-        tools:layout_editor_absoluteX="181dp"
-        tools:layout_editor_absoluteY="111dp" />
-</android.support.constraint.ConstraintLayout>
+        android:background="@null"
+        android:text="@string/next"
+        android:textColor="@android:color/white" />
+    <Button
+        android:id="@+id/Btn_Skip"
+        android:layout_width="5dp"
+        android:layout_height="wrap_content"
+        android:text="@string/skip"
+        android:background="@null"
+        android:textColor="@android:color/white" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

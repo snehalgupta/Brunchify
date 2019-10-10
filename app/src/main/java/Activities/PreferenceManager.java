@@ -1,4 +1,4 @@
-package teamcool.mandeep.brunchify;
+package Activities;
 
 import android.content.Context;
 import android.content.SharedPreferences;

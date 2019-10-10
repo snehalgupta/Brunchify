@@ -1,36 +1,45 @@
 {
   "project_info": {
-    "project_number": "175531861860",
-    "firebase_url": "https://my-project-brunchify.firebaseio.com",
-    "project_id": "my-project-brunchify",
-    "storage_bucket": "my-project-brunchify.appspot.com"
+    "project_number": "854290504353",
+    "firebase_url": "https://brunchify-1570621094171.firebaseio.com",
+    "project_id": "brunchify-1570621094171",
+    "storage_bucket": "brunchify-1570621094171.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:175531861860:android:f8caca04edb88e59283c71",
+        "mobilesdk_app_id": "1:854290504353:android:4104ac5deeef4a9848aee0",
         "android_client_info": {
           "package_name": "teamcool.mandeep.brunchify"
         }
       },
       "oauth_client": [
         {
-          "client_id": "175531861860-moffbgh6gtikbi4h32ve65rav6i9j04d.apps.googleusercontent.com",
+          "client_id": "854290504353-p9kf8m6imj0um02rkvrbtapb0inbsotg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "teamcool.mandeep.brunchify",
-            "certificate_hash": "a17417428ac5d7a1c1f268656ccb6cb07920127b"
+            "certificate_hash": "ec1081caaab187a1100bdf09ecbca504074f97bb"
           }
+        },
+        {
+          "client_id": "854290504353-2latpcqes8ro3b2ee67pnvpb1215tk12.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCP7piikCeJg1VPyqq5TZmFD3xZN2XalOs"
+          "current_key": "AIzaSyD_QrKghmbzCYzFPRkVVVswyEV41xNGpd8"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "854290504353-2latpcqes8ro3b2ee67pnvpb1215tk12.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
