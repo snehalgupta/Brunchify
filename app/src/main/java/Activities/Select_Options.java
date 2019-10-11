@@ -20,7 +20,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.content.Intent;
 
-public class Select_Options extends FragmentActivity {
+public class Select_Options extends FragmentActivity implements Select_Objectives.OnFragmentInteractionListener {
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
     private int no_of_fragments = 3;
@@ -71,6 +71,11 @@ public class Select_Options extends FragmentActivity {
 
     private int getItem(int i){
         return viewPager.getCurrentItem()+i;
+    }
+
+    @Override
+    public void onFragmentInteraction(String item) {
+
     }
 
     public class MyViewPagerAdapter extends FragmentPagerAdapter{

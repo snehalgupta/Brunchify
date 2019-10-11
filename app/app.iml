@@ -168,6 +168,7 @@
     <orderEntry type="library" name="Gradle: androidx.transition:transition-1.0.0-rc01" level="project" />
     <orderEntry type="library" name="Gradle: androidx.collection:collection:1.0.0-rc01@jar" level="project" />
     <orderEntry type="library" name="Gradle: androidx.constraintlayout:constraintlayout-1.1.2" level="project" />
+    <orderEntry type="library" name="Gradle: com.google.android:flexbox-0.3.2" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-basement-12.0.1" level="project" />
     <orderEntry type="library" name="Gradle: androidx.slidingpanelayout:slidingpanelayout-1.0.0-rc01" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.12@jar" level="project" />
