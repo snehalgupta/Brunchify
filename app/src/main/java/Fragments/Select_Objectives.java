@@ -31,7 +31,6 @@ public class Select_Objectives extends Fragment{
     private String mParam1;
     private RecyclerView recyclerView;
     private ArrayList<String> objectives_arr;
-
     private OnFragmentInteractionListener mListener;
 
     public Select_Objectives() {
@@ -60,7 +59,7 @@ public class Select_Objectives extends Fragment{
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_select__objectives, container, false);
-        recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view1);
+        recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view_obj);
         FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
         layoutm.setFlexDirection(FlexDirection.ROW);
         layoutm.setJustifyContent(JustifyContent.FLEX_START);

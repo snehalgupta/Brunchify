@@ -20,7 +20,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.content.Intent;
 
-public class Select_Options extends FragmentActivity implements Select_Objectives.OnFragmentInteractionListener {
+public class Select_Options extends FragmentActivity implements Select_Objectives.OnFragmentInteractionListener,Select_Neighbourhood.OnFragmentInteractionListener {
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
     private int no_of_fragments = 3;
