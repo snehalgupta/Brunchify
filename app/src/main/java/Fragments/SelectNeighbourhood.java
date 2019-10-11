@@ -1,7 +1,6 @@
 package Fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import Adapters.Neighbourhood_RV_Adapter;
@@ -13,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
@@ -24,7 +22,7 @@ import java.util.ArrayList;
 import androidx.recyclerview.widget.RecyclerView;
 import teamcool.mandeep.brunchify.R;
 
-public class Select_Neighbourhood extends Fragment implements AdapterView.OnItemSelectedListener {
+public class SelectNeighbourhood extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private static final String ARG_PARAM1 = "param1";
     private String mParam1;
@@ -34,11 +32,11 @@ public class Select_Neighbourhood extends Fragment implements AdapterView.OnItem
     private OnFragmentInteractionListener mListener;
     String selected_city;
 
-    public Select_Neighbourhood() {
+    public SelectNeighbourhood() {
     }
 
-    public static Select_Neighbourhood newInstance(String param1) {
-        Select_Neighbourhood fragment = new Select_Neighbourhood();
+    public static SelectNeighbourhood newInstance(String param1) {
+        SelectNeighbourhood fragment = new SelectNeighbourhood();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);

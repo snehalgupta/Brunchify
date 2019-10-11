@@ -1,9 +1,11 @@
 package Activities;
 
 //import android.support.v7.app.AppCompatActivity;
-import Fragments.Select_Neighbourhood;
-import Fragments.Select_Objectives;
-import Fragments.Select_Slots;
+import Fragments.Interests;
+import Fragments.SelectInterests;
+import Fragments.SelectNeighbourhood;
+import Fragments.SelectObjectives;
+import Fragments.SelectSlots;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -20,10 +22,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.content.Intent;
 
-public class Select_Options extends FragmentActivity implements Select_Objectives.OnFragmentInteractionListener,Select_Neighbourhood.OnFragmentInteractionListener {
+public class SelectOptions extends FragmentActivity implements SelectObjectives.OnFragmentInteractionListener, SelectNeighbourhood.OnFragmentInteractionListener,SelectInterests.OnFragmentInteractionListener, Interests.OnFragmentInteractionListener {
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
-    private int no_of_fragments = 3;
+    private int no_of_fragments = 4;
     private Button btn_skip;
     private Button btn_next;
 
@@ -65,7 +67,7 @@ public class Select_Options extends FragmentActivity implements Select_Objective
     }
 
     private void launchDashboard(){
-        startActivity(new Intent(Select_Options.this, Dashboard.class));
+        startActivity(new Intent(SelectOptions.this, Dashboard.class));
         finish();
     }
 
@@ -87,10 +89,11 @@ public class Select_Options extends FragmentActivity implements Select_Objective
         @Override
         public Fragment getItem(int pos){
             switch(pos){
-                case 0: return Select_Objectives.newInstance("Select objectives");
-                case 1: return Select_Neighbourhood.newInstance("Select neighbourhood");
-                case 2: return Select_Slots.newInstance("Select slots");
-                default: return Select_Objectives.newInstance("Default");
+                case 0: return SelectObjectives.newInstance("Select objectives");
+                case 1: return SelectInterests.newInstance("Select Interests");
+                case 2: return SelectNeighbourhood.newInstance("Select neighbourhood");
+                case 3: return SelectSlots.newInstance("Select slots");
+                default: return SelectObjectives.newInstance("Default");
             }
         }
 

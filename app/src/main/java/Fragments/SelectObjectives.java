@@ -1,18 +1,14 @@
 package Fragments;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 
 import Adapters.Objectives_RV_Adapter;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
@@ -20,12 +16,10 @@ import com.google.android.flexbox.JustifyContent;
 
 import java.util.ArrayList;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import teamcool.mandeep.brunchify.R;
 
-public class Select_Objectives extends Fragment{
+public class SelectObjectives extends Fragment{
 
     private static final String ARG_PARAM1 = "param1";
     private String mParam1;
@@ -33,12 +27,12 @@ public class Select_Objectives extends Fragment{
     private ArrayList<String> objectives_arr;
     private OnFragmentInteractionListener mListener;
 
-    public Select_Objectives() {
+    public SelectObjectives() {
 
     }
 
-    public static Select_Objectives newInstance(String param1) {
-        Select_Objectives fragment = new Select_Objectives();
+    public static SelectObjectives newInstance(String param1) {
+        SelectObjectives fragment = new SelectObjectives();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);

@@ -4,33 +4,31 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import Adapters.Pager_Adapter;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import teamcool.mandeep.brunchify.R;
 
-public class Select_Interests extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class SelectInterests extends Fragment implements Interests.OnFragmentInteractionListener{
 
-    // TODO: Rename and change types of parameters
+    private static final String ARG_PARAM1 = "param1";
     private String mParam1;
-    private String mParam2;
+    private FragmentPagerAdapter adapter_vp;
 
     private OnFragmentInteractionListener mListener;
 
-    public Select_Interests() {
-        // Required empty public constructor
+    public SelectInterests() {
+
     }
 
-    // TODO: Rename and change types and number of parameters
-    public static Select_Interests newInstance(String param1) {
-        Select_Interests fragment = new Select_Interests();
+    public static SelectInterests newInstance(String param1) {
+        SelectInterests fragment = new SelectInterests();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
@@ -42,22 +40,17 @@ public class Select_Interests extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_select__interests, container, false);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        View view = inflater.inflate(R.layout.fragment_select__interests, container, false);
+        ViewPager vpager = (ViewPager)view.findViewById(R.id.vpPager);
+        adapter_vp = new Pager_Adapter(getFragmentManager());
+        vpager.setAdapter(adapter_vp);
+        return view;
     }
 
     @Override
@@ -66,8 +59,7 @@ public class Select_Interests extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -77,9 +69,14 @@ public class Select_Interests extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onFragmentInteraction(String item) {
+
+    }
+
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(String item);
     }
+
 }

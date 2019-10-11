@@ -2,12 +2,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Fragments.Select_Interests">
+    tools:context="Fragments.SelectInterests">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/interests_img"
+            android:layout_width="match_parent"
+            android:layout_marginVertical="16dp"
+            android:layout_height="100dp"
+            android:scaleType="fitCenter"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/interests" />
+
+        <TextView
+            android:id="@+id/interests_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/interests_img"
+            android:layout_marginVertical="16dp"
+            android:text="Pick Your Interests!"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlackdark"
+            android:fontFamily="@font/avenir"
+            android:textSize="20dp" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vpPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/interests_text">
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/view_pager_tab"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorBlue"
+                app:tabMode="fixed"
+                app:tabGravity="fill" />
+        </androidx.viewpager.widget.ViewPager>
+    </RelativeLayout>
 
 </FrameLayout>

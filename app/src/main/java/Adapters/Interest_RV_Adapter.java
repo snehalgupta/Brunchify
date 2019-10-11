@@ -10,76 +10,75 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
-import Fragments.SelectObjectives;
+import Fragments.Interests;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import teamcool.mandeep.brunchify.R;
 
-public class Objectives_RV_Adapter extends RecyclerView.Adapter<Objectives_RV_Adapter.ViewHolder> {
+public class Interest_RV_Adapter extends RecyclerView.Adapter<Interest_RV_Adapter.ViewHolder> {
 
-    private final ArrayList<String> objectives;
-    private ArrayList<String> selected_objectives;
-    private final SelectObjectives.OnFragmentInteractionListener mlistener;
-    static final String TAG = "ObjectiveRV";
+    private final ArrayList<String> interests;
+    private ArrayList<String> selected_interests;
+    private final Interests.OnFragmentInteractionListener mlistener;
+    static final String TAG = "InterestsRV";
     private Context context;
 
-    public Objectives_RV_Adapter(Context cont, ArrayList<String> arr, SelectObjectives.OnFragmentInteractionListener listener){
-        objectives = arr;
-        mlistener = listener;
+    public Interest_RV_Adapter(Context cont, ArrayList<String> arr, Interests.OnFragmentInteractionListener listener) {
         context = cont;
-        selected_objectives = new ArrayList<String>();
+        interests = arr;
+        mlistener = listener;
+        selected_interests = new ArrayList<String>();
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public Interest_RV_Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.objectives_button, parent, false);
-        return new ViewHolder(view,context);
+                .inflate(R.layout.interests_button, parent, false);
+        return new Interest_RV_Adapter.ViewHolder(view, context);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
-        holder.setData(objectives.get(position));
+    public void onBindViewHolder(final Interest_RV_Adapter.ViewHolder holder, int position) {
+        holder.setData(interests.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return objectives.size();
+        return interests.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mview;
         public final Button mButton;
         public Context context;
-        public String objective;
+        public String interest_;
 
-        public ViewHolder(View view, Context cont){
+        public ViewHolder(View view, Context cont) {
             super(view);
             mview = view;
-            mButton = (Button)view.findViewById(R.id.obj_button);
+            mButton = (Button) view.findViewById(R.id.interests_button);
             context = cont;
         }
 
         public void setData(final String item) {
-            this.objective = item;
-            mButton.setText(objective);
+            this.interest_ = item;
+            mButton.setText(interest_);
             mButton.setTextColor(Color.BLACK);
             mButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     {
-                        Log.i(TAG,"selected");
+                        Log.i(TAG, "selected");
                         if (null != mlistener) {
                             mlistener.onFragmentInteraction(item);
                         }
-                        Boolean isSelected = selected_objectives.contains(objective);
-                        if(isSelected){
+                        Boolean isSelected = selected_interests.contains(interest_);
+                        if (isSelected) {
                             mButton.setBackground(ContextCompat.getDrawable(context, R.drawable.capsulewhite));
                             mButton.setTextColor(Color.BLACK);
-                            selected_objectives.remove(objective);
-                        }
-                        else{
-                            selected_objectives.add(objective);
+                            selected_interests.remove(interest_);
+                        } else {
+                            selected_interests.add(interest_);
                             mButton.setBackground(ContextCompat.getDrawable(context, R.drawable.capsuleselected));
                             mButton.setTextColor(Color.WHITE);
                         }

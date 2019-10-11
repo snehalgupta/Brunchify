@@ -147,7 +147,7 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
     private void handleresult(GoogleSignInResult googleSignInResult){
         if(googleSignInResult.isSuccess()){
             Toast.makeText(this,googleSignInResult.getSignInAccount().getDisplayName(),Toast.LENGTH_LONG).show();
-            Intent intent=new Intent(WelcomeActivity.this, Select_Options.class);
+            Intent intent=new Intent(WelcomeActivity.this, SelectOptions.class);
             startActivity(intent);
         }
         else
@@ -184,7 +184,7 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
 
     private void launchHomeScreen() {
         prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(WelcomeActivity.this, Select_Options.class));
+        startActivity(new Intent(WelcomeActivity.this, SelectOptions.class));
         finish();
     }
 

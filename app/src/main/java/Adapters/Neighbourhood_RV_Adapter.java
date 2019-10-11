@@ -10,7 +10,7 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
-import Fragments.Select_Neighbourhood;
+import Fragments.SelectNeighbourhood;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import teamcool.mandeep.brunchify.R;
@@ -19,11 +19,11 @@ public class Neighbourhood_RV_Adapter extends RecyclerView.Adapter<Neighbourhood
 
     private final ArrayList<String> places;
     private ArrayList<String> selected_places;
-    private final Select_Neighbourhood.OnFragmentInteractionListener mlistener;
+    private final SelectNeighbourhood.OnFragmentInteractionListener mlistener;
     static final String TAG = "NeighbourhoodRV";
     private Context context;
 
-    public Neighbourhood_RV_Adapter(Context cont, ArrayList<String> arr, Select_Neighbourhood.OnFragmentInteractionListener listener){
+    public Neighbourhood_RV_Adapter(Context cont, ArrayList<String> arr, SelectNeighbourhood.OnFragmentInteractionListener listener){
         places = arr;
         mlistener = listener;
         context = cont;

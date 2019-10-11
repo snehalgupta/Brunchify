@@ -1,7 +1,5 @@
 package Fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,7 +10,7 @@ import android.view.ViewGroup;
 
 import teamcool.mandeep.brunchify.R;
 
-public class Select_Slots extends Fragment {
+public class SelectSlots extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -24,13 +22,13 @@ public class Select_Slots extends Fragment {
 
     //private OnFragmentInteractionListener mListener;
 
-    public Select_Slots() {
+    public SelectSlots() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static Select_Slots newInstance(String param1) {
-        Select_Slots fragment = new Select_Slots();
+    public static SelectSlots newInstance(String param1) {
+        SelectSlots fragment = new SelectSlots();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
