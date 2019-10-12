@@ -8,6 +8,7 @@ import Fragments.SelectObjectives;
 import Fragments.SelectSlots;
 import Fragments.Social;
 import Fragments.Tech;
+import Models.Availability_Slot;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -24,7 +25,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.content.Intent;
 
-public class SelectOptions extends FragmentActivity implements SelectObjectives.OnFragmentInteractionListener, SelectNeighbourhood.OnFragmentInteractionListener,SelectInterests.OnFragmentInteractionListener, Business.OnFragmentInteractionListener, Social.OnFragmentInteractionListener, Tech.OnFragmentInteractionListener {
+public class SelectOptions extends FragmentActivity implements SelectObjectives.OnFragmentInteractionListener, SelectNeighbourhood.OnFragmentInteractionListener,SelectInterests.OnFragmentInteractionListener, Business.OnFragmentInteractionListener, Social.OnFragmentInteractionListener, Tech.OnFragmentInteractionListener, SelectSlots.OnFragmentInteractionListener {
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
     private int no_of_fragments = 4;
@@ -79,6 +80,11 @@ public class SelectOptions extends FragmentActivity implements SelectObjectives.
 
     @Override
     public void onFragmentInteraction(String item) {
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Availability_Slot slot) {
 
     }
 
