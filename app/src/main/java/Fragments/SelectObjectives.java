@@ -56,7 +56,7 @@ public class SelectObjectives extends Fragment{
         recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view_obj);
         FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
         layoutm.setFlexDirection(FlexDirection.ROW);
-        layoutm.setJustifyContent(JustifyContent.FLEX_START);
+        layoutm.setJustifyContent(JustifyContent.CENTER);
         recyclerView.setLayoutManager(layoutm);
         objectives_arr = new ArrayList<String>();
         objectives_arr.add("Brainstorming");

@@ -11,13 +11,13 @@ import android.os.Bundle;
 //import android.support.v4.view.ViewPager;
 //import android.support.v7.app.AppCompatActivity;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 import teamcool.mandeep.brunchify.R;
 
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,12 +30,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 public class WelcomeActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+    private static final String TAG = WelcomeActivity.class.getSimpleName();
     private GoogleApiClient googleApiClient;
     private static final int REQ_CODE=9001;
     private ViewPager viewPager;
@@ -47,10 +57,13 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
     private Button btnNext;
     private PreferenceManager prefManager;
     private ImageButton imageButton;
+    private FirebaseAuth mFirebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
 
         // Checking for first time launch - before calling setContentView()
         prefManager = new PreferenceManager(this);
@@ -77,7 +90,11 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
         btnSkip = (Button) findViewById(R.id.btn_skip);
         btnNext = (Button) findViewById(R.id.btn_next);
         imageButton=(ImageButton)findViewById(R.id.btn_continue);
-        GoogleSignInOptions googleSignInOptions=new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+        GoogleSignInOptions googleSignInOptions= new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .requestProfile()
+                .build();
         googleApiClient=new GoogleApiClient.Builder(this).enableAutoManage(this,this).addApi(Auth.GOOGLE_SIGN_IN_API,googleSignInOptions).build();
         // layouts of all welcome sliders
         // add few more layouts if you want
@@ -123,42 +140,76 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signin();
+                signIn();
             }
         });
     }
 
-    private void signin(){
+    private void signIn(){
         Intent intent=Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
         startActivityForResult(intent,REQ_CODE);
 
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==REQ_CODE){
-            Toast.makeText(this,"manny",Toast.LENGTH_LONG).show();
-            GoogleSignInResult result=Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            handleresult(result);
+
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == REQ_CODE) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account);
+            } catch (ApiException e) {
+                // Google Sign In failed, update UI appropriately
+                Log.w(TAG, "Google sign in failed", e);
+                Toast.makeText(this, "moii", Toast.LENGTH_SHORT);
+            }
         }
     }
 
-    private void handleresult(GoogleSignInResult googleSignInResult){
-        if(googleSignInResult.isSuccess()){
-            Toast.makeText(this,googleSignInResult.getSignInAccount().getDisplayName(),Toast.LENGTH_LONG).show();
-            Intent intent=new Intent(WelcomeActivity.this, SelectOptions.class);
-            startActivity(intent);
+    private void signInFromGoogleResult(GoogleSignInAccount acct, AuthResult googleSignInResult){
+        //FirebaseUser user = mFirebaseAuth.getCurrentUser();
+        Intent intent;
+        //googleSignInResult.getAdditionalUserInfo().getProfile()
+        if (googleSignInResult.getAdditionalUserInfo().isNewUser()) {
+            intent = new Intent(WelcomeActivity.this, SelectOptions.class);
         }
-        else
-        {
-            Toast.makeText(this,"moii",Toast.LENGTH_LONG).show();
+        else{
+            intent = new Intent(WelcomeActivity.this, Dashboard.class);
         }
-
+        startActivity(intent);
     }
-    private void updateUi(Boolean islogin){
 
+    /**
+     * Function to follow when a user is authenticated by Google
+     * Based on user's status go to either Dashboard or Onboarding
+     */
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
+        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
+
+        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        mFirebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithCredential:success");
+                            signInFromGoogleResult(acct, task.getResult());
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                        }
+
+                        // ...
+                    }
+                });
     }
+
+
     private void addBottomDots(int currentPage) {
         dots = new TextView[layouts.length];
 
