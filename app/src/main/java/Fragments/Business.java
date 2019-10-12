@@ -1,16 +1,14 @@
 package Fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
-import Adapters.Interest_RV_Adapter;
+import Adapters.Business_RV_Adapter;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
@@ -22,26 +20,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import teamcool.mandeep.brunchify.R;
 
 
-public class Interests extends Fragment {
+public class Business extends Fragment {
 
-    private static String type;
-
+    private static final String ARG_PARAM1 = "param1";
     private String mParam1;
     private RecyclerView recyclerView;
-    private ArrayList<String> interests;
     private ArrayList<String> business;
     private ArrayList<String> tech;
-    private ArrayList<String> social;
     private OnFragmentInteractionListener mListener;
 
-    public Interests() {
+    public Business() {
     }
 
-    public static Interests newInstance(String param1) {
-        Interests fragment = new Interests();
-        type = param1;
+    public static Business newInstance(String param1) {
+        Business fragment = new Business();
         Bundle args = new Bundle();
-        args.putString(type, param1);
+        args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,22 +44,20 @@ public class Interests extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(type);
+            mParam1 = getArguments().getString(ARG_PARAM1);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_interest, container, false);
-        recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view_interests);
+        View view = inflater.inflate(R.layout.fragment_business, container, false);
+        recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view_business);
         FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
         layoutm.setFlexDirection(FlexDirection.ROW);
         layoutm.setJustifyContent(JustifyContent.FLEX_START);
         recyclerView.setLayoutManager(layoutm);
         business = new ArrayList<String>();
-        tech = new ArrayList<String>();
-        social = new ArrayList<String>();
         business.add("Healthcare");
         business.add("Entrepreneurship");
         business.add("Marketing");
@@ -75,31 +67,8 @@ public class Interests extends Fragment {
         business.add("Investment Banking");
         business.add("E-commerce");
         business.add("Retail");
-        social.add("Diversity and Inclusion");
-        social.add("Photography");
-        social.add("Travel");
-        social.add("Hiking");
-        social.add("Fishing");
-        social.add("Music");
-        social.add("Social Impact");
-        tech.add("AI");
-        tech.add("Programming Languages");
-        tech.add("Data Science");
-        tech.add("Product Design");
-        tech.add("Crypto");
-        tech.add("VR/AR");
-        mParam1 = type;
-        Toast.makeText(getContext(),type,Toast.LENGTH_LONG).show();
-        if(mParam1.equals("0")){
-            interests = business;
-        }
-        else if(mParam1.equals("1")){
-            interests = social;
-        }
-        else{
-            interests = tech;
-        }
-        Interest_RV_Adapter adapter = new Interest_RV_Adapter(getContext(),interests,mListener);
+        //Toast.makeText(getContext(),type,Toast.LENGTH_LONG).show();
+        Business_RV_Adapter adapter = new Business_RV_Adapter(getContext(),business,mListener);
         recyclerView.setAdapter(adapter);
         return view;
     }

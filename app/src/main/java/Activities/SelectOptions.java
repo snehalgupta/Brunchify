@@ -1,11 +1,13 @@
 package Activities;
 
 //import android.support.v7.app.AppCompatActivity;
-import Fragments.Interests;
+import Fragments.Business;
 import Fragments.SelectInterests;
 import Fragments.SelectNeighbourhood;
 import Fragments.SelectObjectives;
 import Fragments.SelectSlots;
+import Fragments.Social;
+import Fragments.Tech;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -22,7 +24,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.content.Intent;
 
-public class SelectOptions extends FragmentActivity implements SelectObjectives.OnFragmentInteractionListener, SelectNeighbourhood.OnFragmentInteractionListener,SelectInterests.OnFragmentInteractionListener, Interests.OnFragmentInteractionListener {
+public class SelectOptions extends FragmentActivity implements SelectObjectives.OnFragmentInteractionListener, SelectNeighbourhood.OnFragmentInteractionListener,SelectInterests.OnFragmentInteractionListener, Business.OnFragmentInteractionListener, Social.OnFragmentInteractionListener, Tech.OnFragmentInteractionListener {
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
     private int no_of_fragments = 4;
@@ -90,7 +92,7 @@ public class SelectOptions extends FragmentActivity implements SelectObjectives.
         public Fragment getItem(int pos){
             switch(pos){
                 case 0: return SelectObjectives.newInstance("Select objectives");
-                case 1: return SelectInterests.newInstance("Select Interests");
+                case 1: return SelectInterests.newInstance("Select Business");
                 case 2: return SelectNeighbourhood.newInstance("Select neighbourhood");
                 case 3: return SelectSlots.newInstance("Select slots");
                 default: return SelectObjectives.newInstance("Default");

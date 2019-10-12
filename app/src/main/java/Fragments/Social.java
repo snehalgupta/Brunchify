@@ -3,31 +3,36 @@ package Fragments;
 import android.content.Context;
 import android.os.Bundle;
 
-import Adapters.Pager_Adapter;
+import Adapters.Social_RV_Adapter;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import com.google.android.flexbox.FlexDirection;
+import com.google.android.flexbox.FlexboxLayoutManager;
+import com.google.android.flexbox.JustifyContent;
+
+import java.util.ArrayList;
+
+import androidx.recyclerview.widget.RecyclerView;
 import teamcool.mandeep.brunchify.R;
 
-public class SelectInterests extends Fragment implements Business.OnFragmentInteractionListener, Social.OnFragmentInteractionListener, Tech.OnFragmentInteractionListener{
+
+public class Social extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private String mParam1;
-    private FragmentPagerAdapter adapter_vp;
-
+    private RecyclerView recyclerView;
+    private ArrayList<String> social;
     private OnFragmentInteractionListener mListener;
 
-    public SelectInterests() {
-
+    public Social() {
     }
 
-    public static SelectInterests newInstance(String param1) {
-        SelectInterests fragment = new SelectInterests();
+    public static Social newInstance(String param1) {
+        Social fragment = new Social();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
@@ -45,10 +50,22 @@ public class SelectInterests extends Fragment implements Business.OnFragmentInte
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_select__interests, container, false);
-        ViewPager vpager = (ViewPager)view.findViewById(R.id.vpPager);
-        adapter_vp = new Pager_Adapter(getFragmentManager());
-        vpager.setAdapter(adapter_vp);
+        View view = inflater.inflate(R.layout.fragment_social, container, false);
+        recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view_social);
+        FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
+        layoutm.setFlexDirection(FlexDirection.ROW);
+        layoutm.setJustifyContent(JustifyContent.FLEX_START);
+        recyclerView.setLayoutManager(layoutm);
+        social = new ArrayList<String>();
+        social.add("Diversity and Inclusion");
+        social.add("Photography");
+        social.add("Travel");
+        social.add("Hiking");
+        social.add("Fishing");
+        social.add("Music");
+        social.add("Social Impact");
+        Social_RV_Adapter adapter = new Social_RV_Adapter(getContext(),social,mListener);
+        recyclerView.setAdapter(adapter);
         return view;
     }
 
@@ -66,11 +83,6 @@ public class SelectInterests extends Fragment implements Business.OnFragmentInte
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    @Override
-    public void onFragmentInteraction(String item) {
-
     }
 
 

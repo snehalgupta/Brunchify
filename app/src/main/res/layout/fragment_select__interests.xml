@@ -42,9 +42,7 @@
                 android:id="@+id/view_pager_tab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorBlue"
-                app:tabMode="fixed"
-                app:tabGravity="fill" />
+                />
         </androidx.viewpager.widget.ViewPager>
     </RelativeLayout>
 

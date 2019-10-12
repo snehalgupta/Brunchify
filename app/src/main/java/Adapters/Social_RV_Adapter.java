@@ -10,20 +10,20 @@ import android.widget.Button;
 
 import java.util.ArrayList;
 
-import Fragments.Interests;
+import Fragments.Social;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import teamcool.mandeep.brunchify.R;
 
-public class Interest_RV_Adapter extends RecyclerView.Adapter<Interest_RV_Adapter.ViewHolder> {
-
+public class Social_RV_Adapter extends RecyclerView.Adapter<Social_RV_Adapter.ViewHolder> {
+    
     private final ArrayList<String> interests;
     private ArrayList<String> selected_interests;
-    private final Interests.OnFragmentInteractionListener mlistener;
-    static final String TAG = "InterestsRV";
+    private final Social.OnFragmentInteractionListener mlistener;
+    static final String TAG = "SocialRV";
     private Context context;
-
-    public Interest_RV_Adapter(Context cont, ArrayList<String> arr, Interests.OnFragmentInteractionListener listener) {
+    
+    public Social_RV_Adapter(Context cont, ArrayList<String> arr, Social.OnFragmentInteractionListener listener){
         context = cont;
         interests = arr;
         mlistener = listener;
@@ -31,14 +31,14 @@ public class Interest_RV_Adapter extends RecyclerView.Adapter<Interest_RV_Adapte
     }
 
     @Override
-    public Interest_RV_Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public Social_RV_Adapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.interests_button, parent, false);
-        return new Interest_RV_Adapter.ViewHolder(view, context);
+                .inflate(R.layout.social_button, parent, false);
+        return new Social_RV_Adapter.ViewHolder(view, context);
     }
 
     @Override
-    public void onBindViewHolder(final Interest_RV_Adapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final Social_RV_Adapter.ViewHolder holder, int position) {
         holder.setData(interests.get(position));
     }
 
@@ -56,7 +56,7 @@ public class Interest_RV_Adapter extends RecyclerView.Adapter<Interest_RV_Adapte
         public ViewHolder(View view, Context cont) {
             super(view);
             mview = view;
-            mButton = (Button) view.findViewById(R.id.interests_button);
+            mButton = (Button) view.findViewById(R.id.social_button);
             context = cont;
         }
 
@@ -88,4 +88,5 @@ public class Interest_RV_Adapter extends RecyclerView.Adapter<Interest_RV_Adapte
         }
 
     }
+
 }
