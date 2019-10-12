@@ -12,7 +12,7 @@ public class User {
     public ArrayList<Meetup> upcoming_meetups;
     public String primary_objective;
     public ArrayList<String> neighbourhoods;
-    public ArrayList<String> slots;
+    public ArrayList<Availability_Slot> slots;
 
     public User(String username) {
         name = username;
@@ -21,7 +21,7 @@ public class User {
         neighbourhoods.add(place);
     }
 
-    public void add_slot(String slot) {
+    public void add_slot(Availability_Slot slot) {
         slots.add(slot);
     }
 
