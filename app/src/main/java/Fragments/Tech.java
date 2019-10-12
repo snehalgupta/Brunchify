@@ -54,7 +54,7 @@ public class Tech extends Fragment {
         recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view_tech);
         FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
         layoutm.setFlexDirection(FlexDirection.ROW);
-        layoutm.setJustifyContent(JustifyContent.FLEX_START);
+        layoutm.setJustifyContent(JustifyContent.CENTER);
         recyclerView.setLayoutManager(layoutm);
         tech = new ArrayList<String>();
         tech.add("AI");

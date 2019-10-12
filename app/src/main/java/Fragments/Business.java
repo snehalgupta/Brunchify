@@ -55,7 +55,7 @@ public class Business extends Fragment {
         recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view_business);
         FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
         layoutm.setFlexDirection(FlexDirection.ROW);
-        layoutm.setJustifyContent(JustifyContent.FLEX_START);
+        layoutm.setJustifyContent(JustifyContent.CENTER);
         recyclerView.setLayoutManager(layoutm);
         business = new ArrayList<String>();
         business.add("Healthcare");

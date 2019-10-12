@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import teamcool.mandeep.brunchify.R;
 
@@ -18,7 +19,7 @@ public class SelectInterests extends Fragment implements Business.OnFragmentInte
 
     private static final String ARG_PARAM1 = "param1";
     private String mParam1;
-    private FragmentPagerAdapter adapter_vp;
+    private FragmentStatePagerAdapter adapter_vp;
 
     private OnFragmentInteractionListener mListener;
 

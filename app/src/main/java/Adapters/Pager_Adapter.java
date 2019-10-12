@@ -6,8 +6,9 @@ import Fragments.Tech;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 
-public class Pager_Adapter extends FragmentPagerAdapter {
+public class Pager_Adapter extends FragmentStatePagerAdapter {
     private static int num_items = 3;
 
     public Pager_Adapter(FragmentManager fm){

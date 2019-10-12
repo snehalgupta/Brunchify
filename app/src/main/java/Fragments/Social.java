@@ -54,7 +54,7 @@ public class Social extends Fragment {
         recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view_social);
         FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
         layoutm.setFlexDirection(FlexDirection.ROW);
-        layoutm.setJustifyContent(JustifyContent.FLEX_START);
+        layoutm.setJustifyContent(JustifyContent.CENTER);
         recyclerView.setLayoutManager(layoutm);
         social = new ArrayList<String>();
         social.add("Diversity and Inclusion");

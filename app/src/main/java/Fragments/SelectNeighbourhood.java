@@ -59,7 +59,7 @@ public class SelectNeighbourhood extends Fragment implements AdapterView.OnItemS
         recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view_neighbourhood);
         FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
         layoutm.setFlexDirection(FlexDirection.ROW);
-        layoutm.setJustifyContent(JustifyContent.FLEX_START);
+        layoutm.setJustifyContent(JustifyContent.CENTER);
         recyclerView.setLayoutManager(layoutm);
         delhi = new ArrayList<String>();
         delhi.add("CP");

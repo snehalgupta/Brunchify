@@ -37,6 +37,7 @@ public class SelectSlots extends Fragment {
     }
 
     public static ArrayList<Availability_Slot> get_slots(){
+
         ArrayList<Availability_Slot> ans = new ArrayList<Availability_Slot>();
         ArrayList<String> timings = new ArrayList<String>();
         timings.add("10 AM");
@@ -50,21 +51,23 @@ public class SelectSlots extends Fragment {
         int diff = present_day - 4;
         calendar.add(Calendar.DAY_OF_MONTH,7-diff);
         Date next_slot = calendar.getTime();
+
         for(int i=0;i<3;i++){
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
-        String day = sdf.format(next_slot);
-        sdf = new SimpleDateFormat("MMMMM");
-        String month = sdf.format(next_slot);
-        sdf = new SimpleDateFormat("yyyy");
-        String year = sdf.format(next_slot);
-        sdf = new SimpleDateFormat("dd");
-        String date = sdf.format(next_slot);
-        Availability_Slot tempslot = new Availability_Slot(day,month+" "+date+", "+year,timings);
-        ans.add(tempslot);
-        calendar.setTime(next_slot);
-        calendar.add(Calendar.DAY_OF_MONTH,1);
-        next_slot = calendar.getTime();
+            SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+            String day = sdf.format(next_slot);
+            sdf = new SimpleDateFormat("MMM");
+            String month = sdf.format(next_slot);
+            sdf = new SimpleDateFormat("yyyy");
+            String year = sdf.format(next_slot);
+            sdf = new SimpleDateFormat("dd");
+            String date = sdf.format(next_slot);
+            Availability_Slot tempslot = new Availability_Slot(day,month+" "+date+", "+year,timings);
+            ans.add(tempslot);
+            calendar.setTime(next_slot);
+            calendar.add(Calendar.DAY_OF_MONTH,1);
+            next_slot = calendar.getTime();
         }
+
         return ans;
     }
 
