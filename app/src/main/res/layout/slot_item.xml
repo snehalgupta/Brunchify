@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/slot_date"
@@ -12,7 +12,8 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:textColor="@color/lightpurple"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        tools:text="Wednesday Oct 16, 2019"/>
 
     <Button
         android:id="@+id/slot_1"

@@ -51,7 +51,7 @@ public class SelectSlots extends Fragment {
         calendar.add(Calendar.DAY_OF_MONTH,7-diff);
         Date next_slot = calendar.getTime();
         for(int i=0;i<3;i++){
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEEE");
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
         String day = sdf.format(next_slot);
         sdf = new SimpleDateFormat("MMMMM");
         String month = sdf.format(next_slot);

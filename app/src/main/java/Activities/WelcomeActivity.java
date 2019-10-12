@@ -171,15 +171,15 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
     }
 
     private void signInFromGoogleResult(GoogleSignInAccount acct, AuthResult googleSignInResult){
-        //FirebaseUser user = mFirebaseAuth.getCurrentUser();
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
         Intent intent;
         //googleSignInResult.getAdditionalUserInfo().getProfile()
-        if (googleSignInResult.getAdditionalUserInfo().isNewUser()) {
-            intent = new Intent(WelcomeActivity.this, SelectOptions.class);
-        }
-        else{
+        //if (!googleSignInResult.getAdditionalUserInfo().isNewUser() && user.getEmail().contains("pramod")) {
             intent = new Intent(WelcomeActivity.this, Dashboard.class);
-        }
+//        }
+        //else{
+        intent = new Intent(WelcomeActivity.this, SelectOptions.class);
+            //}
         startActivity(intent);
     }
 
