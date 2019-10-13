@@ -67,6 +67,7 @@
             android:id="@+id/name_field"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
             android:layout_centerHorizontal="true"
             android:hint="Your Name"
             android:layout_below="@id/linear_layout_1"/>
@@ -102,10 +103,12 @@
         </LinearLayout>
         <EditText
             android:background="@drawable/textbox"
-            android:layout_width="300dp"
-            android:layout_height="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/linear_layout_2"
-            android:hint="text6 demo" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="200dp"
+            android:hint="Enter introduction here...\n\n" />
     </RelativeLayout>
 
 </FrameLayout>
