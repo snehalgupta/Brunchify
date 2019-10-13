@@ -1,6 +1,7 @@
 package Activities;
 
 //import android.support.v7.app.AppCompatActivity;
+import Fragments.All_Set;
 import Fragments.Business;
 import Fragments.SelectInterests;
 import Fragments.SelectNeighbourhood;
@@ -8,6 +9,7 @@ import Fragments.SelectObjectives;
 import Fragments.SelectSlots;
 import Fragments.Social;
 import Fragments.Tech;
+import Fragments.Write_Intro;
 import Models.Availability_Slot;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
@@ -17,6 +19,7 @@ import androidx.viewpager.widget.ViewPager;
 import teamcool.mandeep.brunchify.R;
 
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.view.View;
 import android.widget.Button;
@@ -25,10 +28,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.content.Intent;
 
-public class SelectOptions extends FragmentActivity implements SelectObjectives.OnFragmentInteractionListener, SelectNeighbourhood.OnFragmentInteractionListener,SelectInterests.OnFragmentInteractionListener, Business.OnFragmentInteractionListener, Social.OnFragmentInteractionListener, Tech.OnFragmentInteractionListener, SelectSlots.OnFragmentInteractionListener {
+public class SelectOptions extends FragmentActivity implements SelectObjectives.OnFragmentInteractionListener, SelectNeighbourhood.OnFragmentInteractionListener,SelectInterests.OnFragmentInteractionListener, Business.OnFragmentInteractionListener, Social.OnFragmentInteractionListener, Tech.OnFragmentInteractionListener, SelectSlots.OnFragmentInteractionListener, Write_Intro.OnFragmentInteractionListener, All_Set.OnFragmentInteractionListener {
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
-    private int no_of_fragments = 4;
+    private int no_of_fragments = 6;
     private Button btn_skip;
     private Button btn_next;
 
@@ -88,6 +91,11 @@ public class SelectOptions extends FragmentActivity implements SelectObjectives.
 
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
     public class MyViewPagerAdapter extends FragmentPagerAdapter{
 
         public MyViewPagerAdapter(FragmentManager fm){
@@ -97,10 +105,12 @@ public class SelectOptions extends FragmentActivity implements SelectObjectives.
         @Override
         public Fragment getItem(int pos){
             switch(pos){
-                case 0: return SelectObjectives.newInstance("Select objectives");
-                case 1: return SelectInterests.newInstance("Select Business");
+                case 0: return SelectObjectives.newInstance("Select Objectives");
+                case 1: return SelectInterests.newInstance("Select Interests");
                 case 2: return SelectNeighbourhood.newInstance("Select neighbourhood");
                 case 3: return SelectSlots.newInstance("Select slots");
+                case 4: return Write_Intro.newInstance("Write Intro");
+                case 5: return All_Set.newInstance("All Set!");
                 default: return SelectObjectives.newInstance("Default");
             }
         }
