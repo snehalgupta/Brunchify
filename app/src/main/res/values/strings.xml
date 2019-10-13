@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Brunchify</string>
     <string name="city_prompt">Choose a City</string>
+    <string name="objective_prompt">Choose primary objective</string>
     <string name="welcomescreenonetext1">Connecting mutually relevant,\n opportunistic people on 1:1 brunch</string>
     <string name="welcomescreenonetext2">Swipe to see \n how this works</string>
     <string name="welcomescreentwotext1">Sign Up for the Week</string>
@@ -22,6 +23,19 @@
     <string-array name="cities_array">
         <item>Delhi</item>
         <item>Bangalore</item>
+    </string-array>
+    <string-array name="objectives_array">
+        <item>Brainstorming</item>
+        <item>Invest Money</item>
+        <item>Explore New Projects</item>
+        <item>Mentor Others</item>
+        <item>Organize Events</item>
+        <item>Start a company</item>
+        <item>Find Cofounder or Partner</item>
+        <item>Raise Funding</item>
+        <item>Business Development</item>
+        <item>Grow your team</item>
+        <item>Explore other companies</item>
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

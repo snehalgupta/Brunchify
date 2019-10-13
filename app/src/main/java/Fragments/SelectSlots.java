@@ -12,6 +12,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
@@ -25,10 +28,11 @@ import java.util.Date;
 import androidx.recyclerview.widget.RecyclerView;
 import teamcool.mandeep.brunchify.R;
 
-public class SelectSlots extends Fragment {
+public class SelectSlots extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private static final String ARG_PARAM1 = "param1";
     private String mParam1;
+    private String primary_obj;
     private RecyclerView recyclerView;
     private ArrayList<Availability_Slot> arr ;
     private OnFragmentInteractionListener mListener;
@@ -99,6 +103,11 @@ public class SelectSlots extends Fragment {
         recyclerView.setLayoutManager(layoutm);
         Slots_RV_Adapter adapter = new Slots_RV_Adapter(getContext(),arr,mListener);
         recyclerView.setAdapter(adapter);
+        Spinner dropdown = (Spinner)view.findViewById(R.id.slot_spinner);
+        ArrayAdapter<CharSequence> adapter_ = ArrayAdapter.createFromResource(getContext(),R.array.objectives_array,android.R.layout.simple_spinner_item);
+        adapter_.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dropdown.setAdapter(adapter_);
+        dropdown.setOnItemSelectedListener(this);
         return view;
     }
 
@@ -116,6 +125,17 @@ public class SelectSlots extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        Object item = adapterView.getItemAtPosition(i);
+        primary_obj = item.toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 
     public interface OnFragmentInteractionListener {

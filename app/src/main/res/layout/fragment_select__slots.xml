@@ -41,5 +41,28 @@
             android:layout_marginHorizontal="16dp"
             >
         </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/primary_obj_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recycler_view_slots"
+            android:layout_marginVertical="16dp"
+            android:text="What is your primary objective \n this week?"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlackdark"
+            android:fontFamily="@font/avenir"
+            android:textSize="20dp" />
+
+        <Spinner
+            android:id="@+id/slot_spinner"
+            style="@android:style/Widget.Spinner"
+            android:prompt="@string/objective_prompt"
+            android:entries="@array/objectives_array"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/primary_obj_text"/>
+
     </RelativeLayout>
 </FrameLayout>
