@@ -1,10 +1,8 @@
 package Fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 
-import Adapters.Tech_RV_Adapter;
-import androidx.fragment.app.Fragment;
+import Adapters.BaseChoiceAdapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,24 +15,26 @@ import com.google.android.flexbox.JustifyContent;
 import java.util.ArrayList;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import Models.User;
 import teamcool.mandeep.brunchify.R;
 
 
-public class Tech extends Fragment {
+public class Tech extends BaseOnboardFragment {
 
     private static final String ARG_PARAM1 = "param1";
-    private String mParam1;
+    public int mParam1;
     private RecyclerView recyclerView;
     private ArrayList<String> tech;
-    private OnFragmentInteractionListener mListener;
+    private BaseChoiceAdapter<String> adapter;
 
     public Tech() {
     }
 
-    public static Tech newInstance(String param1) {
+    public static Tech newInstance(int param1) {
         Tech fragment = new Tech();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putInt(ARG_PARAM1, param1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -43,7 +43,7 @@ public class Tech extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam1 = getArguments().getInt(ARG_PARAM1);
         }
     }
 
@@ -63,30 +63,16 @@ public class Tech extends Fragment {
         tech.add("Product Design");
         tech.add("Crypto");
         tech.add("VR/AR");
-        Tech_RV_Adapter adapter = new Tech_RV_Adapter(getContext(),tech,mListener);
+//        Tech_RV_Adapter adapter = new Tech_RV_Adapter(getContext(),tech,mListener);
+        adapter = new BaseChoiceAdapter<>(getContext(),tech,R.layout.tech_button);
         recyclerView.setAdapter(adapter);
         return view;
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(String item);
+    public String updateUser() {
+        User.getCurrentUser().addInterests(adapter.getSelectedChoices());
+        return null;
     }
 
 }

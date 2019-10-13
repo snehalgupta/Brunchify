@@ -1,10 +1,8 @@
 package Fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 
-import Adapters.Objectives_RV_Adapter;
-import androidx.fragment.app.Fragment;
+import Adapters.BaseChoiceAdapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,36 +15,17 @@ import com.google.android.flexbox.JustifyContent;
 import java.util.ArrayList;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import Models.User;
 import teamcool.mandeep.brunchify.R;
 
-public class SelectObjectives extends Fragment{
+public class SelectObjectives extends BaseOnboardFragment{
 
-    private static final String ARG_PARAM1 = "param1";
-    private String mParam1;
     private RecyclerView recyclerView;
     private ArrayList<String> objectives_arr;
-    private OnFragmentInteractionListener mListener;
+    private BaseChoiceAdapter<String> adapter;
 
-    public SelectObjectives() {
-
-    }
-
-    public static SelectObjectives newInstance(String param1) {
-        SelectObjectives fragment = new SelectObjectives();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-        }
-    }
+    public SelectObjectives() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,29 +49,19 @@ public class SelectObjectives extends Fragment{
         objectives_arr.add("Business Development");
         objectives_arr.add("Grow your team");
         objectives_arr.add("Explore other companies");
-        Objectives_RV_Adapter adapter = new Objectives_RV_Adapter(getContext(),objectives_arr,mListener);
+        //Objectives_RV_Adapter adapter = new Objectives_RV_Adapter(getContext(),objectives_arr,mListener);
+        adapter = new BaseChoiceAdapter<>(getContext(),objectives_arr,R.layout.objectives_button);
         recyclerView.setAdapter(adapter);
         return view;
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
+    public String updateUser() {
+        if (adapter.getSelectedChoices().size() < 1){
+            return "Please select an objective";
         }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(String item);
+        User.getCurrentUser().setObjectives(adapter.getSelectedChoices());
+        return null;
     }
 
 }

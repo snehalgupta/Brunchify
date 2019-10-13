@@ -1,13 +1,13 @@
 package Fragments;
 
 import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 
-import Adapters.Slots_RV_Adapter;
+import Activities.Dashboard;
+import Activities.PreferenceManager;
+import Adapters.BaseChoiceAdapter;
 import Models.Availability_Slot;
-import Models.Meetup;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Button;
 
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
@@ -26,16 +27,21 @@ import java.util.Calendar;
 import java.util.Date;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import Models.User;
 import teamcool.mandeep.brunchify.R;
 
-public class SelectSlots extends Fragment implements AdapterView.OnItemSelectedListener {
+public class SelectSlots extends BaseOnboardFragment implements AdapterView.OnItemSelectedListener {
 
-    private static final String ARG_PARAM1 = "param1";
-    private String mParam1;
-    private String primary_obj;
     private RecyclerView recyclerView;
     private ArrayList<Availability_Slot> arr ;
-    private OnFragmentInteractionListener mListener;
+    private OnWizardInteractionListener mListener;
+    private Button doneBtn;
+
+    private PreferenceManager prefManager;
+    private BaseChoiceAdapter<Availability_Slot> adapter;
+    private String primary_obj;
+
 
     public SelectSlots() {
     }
@@ -75,22 +81,6 @@ public class SelectSlots extends Fragment implements AdapterView.OnItemSelectedL
         return ans;
     }
 
-    public static SelectSlots newInstance(String param1) {
-        SelectSlots fragment = new SelectSlots();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -101,21 +91,53 @@ public class SelectSlots extends Fragment implements AdapterView.OnItemSelectedL
         layoutm.setFlexDirection(FlexDirection.ROW);
         layoutm.setJustifyContent(JustifyContent.FLEX_START);
         recyclerView.setLayoutManager(layoutm);
-        Slots_RV_Adapter adapter = new Slots_RV_Adapter(getContext(),arr,mListener);
+        //Slots_RV_Adapter adapter = new Slots_RV_Adapter(getContext(),arr,mListener);
+
+        adapter = new BaseChoiceAdapter<>(getContext(), arr, R.layout.slot_item);
+
         recyclerView.setAdapter(adapter);
         Spinner dropdown = (Spinner)view.findViewById(R.id.slot_spinner);
         ArrayAdapter<CharSequence> adapter_ = ArrayAdapter.createFromResource(getContext(),R.array.objectives_array,android.R.layout.simple_spinner_item);
         adapter_.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdown.setAdapter(adapter_);
         dropdown.setOnItemSelectedListener(this);
+        prefManager = new PreferenceManager(getContext());
+
+        doneBtn = (Button) view.findViewById(R.id.done_onboarding_btn);
+
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                completeOnboarding();
+            }
+        });
         return view;
+
+    }
+
+    @Override
+    public String updateUser() {
+        if (adapter.getSelectedChoices().size() < 1){
+            return "Please choose at least 1 time slot";
+        }
+        User.getCurrentUser().setSlots(adapter.getSelectedChoices());
+        return null;
+    }
+
+    private void completeOnboarding() {
+        prefManager.setFirstTimeLaunch(false);
+
+        // Write all collected info for user, to object and to firestore
+
+        // TODO: Launch All set page
+        startActivity(new Intent(getContext(), Dashboard.class));
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof OnWizardInteractionListener) {
+            mListener = (OnWizardInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
         }

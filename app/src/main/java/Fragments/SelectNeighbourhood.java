@@ -1,10 +1,8 @@
 package Fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 
-import Adapters.Neighbourhood_RV_Adapter;
-import androidx.fragment.app.Fragment;
+import Adapters.BaseChoiceAdapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,36 +18,19 @@ import com.google.android.flexbox.JustifyContent;
 import java.util.ArrayList;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import Models.User;
 import teamcool.mandeep.brunchify.R;
 
-public class SelectNeighbourhood extends Fragment implements AdapterView.OnItemSelectedListener {
+public class SelectNeighbourhood extends BaseOnboardFragment implements AdapterView.OnItemSelectedListener {
 
-    private static final String ARG_PARAM1 = "param1";
-    private String mParam1;
     private RecyclerView recyclerView;
     private ArrayList<String> delhi;
     private ArrayList<String> bangalore;
-    private OnFragmentInteractionListener mListener;
     String selected_city;
+    private BaseChoiceAdapter<String> neighbourhoodAdapter;
 
-    public SelectNeighbourhood() {
-    }
-
-    public static SelectNeighbourhood newInstance(String param1) {
-        SelectNeighbourhood fragment = new SelectNeighbourhood();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-        }
-    }
+    public SelectNeighbourhood() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,19 +59,13 @@ public class SelectNeighbourhood extends Fragment implements AdapterView.OnItemS
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
+    public String updateUser() {
+        User.getCurrentUser().neighbourhoods.clear();
+        if (neighbourhoodAdapter.getSelectedChoices().size() < 1){
+            return "Please select a neighbourhood";
         }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+        User.getCurrentUser().addNeighbourhoods(neighbourhoodAdapter.getSelectedChoices());
+        return null;
     }
 
     @Override
@@ -104,18 +79,15 @@ public class SelectNeighbourhood extends Fragment implements AdapterView.OnItemS
         else{
             arr = bangalore;
         }
-        Neighbourhood_RV_Adapter adapter = new Neighbourhood_RV_Adapter(getContext(),arr,mListener);
-        recyclerView.setAdapter(adapter);
+        //Neighbourhood_RV_Adapter adapter = new Neighbourhood_RV_Adapter(getContext(),arr,mListener);
+        neighbourhoodAdapter = new BaseChoiceAdapter<>(getContext(),arr,R.layout.neighbourhood_button);
+        recyclerView.setAdapter(neighbourhoodAdapter);
         //Toast.makeText(getContext(),selected_city,Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
         //Toast.makeText(getContext(),"Select city",Toast.LENGTH_LONG).show();
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(String item);
     }
 
 }

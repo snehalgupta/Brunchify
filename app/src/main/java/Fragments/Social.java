@@ -1,10 +1,8 @@
 package Fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 
-import Adapters.Social_RV_Adapter;
-import androidx.fragment.app.Fragment;
+import Adapters.BaseChoiceAdapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,24 +15,26 @@ import com.google.android.flexbox.JustifyContent;
 import java.util.ArrayList;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import Models.User;
 import teamcool.mandeep.brunchify.R;
 
 
-public class Social extends Fragment {
+public class Social extends BaseOnboardFragment {
 
     private static final String ARG_PARAM1 = "param1";
-    private String mParam1;
+    public int mParam1;
     private RecyclerView recyclerView;
     private ArrayList<String> social;
-    private OnFragmentInteractionListener mListener;
+    private BaseChoiceAdapter<String> adapter;
 
     public Social() {
     }
 
-    public static Social newInstance(String param1) {
+    public static Social newInstance(int param1) {
         Social fragment = new Social();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putInt(ARG_PARAM1, param1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -43,7 +43,7 @@ public class Social extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam1 = getArguments().getInt(ARG_PARAM1);
         }
     }
 
@@ -64,30 +64,16 @@ public class Social extends Fragment {
         social.add("Fishing");
         social.add("Music");
         social.add("Social Impact");
-        Social_RV_Adapter adapter = new Social_RV_Adapter(getContext(),social,mListener);
+        //Social_RV_Adapter adapter = new Social_RV_Adapter(getContext(),social,mListener);
+        adapter = new BaseChoiceAdapter<>(getContext(),social,R.layout.social_button);
         recyclerView.setAdapter(adapter);
         return view;
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(String item);
+    public String updateUser() {
+        User.getCurrentUser().addInterests(adapter.getSelectedChoices());
+        return null;
     }
 
 }
