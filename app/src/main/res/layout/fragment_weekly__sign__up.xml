@@ -4,10 +4,75 @@
     android:layout_height="match_parent"
     tools:context="Fragments.Weekly_Sign_Up">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/ws_text1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="30dp"
+            android:text="Signing Up in?"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlackdark"
+            android:fontFamily="@font/avenir"
+            android:textSize="20dp" />
+
+        <Spinner
+            android:id="@+id/ws_spinner1"
+            style="@android:style/Widget.Spinner"
+            android:prompt="@string/city_prompt"
+            android:entries="@array/cities_array"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ws_text1"/>
+
+        <TextView
+            android:id="@+id/ws_text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="30dp"
+            android:layout_below="@+id/ws_spinner1"
+            android:text="Where would you be \n able to meet?"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlackdark"
+            android:fontFamily="@font/avenir"
+            android:textSize="20dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/ws_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ws_text2"
+            android:layout_marginHorizontal="16dp"
+            >
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/ws_text3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="30dp"
+            android:layout_below="@+id/ws_recycler_view"
+            android:text="How many meetings would \n you like this week?"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorBlackdark"
+            android:fontFamily="@font/avenir"
+            android:textSize="20dp" />
+
+        <Spinner
+            android:id="@+id/ws_spinner2"
+            style="@android:style/Widget.Spinner"
+            android:prompt="@string/no_of_meetings"
+            android:entries="@array/days_array"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ws_text3"/>
+
+    </RelativeLayout>
 
 </FrameLayout>

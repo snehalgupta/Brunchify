@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Brunchify</string>
     <string name="city_prompt">Choose a City</string>
+    <string name="no_of_meetings">Choose number of meetings</string>
     <string name="objective_prompt">Choose primary objective</string>
     <string name="welcomescreenonetext1">Connecting mutually relevant,\n opportunistic people on 1:1 brunch</string>
     <string name="welcomescreenonetext2">Swipe to see \n how this works</string>
@@ -36,6 +37,11 @@
         <item>Business Development</item>
         <item>Grow your team</item>
         <item>Explore other companies</item>
+    </string-array>
+    <string-array name="days_array">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
