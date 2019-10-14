@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import Activities.Dashboard;
 import Activities.PreferenceManager;
+import Activities.WeeklySignUp;
 import Models.User;
 import androidx.fragment.app.Fragment;
 
@@ -87,7 +88,7 @@ public class Write_Intro extends BaseOnboardFragment {
         // Write all collected info for user, to object and to firestore
 
         // TODO: Launch All set page
-        startActivity(new Intent(getContext(), Dashboard.class));
+        startActivity(new Intent(getContext(), WeeklySignUp.class));
     }
 
     private OnWizardInteractionListener mListener;

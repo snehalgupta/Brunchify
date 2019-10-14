@@ -15,6 +15,8 @@ public class User {
     public ArrayList<String> neighbourhoods;
     public ArrayList<Availability_Slot> slots;
     private boolean onBoarded = false;
+    public int no_of_meetings;
+    public ArrayList<String> weekly_places;
 
     private static User currentUser = null;
 
@@ -34,6 +36,7 @@ public class User {
         this.upcomingMeetups = new ArrayList<>();
         this.neighbourhoods = new ArrayList<>();
         this.slots = new ArrayList<>();
+        this.weekly_places = new ArrayList<>();
     }
 
     public User(String uid, String name) {
@@ -45,6 +48,7 @@ public class User {
         this.pastMeetups = new ArrayList<>();
         this.upcomingMeetups = new ArrayList<>();
         this.neighbourhoods = new ArrayList<>();
+        this.weekly_places = new ArrayList<>();
         this.slots = new ArrayList<>();
     }
 

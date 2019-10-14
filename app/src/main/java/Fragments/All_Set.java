@@ -12,12 +12,10 @@ import android.view.ViewGroup;
 
 import teamcool.mandeep.brunchify.R;
 
-public class All_Set extends Fragment {
+public class All_Set extends BaseOnboardFragment{
 
     private static final String ARG_PARAM1 = "param1";
     private String mParam1;
-
-    private OnFragmentInteractionListener mListener;
 
     public All_Set() {
     }
@@ -46,25 +44,11 @@ public class All_Set extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+    public String updateUser() {
+        String str= "All_set";
+        return str;
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
 }
 
 

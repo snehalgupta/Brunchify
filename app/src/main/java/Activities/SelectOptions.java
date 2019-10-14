@@ -37,9 +37,6 @@ public class SelectOptions extends FragmentActivity implements
     private static final String TAG = SelectOptions.class.getSimpleName();
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
-    //private int no_of_fragments = 6;
-    private Button btn_skip;
-    private Button btn_next;
     private BaseOnboardFragment[] fragments;
 
     @Override
@@ -56,38 +53,14 @@ public class SelectOptions extends FragmentActivity implements
 
         initFragments();
 
-
-        btn_skip = (Button) findViewById(R.id.Btn_Skip);
-        btn_next = (Button) findViewById(R.id.Btn_Next);
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         myViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.setOffscreenPageLimit(fragments.length+1);
-        btn_skip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                launchDashboard();
-            }
-        });
-        btn_next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int current = getItem(+1);
-                //if (current < no_of_fragments) {
-                if (current < fragments.length) {
-                    // move to next screen
-                    viewPager.setCurrentItem(current);
-                } else {
-                    launchDashboard();
-                }
-            }
-        });
-
-
     }
 
     private void launchDashboard(){
-        startActivity(new Intent(SelectOptions.this, Dashboard.class));
+        startActivity(new Intent(SelectOptions.this, WeeklySignUp.class));
         finish();
     }
 
@@ -100,7 +73,6 @@ public class SelectOptions extends FragmentActivity implements
                 new SelectObjectives(),
                 new SelectInterests(),
                 new SelectNeighbourhood(),
-                new SelectSlots(),
                 new Write_Intro()
         };
     }

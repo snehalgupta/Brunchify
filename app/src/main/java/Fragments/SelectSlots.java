@@ -109,8 +109,9 @@ public class SelectSlots extends BaseOnboardFragment implements AdapterView.OnIt
         if (adapter.getSelectedChoices().size() < 1){
             return "Please choose at least 1 time slot";
         }
+        String str = "slot selection";
         User.getCurrentUser().setSlots(adapter.getSelectedChoices());
-        return null;
+        return str;
     }
 
     @Override

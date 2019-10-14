@@ -110,7 +110,8 @@
             android:layout_marginTop="100dp"
             android:layout_below="@+id/bio_textbox"
             android:text="Done"
-            android:background="@color/colorAccent"/>
+            android:textColor="@color/colorwhite"
+            android:background="@color/colorBlue"/>
     </RelativeLayout>
 
 </FrameLayout>

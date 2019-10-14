@@ -22,6 +22,7 @@
         </activity>
         <activity android:name="Activities.WelcomeActivity"></activity>
         <activity android:name="Activities.Dashboard"/>
+        <activity android:name="Activities.WeeklySignUp"/>
 <!--            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>-->
     </application>
 
