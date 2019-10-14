@@ -65,7 +65,7 @@ public class Social extends BaseOnboardFragment {
         social.add("Music");
         social.add("Social Impact");
         //Social_RV_Adapter adapter = new Social_RV_Adapter(getContext(),social,mListener);
-        adapter = new BaseChoiceAdapter<>(getContext(),social,R.layout.social_button);
+        adapter = new BaseChoiceAdapter<>(getContext(),social,R.layout.oval_select_button);
         recyclerView.setAdapter(adapter);
         return view;
     }

@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import Activities.Dashboard;
 import Activities.PreferenceManager;
-import Adapters.BaseChoiceAdapter;
+import Adapters.Slots_RV_Adapter;
 import Models.Availability_Slot;
 
 import android.view.LayoutInflater;
@@ -34,21 +34,20 @@ import teamcool.mandeep.brunchify.R;
 public class SelectSlots extends BaseOnboardFragment implements AdapterView.OnItemSelectedListener {
 
     private RecyclerView recyclerView;
-    private ArrayList<Availability_Slot> arr ;
-    private OnWizardInteractionListener mListener;
+    private ArrayList<ArrayList<Availability_Slot>> arr ;
     private Button doneBtn;
 
     private PreferenceManager prefManager;
-    private BaseChoiceAdapter<Availability_Slot> adapter;
+    //private BaseChoiceAdapter<Availability_Slot> adapter;
+    private Slots_RV_Adapter adapter;
     private String primary_obj;
-
 
     public SelectSlots() {
     }
 
-    public static ArrayList<Availability_Slot> get_slots(){
+    public static ArrayList<ArrayList<Availability_Slot>> get_slots(){
 
-        ArrayList<Availability_Slot> ans = new ArrayList<Availability_Slot>();
+        ArrayList<ArrayList<Availability_Slot>> ans = new ArrayList<>();
         ArrayList<String> timings = new ArrayList<String>();
         timings.add("10 AM");
         timings.add("12 PM");
@@ -63,6 +62,7 @@ public class SelectSlots extends BaseOnboardFragment implements AdapterView.OnIt
         Date next_slot = calendar.getTime();
 
         for(int i=0;i<3;i++){
+            ArrayList<Availability_Slot> daySlots = new ArrayList<>();
             SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
             String day = sdf.format(next_slot);
             sdf = new SimpleDateFormat("MMM");
@@ -71,8 +71,10 @@ public class SelectSlots extends BaseOnboardFragment implements AdapterView.OnIt
             String year = sdf.format(next_slot);
             sdf = new SimpleDateFormat("dd");
             String date = sdf.format(next_slot);
-            Availability_Slot tempslot = new Availability_Slot(day,month+" "+date+", "+year,timings);
-            ans.add(tempslot);
+            for (String t: timings) {
+                daySlots.add(new Availability_Slot(day, month + " " + date + ", " + year, t));
+            }
+            ans.add(daySlots);
             calendar.setTime(next_slot);
             calendar.add(Calendar.DAY_OF_MONTH,1);
             next_slot = calendar.getTime();
@@ -91,9 +93,9 @@ public class SelectSlots extends BaseOnboardFragment implements AdapterView.OnIt
         layoutm.setFlexDirection(FlexDirection.ROW);
         layoutm.setJustifyContent(JustifyContent.FLEX_START);
         recyclerView.setLayoutManager(layoutm);
-        //Slots_RV_Adapter adapter = new Slots_RV_Adapter(getContext(),arr,mListener);
+        adapter = new Slots_RV_Adapter(getContext(),arr);
+        //adapter = new BaseChoiceAdapter<>(getContext(), arr, R.layout.slot_item);
 
-        adapter = new BaseChoiceAdapter<>(getContext(), arr, R.layout.slot_item);
 
         recyclerView.setAdapter(adapter);
         Spinner dropdown = (Spinner)view.findViewById(R.id.slot_spinner);
@@ -103,14 +105,8 @@ public class SelectSlots extends BaseOnboardFragment implements AdapterView.OnIt
         dropdown.setOnItemSelectedListener(this);
         prefManager = new PreferenceManager(getContext());
 
-        doneBtn = (Button) view.findViewById(R.id.done_onboarding_btn);
-
-        doneBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                completeOnboarding();
-            }
-        });
+        // Put initDoneBtn in the fragment which is the last step of onboarding
+        initDoneBtn(view);
         return view;
 
     }
@@ -124,6 +120,18 @@ public class SelectSlots extends BaseOnboardFragment implements AdapterView.OnIt
         return null;
     }
 
+    /*************** Code for last fragment of Onboarding Wizard ****************/
+
+    private void initDoneBtn(View view) {
+        doneBtn = (Button) view.findViewById(R.id.done_onboarding_btn);
+        doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                completeOnboarding();
+            }
+        });
+    }
+
     private void completeOnboarding() {
         prefManager.setFirstTimeLaunch(false);
 
@@ -132,6 +140,8 @@ public class SelectSlots extends BaseOnboardFragment implements AdapterView.OnIt
         // TODO: Launch All set page
         startActivity(new Intent(getContext(), Dashboard.class));
     }
+
+    private OnWizardInteractionListener mListener;
 
     @Override
     public void onAttach(Context context) {
@@ -148,6 +158,9 @@ public class SelectSlots extends BaseOnboardFragment implements AdapterView.OnIt
         super.onDetach();
         mListener = null;
     }
+
+    /*************** #################################### ****************/
+
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {

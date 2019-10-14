@@ -37,6 +37,6 @@ public class Pager_Adapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return fragments[0].getClass().getName();
+        return fragments[position].getClass().getSimpleName();
     }
 }

@@ -68,7 +68,7 @@ public class Business extends BaseOnboardFragment {
         business.add("Retail");
         //Toast.makeText(getContext(),type,Toast.LENGTH_LONG).show();
         //mAdapter = new Business_RV_Adapter(getContext(),business,mListener);
-        mAdapter = new BaseChoiceAdapter<>(getContext(), business, R.layout.business_button);
+        mAdapter = new BaseChoiceAdapter<>(getContext(), business, R.layout.oval_select_button);
         recyclerView.setAdapter(mAdapter);
         return view;
     }

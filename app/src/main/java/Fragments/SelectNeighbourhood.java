@@ -80,7 +80,7 @@ public class SelectNeighbourhood extends BaseOnboardFragment implements AdapterV
             arr = bangalore;
         }
         //Neighbourhood_RV_Adapter adapter = new Neighbourhood_RV_Adapter(getContext(),arr,mListener);
-        neighbourhoodAdapter = new BaseChoiceAdapter<>(getContext(),arr,R.layout.neighbourhood_button);
+        neighbourhoodAdapter = new BaseChoiceAdapter<>(getContext(),arr,R.layout.oval_select_button);
         recyclerView.setAdapter(neighbourhoodAdapter);
         //Toast.makeText(getContext(),selected_city,Toast.LENGTH_LONG).show();
     }

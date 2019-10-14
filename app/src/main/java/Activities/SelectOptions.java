@@ -35,7 +35,7 @@ public class SelectOptions extends FragmentActivity implements
         OnWizardInteractionListener {
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
-    private int no_of_fragments = 6;
+    //private int no_of_fragments = 6;
     private Button btn_skip;
     private Button btn_next;
     private BaseOnboardFragment[] fragments;
@@ -51,6 +51,10 @@ public class SelectOptions extends FragmentActivity implements
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         changeStatusBarColor();
+
+        initFragments();
+
+
         btn_skip = (Button) findViewById(R.id.Btn_Skip);
         btn_next = (Button) findViewById(R.id.Btn_Next);
         viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -66,7 +70,8 @@ public class SelectOptions extends FragmentActivity implements
             @Override
             public void onClick(View v) {
                 int current = getItem(+1);
-                if (current < no_of_fragments) {
+                //if (current < no_of_fragments) {
+                if (current < fragments.length) {
                     // move to next screen
                     viewPager.setCurrentItem(current);
                 } else {
@@ -75,7 +80,6 @@ public class SelectOptions extends FragmentActivity implements
             }
         });
 
-        initFragments();
 
     }
 
@@ -121,7 +125,8 @@ public class SelectOptions extends FragmentActivity implements
 
         @Override
         public int getCount(){
-            return no_of_fragments;
+            //return no_of_fragments;
+            return fragments.length;
         }
 
     }

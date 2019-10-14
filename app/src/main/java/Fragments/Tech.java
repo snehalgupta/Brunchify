@@ -64,7 +64,7 @@ public class Tech extends BaseOnboardFragment {
         tech.add("Crypto");
         tech.add("VR/AR");
 //        Tech_RV_Adapter adapter = new Tech_RV_Adapter(getContext(),tech,mListener);
-        adapter = new BaseChoiceAdapter<>(getContext(),tech,R.layout.tech_button);
+        adapter = new BaseChoiceAdapter<>(getContext(),tech,R.layout.oval_select_button);
         recyclerView.setAdapter(adapter);
         return view;
     }

@@ -72,7 +72,7 @@ public class BaseChoiceAdapter<Choice> extends RecyclerView.Adapter<BaseChoiceAd
         public BaseChoiceViewHolder(View view, Context cont) {
             super(view);
             mview = view;
-            mButton = (Button) view.findViewById(R.id.business_button);
+            mButton = (Button) view.findViewById(R.id.oval_select_button);
             context = cont;
         }
 
