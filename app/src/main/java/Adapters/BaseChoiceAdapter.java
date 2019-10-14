@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import teamcool.mandeep.brunchify.R;
 
 //public abstract class BaseChoiceAdapter<Choice, VH extends BaseChoiceAdapter.BaseChoiceViewHolder> extends RecyclerView.Adapter<VH> {
-public class BaseChoiceAdapter<Choice> extends RecyclerView.Adapter<BaseChoiceAdapter.BaseChoiceViewHolder> {
+public class BaseChoiceAdapter<Choice> extends RecyclerView.Adapter<BaseChoiceAdapter.BaseChoiceViewHolder> implements onSelectionListener{
     protected final ArrayList<Choice> allChoices;
     protected ArrayList<Choice> selectedChoices;
     static String TAG = BaseChoiceAdapter.class.getSimpleName();
@@ -53,7 +53,17 @@ public class BaseChoiceAdapter<Choice> extends RecyclerView.Adapter<BaseChoiceAd
         return selectedChoices;
     }
 
-    public class BaseChoiceViewHolder<ViewItem extends Choice> extends RecyclerView.ViewHolder {
+    @Override
+    public void onClick(int pos){
+        if (selectedChoices.contains(allChoices.get(pos))){
+            selectedChoices.remove(allChoices.get(pos));
+        }
+        else{
+            selectedChoices.add(allChoices.get(pos));
+        }
+    }
+
+    public class BaseChoiceViewHolder<ViewItem> extends RecyclerView.ViewHolder {
         public final View mview;
         public final Button mButton;
         public Context context;
@@ -83,9 +93,11 @@ public class BaseChoiceAdapter<Choice> extends RecyclerView.Adapter<BaseChoiceAd
                         if (isSelected) {
                             mButton.setBackground(ContextCompat.getDrawable(context, R.drawable.capsulewhite));
                             mButton.setTextColor(Color.BLACK);
-                            selectedChoices.remove(item);
+                            //selectedChoices.remove(item);
+                            BaseChoiceAdapter.this.onClick(getAdapterPosition());
                         } else {
-                            selectedChoices.add(item);
+                            //selectedChoices.add(item);
+                            BaseChoiceAdapter.this.onClick(getAdapterPosition());
                             mButton.setBackground(ContextCompat.getDrawable(context, R.drawable.capsuleselected));
                             mButton.setTextColor(Color.WHITE);
                         }
@@ -95,4 +107,8 @@ public class BaseChoiceAdapter<Choice> extends RecyclerView.Adapter<BaseChoiceAd
         }
 
     }
+}
+
+interface onSelectionListener{
+    void onClick(int pos);
 }
