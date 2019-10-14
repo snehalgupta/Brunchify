@@ -21,8 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name="Activities.WelcomeActivity"></activity>
-        <activity android:name="Activities.Dashboard"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+        <activity android:name="Activities.Dashboard"/>
+<!--            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>-->
     </application>
 
 </manifest>

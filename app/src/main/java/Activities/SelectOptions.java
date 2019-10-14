@@ -23,6 +23,7 @@ import teamcool.mandeep.brunchify.R;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.os.Bundle;
@@ -33,6 +34,7 @@ import android.widget.Toast;
 
 public class SelectOptions extends FragmentActivity implements
         OnWizardInteractionListener {
+    private static final String TAG = SelectOptions.class.getSimpleName();
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
     //private int no_of_fragments = 6;
@@ -60,6 +62,7 @@ public class SelectOptions extends FragmentActivity implements
         viewPager = (ViewPager) findViewById(R.id.view_pager);
         myViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(myViewPagerAdapter);
+        viewPager.setOffscreenPageLimit(fragments.length+1);
         btn_skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,7 +109,8 @@ public class SelectOptions extends FragmentActivity implements
         for (int i=0; i<fragments.length;i++){
             String msg = fragments[i].updateUser();
             if (msg!=null){
-                Toast.makeText(this, msg, Toast.LENGTH_SHORT);
+                Log.i(TAG,fragments[i].getClass().getSimpleName() + " Returned message " + msg);
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
                 viewPager.setCurrentItem(i, true);
             }
         }

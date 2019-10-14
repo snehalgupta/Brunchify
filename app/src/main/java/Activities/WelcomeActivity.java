@@ -74,13 +74,6 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
 
         mFirebaseAuth = FirebaseAuth.getInstance();
 
-        // Checking for first time launch - before calling setContentView()
-        prefManager = new PreferenceManager(this);
-        if (!prefManager.isFirstTimeLaunch()) {
-            launchHomeScreen();
-            finish();
-        }
-
         // Making notification bar transparent
         if (Build.VERSION.SDK_INT >= 21) {
             getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
@@ -100,6 +93,16 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
         btnNext = (Button) findViewById(R.id.btn_next);
         googleSigninBtn = (ImageButton) findViewById(R.id.google_btn);
         progbar = (ProgressBar) findViewById(R.id.progbar);
+
+
+
+        // Checking for first time launch - before calling setContentView()
+        /*prefManager = new PreferenceManager(this);
+        if (!prefManager.isFirstTimeLaunch()) {
+            launchHomeScreen();
+            finish();
+        }*/
+
         GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -191,6 +194,7 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
 
     private void launchHomeScreen() {
         //prefManager.setFirstTimeLaunch(false);
+        Log.i(TAG,"Not first time user, launching homes screen");
         startActivity(new Intent(WelcomeActivity.this, Dashboard.class));
         progbar.setVisibility(View.INVISIBLE);
         finish();
@@ -267,6 +271,7 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            progbar.setVisibility(View.INVISIBLE);
                         }
 
                         // ...

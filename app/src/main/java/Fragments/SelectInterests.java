@@ -24,7 +24,7 @@ public class SelectInterests extends BaseOnboardFragment{
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_select__interests, container, false);
         ViewPager vpager = (ViewPager)view.findViewById(R.id.vpPager);
-        vpager.setOffscreenPageLimit(2);
+        vpager.setOffscreenPageLimit(3);
         adapter_vp = new Pager_Adapter(getFragmentManager());
         vpager.setAdapter(adapter_vp);
         return view;
