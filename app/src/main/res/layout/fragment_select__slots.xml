@@ -74,14 +74,6 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/done_onboarding_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="Done"
-            android:background="@color/colorAccent"/>
-
     </LinearLayout>
->>>>>>> Fixed code for the welcome screens, added done button at end of onboarding, created User object
+
 </FrameLayout>

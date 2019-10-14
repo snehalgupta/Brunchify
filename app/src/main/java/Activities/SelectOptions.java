@@ -100,7 +100,8 @@ public class SelectOptions extends FragmentActivity implements
                 new SelectObjectives(),
                 new SelectInterests(),
                 new SelectNeighbourhood(),
-                new SelectSlots()
+                new SelectSlots(),
+                new Write_Intro()
         };
     }
 

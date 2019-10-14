@@ -63,21 +63,13 @@
 
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/name_field"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginBottom="10dp"
-            android:layout_centerHorizontal="true"
-            android:hint="Your Name"
-            android:layout_below="@id/linear_layout_1"/>
-
         <LinearLayout
             android:id="@+id/linear_layout_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/name_field"
+            android:layout_below="@id/linear_layout_1"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal" >
 
             <ImageView
@@ -89,7 +81,7 @@
 
             <TextView
                 android:id="@+id/msg_text"
-                android:text="Subject: Your match for this week!\nFrom: Brunchify\nTo: Match1, Match2"
+                android:text="Subject: Your match for this week!\nFrom: Brunchify\n"
                 android:layout_width="280dp"
                 android:layout_height="70dp"
                 android:paddingBottom="3dp"
@@ -102,6 +94,7 @@
                 android:textSize="16sp"/>
         </LinearLayout>
         <EditText
+            android:id="@+id/bio_textbox"
             android:background="@drawable/textbox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -109,6 +102,15 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="200dp"
             android:hint="Enter introduction here...\n\n" />
+
+        <Button
+            android:id="@+id/done_onboarding_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_below="@+id/bio_textbox"
+            android:text="Done"
+            android:background="@color/colorAccent"/>
     </RelativeLayout>
 
 </FrameLayout>

@@ -35,9 +35,7 @@ public class SelectSlots extends BaseOnboardFragment implements AdapterView.OnIt
 
     private RecyclerView recyclerView;
     private ArrayList<ArrayList<Availability_Slot>> arr ;
-    private Button doneBtn;
 
-    private PreferenceManager prefManager;
     //private BaseChoiceAdapter<Availability_Slot> adapter;
     private Slots_RV_Adapter adapter;
     private String primary_obj;
@@ -103,12 +101,7 @@ public class SelectSlots extends BaseOnboardFragment implements AdapterView.OnIt
         adapter_.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdown.setAdapter(adapter_);
         dropdown.setOnItemSelectedListener(this);
-        prefManager = new PreferenceManager(getContext());
-
-        // Put initDoneBtn in the fragment which is the last step of onboarding
-        initDoneBtn(view);
         return view;
-
     }
 
     @Override
@@ -119,48 +112,6 @@ public class SelectSlots extends BaseOnboardFragment implements AdapterView.OnIt
         User.getCurrentUser().setSlots(adapter.getSelectedChoices());
         return null;
     }
-
-    /*************** Code for last fragment of Onboarding Wizard ****************/
-
-    private void initDoneBtn(View view) {
-        doneBtn = (Button) view.findViewById(R.id.done_onboarding_btn);
-        doneBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                completeOnboarding();
-            }
-        });
-    }
-
-    private void completeOnboarding() {
-        prefManager.setFirstTimeLaunch(false);
-
-        // Write all collected info for user, to object and to firestore
-
-        // TODO: Launch All set page
-        startActivity(new Intent(getContext(), Dashboard.class));
-    }
-
-    private OnWizardInteractionListener mListener;
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnWizardInteractionListener) {
-            mListener = (OnWizardInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /*************** #################################### ****************/
-
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
