@@ -14,8 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
-
-import Models.User;
 import teamcool.mandeep.brunchify.R;
 
 import android.text.Html;
@@ -28,7 +26,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,17 +37,12 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class WelcomeActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     private static final String TAG = WelcomeActivity.class.getSimpleName();
@@ -64,9 +56,8 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
     private Button btnSkip;
     private Button btnNext;
     private PreferenceManager prefManager;
-    private ImageButton googleSigninBtn;
+    private ImageButton imageButton;
     private FirebaseAuth mFirebaseAuth;
-    private ProgressBar progbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,14 +89,13 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
         dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         btnSkip = (Button) findViewById(R.id.btn_skip);
         btnNext = (Button) findViewById(R.id.btn_next);
-        googleSigninBtn = (ImageButton) findViewById(R.id.google_btn);
-        progbar = (ProgressBar) findViewById(R.id.progbar);
-        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        imageButton=(ImageButton)findViewById(R.id.btn_continue);
+        GoogleSignInOptions googleSignInOptions= new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .requestProfile()
                 .build();
-        googleApiClient = new GoogleApiClient.Builder(this).enableAutoManage(this, this).addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions).build();
+        googleApiClient=new GoogleApiClient.Builder(this).enableAutoManage(this,this).addApi(Auth.GOOGLE_SIGN_IN_API,googleSignInOptions).build();
         // layouts of all welcome sliders
         // add few more layouts if you want
         layouts = new int[]{
@@ -125,7 +115,6 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
         myViewPagerAdapter = new MyViewPagerAdapter();
         viewPager.setAdapter(myViewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
-        viewPager.setOffscreenPageLimit(layouts.length);
 
         btnSkip.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,13 +137,12 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
                 }
             }
         });
-        googleSigninBtn.setOnClickListener(new View.OnClickListener() {
+        imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 signIn();
             }
         });
-
     }
 
     private void signIn(){
@@ -182,68 +170,17 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
         }
     }
 
-    private void launchOnBoarding(){
-        Intent intent = new Intent(WelcomeActivity.this, SelectOptions.class);
-        progbar.setVisibility(View.INVISIBLE);
-        startActivity(intent);
-
-    }
-
-    private void launchHomeScreen() {
-        //prefManager.setFirstTimeLaunch(false);
-        startActivity(new Intent(WelcomeActivity.this, Dashboard.class));
-        progbar.setVisibility(View.INVISIBLE);
-        finish();
-    }
-
     private void signInFromGoogleResult(GoogleSignInAccount acct, AuthResult googleSignInResult){
-        final FirebaseUser user = mFirebaseAuth.getCurrentUser();
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
         Intent intent;
         //googleSignInResult.getAdditionalUserInfo().getProfile()
-        final DocumentReference userDocRef = FirebaseFirestore.getInstance().collection("users")
-                .document(user.getUid());
-
-        Log.d(TAG,"Fetching user info from Firestore");
-        userDocRef.get()
-            .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                @Override
-                public void onSuccess(DocumentSnapshot snapshot) {
-                    if (snapshot.exists()) {
-                        // Redundant as already checked newUser
-                        User.setCurrentUser(snapshot.toObject(User.class));
-                        if (User.getCurrentUser().isOnBoarded()) {
-                            launchHomeScreen();
-                        } else {
-                            launchOnBoarding();
-                        }
-                    } else {
-                        // TODO: Move this registration to End of Onboarding
-                        User.setCurrentUser(new User(user.getDisplayName(), user.getUid()));
-                        userDocRef.set(User.getCurrentUser())
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d(TAG, "firebaseUserSet: user added on firebase");
-                                    launchOnBoarding();
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.e(TAG, "Error Registering user to firebase", e);
-                                }
-                            });
-                    }
-                }
-            })
-            .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.e(TAG, "fetchFirebaseUser: Failure", e);
-                    progbar.setVisibility(View.INVISIBLE);
-                }
-            });
-        //progbar.setVisibility(View.VISIBLE);
+        //if (!googleSignInResult.getAdditionalUserInfo().isNewUser() && user.getEmail().contains("pramod")) {
+            intent = new Intent(WelcomeActivity.this, Dashboard.class);
+//        }
+        //else{
+        intent = new Intent(WelcomeActivity.this, SelectOptions.class);
+            //}
+        startActivity(intent);
     }
 
     /**
@@ -253,8 +190,6 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
     private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
-        progbar.setVisibility(View.VISIBLE);
-        Log.d(TAG,"Attempting Firebase login with google account");
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -296,6 +231,12 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
 
     private int getItem(int i) {
         return viewPager.getCurrentItem() + i;
+    }
+
+    private void launchHomeScreen() {
+        prefManager.setFirstTimeLaunch(false);
+        startActivity(new Intent(WelcomeActivity.this, SelectOptions.class));
+        finish();
     }
 
     //  viewpager change listener

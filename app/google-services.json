@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "854290504353-o2h1tnjqr4ntjl31p1uu0sa4rouidj3p.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "teamcool.mandeep.brunchify",
-            "certificate_hash": "38b4f9f5d4f6713cbdd55b8f789d55aef44e1377"
-          }
-        },
-        {
           "client_id": "854290504353-p9kf8m6imj0um02rkvrbtapb0inbsotg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

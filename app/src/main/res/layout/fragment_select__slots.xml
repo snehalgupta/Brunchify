@@ -4,18 +4,17 @@
     android:layout_height="match_parent"
     tools:context="Fragments.SelectSlots">
 
-    <LinearLayout
+    <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/slots_img"
             android:layout_width="match_parent"
-            android:layout_marginTop="24dp"
+            android:layout_marginVertical="30dp"
             android:layout_height="100dp"
             android:scaleType="fitCenter"
             android:layout_centerHorizontal="true"
@@ -40,15 +39,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/slots_text"
             android:layout_marginHorizontal="16dp"
-            android:layout_gravity="center"
-            tools:listitem="@layout/slot_item"
-            tools:itemCount="3"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            >
+        </androidx.recyclerview.widget.RecyclerView>
 
         <TextView
             android:id="@+id/primary_obj_text"
@@ -72,16 +64,5 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/primary_obj_text"/>
 
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/done_onboarding_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="Done"
-            android:background="@color/colorAccent"/>
-
-    </LinearLayout>
->>>>>>> Fixed code for the welcome screens, added done button at end of onboarding, created User object
+    </RelativeLayout>
 </FrameLayout>

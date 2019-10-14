@@ -47,10 +47,6 @@ public class Business_RV_Adapter extends RecyclerView.Adapter<Business_RV_Adapte
         return interests.size();
     }
 
-    public ArrayList<String> getSelected_interests() {
-        return selected_interests;
-    }
-
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mview;
         public final Button mButton;

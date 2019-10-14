@@ -4,155 +4,53 @@ import java.util.*;
 
 public class User {
 
-    private String uid;
     public String name;
     public String intro;
     public ArrayList<String> objectives;
     public ArrayList<String> interests;
-    public ArrayList<Meetup> pastMeetups;
-    public ArrayList<Meetup> upcomingMeetups;
-    public String primaryObjective;
+    public ArrayList<Meetup> past_meetups;
+    public ArrayList<Meetup> upcoming_meetups;
+    public String primary_objective;
     public ArrayList<String> neighbourhoods;
     public ArrayList<Availability_Slot> slots;
-    private boolean onBoarded = false;
 
-    private static User currentUser = null;
-
-    public static User getCurrentUser() {
-        return currentUser;
+    public User(String username) {
+        name = username;
+    }
+    public void add_neighbourhood(String place) {
+        neighbourhoods.add(place);
     }
 
-    public static void setCurrentUser(User currentUser) {
-        User.currentUser = currentUser;
-    }
-
-    public User() {
-        this.objectives = new ArrayList<>();
-        this.primaryObjective = "";
-        this.interests = new ArrayList<>();
-        this.pastMeetups = new ArrayList<>();
-        this.upcomingMeetups = new ArrayList<>();
-        this.neighbourhoods = new ArrayList<>();
-        this.slots = new ArrayList<>();
-    }
-
-    public User(String uid, String name) {
-        this.uid = uid;
-        this.name = name;
-        this.objectives = new ArrayList<>();
-        this.primaryObjective = "";
-        this.interests = new ArrayList<>();
-        this.pastMeetups = new ArrayList<>();
-        this.upcomingMeetups = new ArrayList<>();
-        this.neighbourhoods = new ArrayList<>();
-        this.slots = new ArrayList<>();
-    }
-
-    public void addNeighbourhoods(ArrayList<String> places) {
-        neighbourhoods.addAll(places);
-    }
-
-    public void addSlot(Availability_Slot slot) {
+    public void add_slot(Availability_Slot slot) {
         slots.add(slot);
     }
 
-    public void addObjective(String obj) {
+    public void add_bio(String text) {
+        intro = text;
+    }
+
+    public void add_objective(String obj) {
         objectives.add(obj);
     }
 
-    public void addInterest(String interest){ this.interests.add(interest); }
-
-    public void addInterests(ArrayList<String> interests){
-        for (String i:interests) {
-            User.getCurrentUser().addInterest(i);
-        }
+    public void change_objectives(ArrayList<String> obj) {
+        objectives = obj;
     }
 
-    public void addUpcomingMeetup(Meetup obj) {
-        upcomingMeetups.add(obj);
+    public void change_interests(ArrayList<String> obj) {
+        interests = obj;
     }
 
-    public void addPastMeetup(Meetup obj) {
-        pastMeetups.add(obj);
+    public void add_upcoming_meetup(Meetup obj) {
+        upcoming_meetups.add(obj);
     }
 
-    public boolean isOnBoarded() {
-        return onBoarded;
+    public void add_past_meetup(Meetup obj) {
+        past_meetups.add(obj);
     }
 
-    public void setOnBoarded(boolean onBoarded) {
-        this.onBoarded = onBoarded;
+    public void set_primary_objective(String obj) {
+        primary_objective = obj;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getIntro() {
-        return intro;
-    }
-
-    public void setIntro(String intro) {
-        this.intro = intro;
-    }
-
-    public ArrayList<String> getObjectives() {
-        return objectives;
-    }
-
-    public void setObjectives(ArrayList<String> objectives) {
-        this.objectives = objectives;
-    }
-
-    public ArrayList<String> getInterests() {
-        return interests;
-    }
-
-    public void setInterests(ArrayList<String> interests) {
-        this.interests = interests;
-    }
-
-    public ArrayList<Meetup> getPastMeetups() {
-        return pastMeetups;
-    }
-
-    public void setPastMeetups(ArrayList<Meetup> pastMeetups) {
-        this.pastMeetups = pastMeetups;
-    }
-
-    public ArrayList<Meetup> getUpcomingMeetups() {
-        return upcomingMeetups;
-    }
-
-    public void setUpcomingMeetups(ArrayList<Meetup> upcomingMeetups) {
-        this.upcomingMeetups = upcomingMeetups;
-    }
-
-    public String getPrimaryObjective() {
-        return primaryObjective;
-    }
-
-    public void setPrimaryObjective(String primaryObjective) {
-        this.primaryObjective = primaryObjective;
-    }
-
-    public ArrayList<String> getNeighbourhoods() {
-        return neighbourhoods;
-    }
-
-    public void setNeighbourhoods(ArrayList<String> neighbourhoods) {
-        this.neighbourhoods = neighbourhoods;
-    }
-
-    public ArrayList<Availability_Slot> getSlots() {
-        return slots;
-    }
-
-    public void setSlots(ArrayList<Availability_Slot> slots) {
-        this.slots = slots;
-    }
 }
