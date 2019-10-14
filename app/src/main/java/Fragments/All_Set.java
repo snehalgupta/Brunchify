@@ -39,7 +39,7 @@ public class All_Set extends BaseOnboardFragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_all__set, container, false);
+        View view = inflater.inflate(R.layout.weekly_sign_up_start, container, false);
         return view;
     }
 

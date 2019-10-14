@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/text_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        android:layout_marginBottom="20dp"
+        android:text="Are you in this week?"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlackdark"
+        android:fontFamily="@font/avenir"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/in_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/text_1"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/capsule"
+        android:fontFamily="@font/avenir"
+        android:text="I'm in"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/colorwhite"
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:id="@+id/text_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/in_btn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:fontFamily="@font/avenir"
+        android:text="*The deadline for weekly \n  signups is 8pm every Monday"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlackdark"
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:id="@+id/text_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_2"
+        android:layout_marginVertical="16dp"
+        android:layout_marginTop="50dp"
+        android:text="or"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="@color/colorBlackdark"
+        android:fontFamily="@font/avenir"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/pass_btn"
+        android:layout_width="160dp"
+        android:layout_marginTop="70dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/text_2"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/capsule"
+        android:fontFamily="@font/avenir"
+        android:text="Pass this week"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/colorwhite"
+        android:textSize="20dp"
+        />
+</RelativeLayout>
