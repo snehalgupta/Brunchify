@@ -3,29 +3,24 @@ package Activities;
 //import android.support.v7.app.AppCompatActivity;
 import Fragments.All_Set;
 import Fragments.BaseOnboardFragment;
-import Fragments.Business;
 import Fragments.OnWizardInteractionListener;
+import Fragments.OnboardingPager;
 import Fragments.SelectInterests;
 import Fragments.SelectNeighbourhood;
 import Fragments.SelectObjectives;
-import Fragments.SelectSlots;
-import Fragments.Social;
-import Fragments.Tech;
 import Fragments.Write_Intro;
-import Models.Availability_Slot;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 import teamcool.mandeep.brunchify.R;
 
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -35,9 +30,8 @@ import android.widget.Toast;
 public class SelectOptions extends FragmentActivity implements
         OnWizardInteractionListener {
     private static final String TAG = SelectOptions.class.getSimpleName();
-    private ViewPager viewPager;
-    private MyViewPagerAdapter myViewPagerAdapter;
-    private BaseOnboardFragment[] fragments;
+    private All_Set allSetFragment;
+    private OnboardingPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,61 +45,35 @@ public class SelectOptions extends FragmentActivity implements
         setContentView(R.layout.activity_main);
         changeStatusBarColor();
 
-        initFragments();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
 
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
-        myViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(myViewPagerAdapter);
-        viewPager.setOffscreenPageLimit(fragments.length+1);
+        viewPager = new OnboardingPager();
+        transaction.add(R.id.fragmentContainer, viewPager);
+        transaction.commit();
     }
 
-    private void launchDashboard(){
-        startActivity(new Intent(SelectOptions.this, WeeklySignUp.class));
-        finish();
-    }
+    private void completeOnboarding(){
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
 
-    private int getItem(int i){
-        return viewPager.getCurrentItem()+i;
-    }
-
-    public void initFragments(){
-        fragments = new BaseOnboardFragment[]{
-                new SelectObjectives(),
-                new SelectInterests(),
-                new SelectNeighbourhood(),
-                new Write_Intro()
-        };
+        allSetFragment = new All_Set();
+        transaction.replace(R.id.fragmentContainer, allSetFragment);
+        transaction.commit();
     }
 
     @Override
     public void submit() {
-        for (int i=0; i<fragments.length;i++){
-            String msg = fragments[i].updateUser();
-            if (msg!=null){
-                Log.i(TAG,fragments[i].getClass().getSimpleName() + " Returned message " + msg);
-                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-                viewPager.setCurrentItem(i, true);
-            }
-        }
+        completeOnboarding();
     }
 
-    public class MyViewPagerAdapter extends FragmentPagerAdapter{
+    @Override
+    public void begin() {
+    }
 
-        public MyViewPagerAdapter(FragmentManager fm){
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int pos){
-            return fragments[pos];
-        }
-
-        @Override
-        public int getCount(){
-            //return no_of_fragments;
-            return fragments.length;
-        }
-
+    @Override
+    public void cancel() {
+        onBackPressed();
     }
 
     private void changeStatusBarColor() {

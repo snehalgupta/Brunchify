@@ -1,5 +1,14 @@
 package Models;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.*;
 
 public class User {
@@ -158,5 +167,24 @@ public class User {
 
     public void setSlots(ArrayList<Availability_Slot> slots) {
         this.slots = slots;
+    }
+
+    public static void writeToFirestore(FirebaseFirestore firestore){
+
+        //TODO: Move function to a data class
+        DocumentReference userDocRef = firestore.collection("users").document(User.getCurrentUser().uid);
+        userDocRef.set(User.getCurrentUser())
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("DBOps", "firebaseUserSet: user added on firebase");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("DBOps", "Error Registering user to firebase", e);
+                    }
+                });
     }
 }

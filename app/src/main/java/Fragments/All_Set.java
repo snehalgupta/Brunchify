@@ -1,6 +1,7 @@
 package Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -9,46 +10,39 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import Activities.WeeklySignUp;
 import teamcool.mandeep.brunchify.R;
 
-public class All_Set extends BaseOnboardFragment{
+public class All_Set extends Fragment{
 
-    private static final String ARG_PARAM1 = "param1";
-    private String mParam1;
+    private Button getStartedBtn;
+    private Context context;
 
     public All_Set() {
-    }
-
-    public static All_Set newInstance(String param1) {
-        All_Set fragment = new All_Set();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.weekly_sign_up_start, container, false);
+        View view = inflater.inflate(R.layout.fragment_all__set, container, false);
+        getStartedBtn = (Button)view.findViewById(R.id.get_started_btn);
+        getStartedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context, WeeklySignUp.class));
+                //finish();
+            }
+        });
         return view;
     }
 
     @Override
-    public String updateUser() {
-        String str= "All_set";
-        return str;
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
     }
-
 }
 
 

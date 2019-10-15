@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="Fragments.Weekly_Sign_Up">
+    tools:context="Fragments.WeeksMeetingScheduleFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -72,6 +72,18 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ws_text3"/>
+
+        <Button
+            android:id="@+id/done_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_below="@+id/bio_textbox"
+            android:text="Done"
+            android:textColor="@color/colorwhite"
+            android:background="@color/colorAccent"
+            android:layout_marginBottom="8dp"
+            android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
 

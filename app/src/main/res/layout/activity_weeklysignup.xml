@@ -3,13 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="Activities.WeeklySignUp">
+    tools:context="Activities.WeeklySignUp"
+    android:orientation="vertical">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager_"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-    </androidx.viewpager.widget.ViewPager>
+    <FrameLayout
+        android:id="@+id/fragmentContainer"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" />
 
 </LinearLayout>

@@ -1,18 +1,17 @@
 package Fragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
 import Adapters.BaseChoiceAdapter;
 import Models.User;
-import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 
 import com.google.android.flexbox.FlexDirection;
@@ -24,7 +23,7 @@ import java.util.ArrayList;
 import androidx.recyclerview.widget.RecyclerView;
 import teamcool.mandeep.brunchify.R;
 
-public class Weekly_Sign_Up extends BaseOnboardFragment{
+public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
 
     private static final String ARG_PARAM1 = "param1";
     private String mParam1;
@@ -36,12 +35,14 @@ public class Weekly_Sign_Up extends BaseOnboardFragment{
     String selected_city;
     int selected_no_of_meetings;
     private BaseChoiceAdapter<String> wsAdapter;
+    private Button mDoneBtn;
 
-    public Weekly_Sign_Up() {
+
+    public WeeksMeetingScheduleFragment() {
     }
 
-    public static Weekly_Sign_Up newInstance(String param1) {
-        Weekly_Sign_Up fragment = new Weekly_Sign_Up();
+    public static WeeksMeetingScheduleFragment newInstance(String param1) {
+        WeeksMeetingScheduleFragment fragment = new WeeksMeetingScheduleFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
@@ -61,6 +62,9 @@ public class Weekly_Sign_Up extends BaseOnboardFragment{
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_weekly__sign__up, container, false);
+
+        initDoneBtn(view);
+
         recyclerView = (RecyclerView)view.findViewById(R.id.ws_recycler_view);
         s1 = (Spinner)view.findViewById(R.id.ws_spinner1);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),R.array.cities_array,android.R.layout.simple_spinner_item);
@@ -131,5 +135,39 @@ public class Weekly_Sign_Up extends BaseOnboardFragment{
         User.getCurrentUser().no_of_meetings = selected_no_of_meetings;
         return null;
     }
+
+
+
+    /*************** Code for last fragment of Onboarding Wizard ****************/
+
+    private void initDoneBtn(View view) {
+        mDoneBtn = (Button) view.findViewById(R.id.done_btn);
+        mDoneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.submit();
+            }
+        });
+    }
+
+    private OnWizardInteractionListener mListener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnWizardInteractionListener) {
+            mListener = (OnWizardInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /*************** #################################### ****************/
 
 }

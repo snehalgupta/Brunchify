@@ -1,11 +1,7 @@
 package Fragments;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
-import Activities.Dashboard;
-import Activities.PreferenceManager;
 import Adapters.Slots_RV_Adapter;
 import Models.Availability_Slot;
 
@@ -15,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Button;
 
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
@@ -37,8 +32,10 @@ public class SelectSlots extends BaseOnboardFragment implements AdapterView.OnIt
     private ArrayList<ArrayList<Availability_Slot>> arr ;
 
     //private BaseChoiceAdapter<Availability_Slot> adapter;
-    private Slots_RV_Adapter adapter;
+    private Slots_RV_Adapter slotsRvAdapter;
     private String primary_obj;
+    private Spinner dropdown;
+    private ArrayAdapter<String> objectivesAdapter;
 
     public SelectSlots() {
     }
@@ -91,27 +88,31 @@ public class SelectSlots extends BaseOnboardFragment implements AdapterView.OnIt
         layoutm.setFlexDirection(FlexDirection.ROW);
         layoutm.setJustifyContent(JustifyContent.FLEX_START);
         recyclerView.setLayoutManager(layoutm);
-        adapter = new Slots_RV_Adapter(getContext(),arr);
+        slotsRvAdapter = new Slots_RV_Adapter(getContext(),arr);
         //adapter = new BaseChoiceAdapter<>(getContext(), arr, R.layout.slot_item);
 
 
-        recyclerView.setAdapter(adapter);
-        Spinner dropdown = (Spinner)view.findViewById(R.id.slot_spinner);
-        ArrayAdapter<CharSequence> adapter_ = ArrayAdapter.createFromResource(getContext(),R.array.objectives_array,android.R.layout.simple_spinner_item);
-        adapter_.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dropdown.setAdapter(adapter_);
+        recyclerView.setAdapter(slotsRvAdapter);
+        dropdown = (Spinner)view.findViewById(R.id.slot_spinner);
+        //objectivesAdapter = ArrayAdapter.createFromResource(getContext(),R.array.objectives_array,android.R.layout.simple_spinner_item);
+        //objectivesAdapter.clear();
+        //objectivesAdapter.addAll(User.getCurrentUser().getObjectives());
+        objectivesAdapter = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item, User.getCurrentUser().getObjectives());
+        objectivesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dropdown.setAdapter(objectivesAdapter);
         dropdown.setOnItemSelectedListener(this);
         return view;
     }
 
     @Override
     public String updateUser() {
-        if (adapter.getSelectedChoices().size() < 1){
+        if (slotsRvAdapter.getSelectedChoices().size() < 1){
             return "Please choose at least 1 time slot";
         }
-        String str = "slot selection";
-        User.getCurrentUser().setSlots(adapter.getSelectedChoices());
-        return str;
+        User.getCurrentUser().setSlots(slotsRvAdapter.getSelectedChoices());
+        User.getCurrentUser().setPrimaryObjective(dropdown.getSelectedItem().toString());
+
+        return null;
     }
 
     @Override

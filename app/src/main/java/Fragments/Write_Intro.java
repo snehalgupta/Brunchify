@@ -77,18 +77,9 @@ public class Write_Intro extends BaseOnboardFragment {
         doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                completeOnboarding();
+                mListener.submit();
             }
         });
-    }
-
-    private void completeOnboarding() {
-        prefManager.setFirstTimeLaunch(false);
-
-        // Write all collected info for user, to object and to firestore
-
-        // TODO: Launch All set page
-        startActivity(new Intent(getContext(), WeeklySignUp.class));
     }
 
     private OnWizardInteractionListener mListener;

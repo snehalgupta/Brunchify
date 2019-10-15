@@ -4,33 +4,28 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import Fragments.All_Set;
-import Fragments.BaseOnboardFragment;
 import Fragments.OnWizardInteractionListener;
-import Fragments.SelectInterests;
-import Fragments.SelectNeighbourhood;
-import Fragments.SelectObjectives;
-import Fragments.SelectSlots;
-import Fragments.Weekly_Sign_Up;
-import Fragments.Write_Intro;
-import androidx.fragment.app.Fragment;
+import Fragments.WeeklySignUpStart;
+import Fragments.WeeklySignupPagerFragment;
+
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
+import androidx.fragment.app.FragmentTransaction;
+
 import teamcool.mandeep.brunchify.R;
 
 public class WeeklySignUp extends FragmentActivity implements OnWizardInteractionListener {
 
     private static final String TAG = WeeklySignUp.class.getSimpleName();
-    private ViewPager viewPager;
-    private BaseOnboardFragment[] fragments;
-    private MyViewPagerAdapter myViewPagerAdapter;
+    //private ViewPager viewPager;
+//    private BaseOnboardFragment[] fragments;
+    //private MyViewPagerAdapter myViewPagerAdapter;
+    private WeeklySignUpStart weeklySignUpStart;
+    private WeeklySignupPagerFragment viewPagerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,43 +40,23 @@ public class WeeklySignUp extends FragmentActivity implements OnWizardInteractio
         changeStatusBarColor();
 
         initFragments();
-
-        viewPager = (ViewPager) findViewById(R.id.view_pager_);
-        myViewPagerAdapter = new WeeklySignUp.MyViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(myViewPagerAdapter);
-        viewPager.setOffscreenPageLimit(fragments.length+1);
     }
 
-    private void launchDashboard(){
+    private void completeWeeklySignup(){
         startActivity(new Intent(WeeklySignUp.this, Dashboard.class));
         finish();
     }
 
     public void initFragments(){
-        fragments = new BaseOnboardFragment[]{
-                new All_Set(),
-                new SelectSlots(),
-                new Weekly_Sign_Up()
-        };
-    }
 
-    public class MyViewPagerAdapter extends FragmentPagerAdapter {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
 
-        public MyViewPagerAdapter(FragmentManager fm){
-            super(fm);
-        }
+        weeklySignUpStart = new WeeklySignUpStart();
+        transaction.add(R.id.fragmentContainer, weeklySignUpStart);
+        transaction.commit();
 
-        @Override
-        public Fragment getItem(int pos){
-            return fragments[pos];
-        }
-
-        @Override
-        public int getCount(){
-            //return no_of_fragments;
-            return fragments.length;
-        }
-
+        viewPagerFragment = new WeeklySignupPagerFragment();
     }
 
     private void changeStatusBarColor() {
@@ -94,13 +69,31 @@ public class WeeklySignUp extends FragmentActivity implements OnWizardInteractio
 
     @Override
     public void submit() {
-        for (int i=0; i<fragments.length;i++){
-            String msg = fragments[i].updateUser();
-            if (msg!=null){
-                Log.i(TAG,fragments[i].getClass().getSimpleName() + " Returned message " + msg);
-                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-                viewPager.setCurrentItem(i, true);
-            }
+        String msg = viewPagerFragment.updateUser();
+        if (msg!=null){
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT);
         }
+        else {
+            completeWeeklySignup();
+        }
+    }
+
+    @Override
+    public void begin() {
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        transaction.replace(R.id.fragmentContainer, viewPagerFragment);
+        transaction.commit();
+
+        /*viewPager = (ViewPager) findViewById(R.id.view_pager_);
+        myViewPagerAdapter = new WeeklySignUp.MyViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(myViewPagerAdapter);
+        viewPager.setOffscreenPageLimit(fragments.length+1);*/
+    }
+
+    @Override
+    public void cancel() {
+        completeWeeklySignup();
     }
 }

@@ -53,6 +53,11 @@ public class BaseChoiceAdapter<Choice> extends RecyclerView.Adapter<BaseChoiceAd
         return selectedChoices;
     }
 
+    public void setSelectedChoices(ArrayList<Choice> selectedChoices) {
+        this.selectedChoices = selectedChoices;
+        notifyDataSetChanged();
+    }
+
     @Override
     public void onClick(int pos){
         if (selectedChoices.contains(allChoices.get(pos))){
@@ -80,27 +85,28 @@ public class BaseChoiceAdapter<Choice> extends RecyclerView.Adapter<BaseChoiceAd
             return choice.toString();
         }
 
+        private void renderSelection(){
+            boolean isSelected = selectedChoices.contains(this.choice);
+            if (isSelected) {
+                mButton.setBackground(ContextCompat.getDrawable(context, R.drawable.capsuleselected));
+                mButton.setTextColor(Color.WHITE);
+            } else {
+                mButton.setBackground(ContextCompat.getDrawable(context, R.drawable.capsulewhite));
+                mButton.setTextColor(Color.BLACK);
+            }
+        }
+
         public void setView(final ViewItem item) {
+            Log.i(TAG, "selected");
             this.choice = item;
             mButton.setText(getText(item));
-            mButton.setTextColor(Color.BLACK);
+            renderSelection();
             mButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     {
-                        Log.i(TAG, "selected");
-                        Boolean isSelected = selectedChoices.contains(item);
-                        if (isSelected) {
-                            mButton.setBackground(ContextCompat.getDrawable(context, R.drawable.capsulewhite));
-                            mButton.setTextColor(Color.BLACK);
-                            //selectedChoices.remove(item);
-                            BaseChoiceAdapter.this.onClick(getAdapterPosition());
-                        } else {
-                            //selectedChoices.add(item);
-                            BaseChoiceAdapter.this.onClick(getAdapterPosition());
-                            mButton.setBackground(ContextCompat.getDrawable(context, R.drawable.capsuleselected));
-                            mButton.setTextColor(Color.WHITE);
-                        }
+                        BaseChoiceAdapter.this.onClick(getAdapterPosition());
+                        renderSelection();
                     }
                 }
             });
