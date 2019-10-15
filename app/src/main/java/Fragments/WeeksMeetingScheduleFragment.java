@@ -127,12 +127,12 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
 
     @Override
     public String updateUser() {
-        User.getCurrentUser().weekly_places.clear();
+        User.getCurrentUser().weeklyPlaces.clear();
         if (wsAdapter.getSelectedChoices().size() < 1){
             return "Please select a location";
         }
-        User.getCurrentUser().weekly_places = wsAdapter.getSelectedChoices();
-        User.getCurrentUser().no_of_meetings = selected_no_of_meetings;
+        User.getCurrentUser().weeklyPlaces = wsAdapter.getSelectedChoices();
+        User.getCurrentUser().noOfMeetings = selected_no_of_meetings;
         return null;
     }
 

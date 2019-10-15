@@ -66,7 +66,7 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
     private PreferenceManager prefManager;
     private ImageButton googleSigninBtn;
     private FirebaseAuth mFirebaseAuth;
-    private ProgressBar progbar;
+    //private ProgressBar progbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +92,7 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
         btnSkip = (Button) findViewById(R.id.btn_skip);
         btnNext = (Button) findViewById(R.id.btn_next);
         googleSigninBtn = (ImageButton) findViewById(R.id.google_btn);
-        progbar = (ProgressBar) findViewById(R.id.progbar);
+        //progbar = (ProgressBar) findViewById(R.id.progbar);
 
 
 
@@ -187,7 +187,7 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
 
     private void launchOnBoarding(){
         Intent intent = new Intent(WelcomeActivity.this, SelectOptions.class);
-        progbar.setVisibility(View.INVISIBLE);
+        //progbar.setVisibility(View.INVISIBLE);
         startActivity(intent);
 
     }
@@ -196,7 +196,7 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
         //prefManager.setFirstTimeLaunch(false);
         Log.i(TAG,"Not first time user, launching homes screen");
         startActivity(new Intent(WelcomeActivity.this, Dashboard.class));
-        progbar.setVisibility(View.INVISIBLE);
+        //progbar.setVisibility(View.INVISIBLE);
         finish();
     }
 
@@ -222,7 +222,8 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
                         }
                     } else {
                         // TODO: Move this registration to End of Onboarding
-                        User.setCurrentUser(new User(user.getDisplayName(), user.getUid()));
+                        // TODO: Check for invite condition
+                        User.setCurrentUser(new User(user.getUid(), user.getDisplayName()));
                         userDocRef.set(User.getCurrentUser())
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
@@ -244,7 +245,7 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Log.e(TAG, "fetchFirebaseUser: Failure", e);
-                    progbar.setVisibility(View.INVISIBLE);
+                    //progbar.setVisibility(View.INVISIBLE);
                 }
             });
         //progbar.setVisibility(View.VISIBLE);
@@ -257,7 +258,7 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
     private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
 
-        progbar.setVisibility(View.VISIBLE);
+        //progbar.setVisibility(View.VISIBLE);
         Log.d(TAG,"Attempting Firebase login with google account");
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mFirebaseAuth.signInWithCredential(credential)
@@ -271,7 +272,7 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            progbar.setVisibility(View.INVISIBLE);
+                            //progbar.setVisibility(View.INVISIBLE);
                         }
 
                         // ...

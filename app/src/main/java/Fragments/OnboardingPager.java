@@ -71,6 +71,8 @@ public class OnboardingPager extends BaseOnboardFragment {
     }
 
     public void initFragments(){
+
+        //TODO: Remove neighbourhood screen
         fragments = new BaseOnboardFragment[]{
                 new SelectObjectives(),
                 new SelectInterests(),
@@ -93,7 +95,6 @@ public class OnboardingPager extends BaseOnboardFragment {
 
         @Override
         public int getCount(){
-            //return no_of_fragments;
             return fragments.length;
         }
 

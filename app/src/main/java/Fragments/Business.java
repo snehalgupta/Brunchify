@@ -14,7 +14,9 @@ import com.google.android.flexbox.JustifyContent;
 
 import java.util.ArrayList;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import Models.User;
 import teamcool.mandeep.brunchify.R;
@@ -52,9 +54,10 @@ public class Business extends BaseOnboardFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_business, container, false);
         recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view_business);
-        FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
-        layoutm.setFlexDirection(FlexDirection.ROW);
-        layoutm.setJustifyContent(JustifyContent.CENTER);
+        StaggeredGridLayoutManager layoutm = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
+        //FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
+        //layoutm.setFlexDirection(FlexDirection.ROW);
+        //layoutm.setJustifyContent(JustifyContent.CENTER);
         recyclerView.setLayoutManager(layoutm);
         business = new ArrayList<String>();
         business.add("Healthcare");

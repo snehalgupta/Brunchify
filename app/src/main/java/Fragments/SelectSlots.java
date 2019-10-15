@@ -35,7 +35,7 @@ public class SelectSlots extends BaseOnboardFragment implements AdapterView.OnIt
     private Slots_RV_Adapter slotsRvAdapter;
     private String primary_obj;
     private Spinner dropdown;
-    private ArrayAdapter<String> objectivesAdapter;
+    private ArrayAdapter<CharSequence> objectivesAdapter;
 
     public SelectSlots() {
     }
@@ -94,10 +94,10 @@ public class SelectSlots extends BaseOnboardFragment implements AdapterView.OnIt
 
         recyclerView.setAdapter(slotsRvAdapter);
         dropdown = (Spinner)view.findViewById(R.id.slot_spinner);
-        //objectivesAdapter = ArrayAdapter.createFromResource(getContext(),R.array.objectives_array,android.R.layout.simple_spinner_item);
+        objectivesAdapter = ArrayAdapter.createFromResource(getContext(),R.array.objectives_array,android.R.layout.simple_spinner_item);
         //objectivesAdapter.clear();
         //objectivesAdapter.addAll(User.getCurrentUser().getObjectives());
-        objectivesAdapter = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item, User.getCurrentUser().getObjectives());
+        //objectivesAdapter = new ArrayAdapter(getContext(),android.R.layout.simple_spinner_item, User.getCurrentUser().getObjectives());
         objectivesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dropdown.setAdapter(objectivesAdapter);
         dropdown.setOnItemSelectedListener(this);

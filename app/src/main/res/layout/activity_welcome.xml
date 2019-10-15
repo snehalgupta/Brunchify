@@ -24,13 +24,13 @@
         android:layout_height="1dp"
         android:alpha=".5"
         android:background="@android:color/white" />-->
-    <ProgressBar
+    <!--<ProgressBar
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:visibility="invisible"
         android:id="@+id/progbar"
         android:layout_margin="32dp"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"/>-->
     <ImageButton
         android:id="@+id/google_btn"
         android:layout_width="match_parent"

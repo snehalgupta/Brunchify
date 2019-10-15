@@ -7,6 +7,7 @@ import Adapters.BaseChoiceAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
@@ -14,7 +15,9 @@ import com.google.android.flexbox.JustifyContent;
 
 import java.util.ArrayList;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import Models.User;
 import teamcool.mandeep.brunchify.R;
@@ -33,9 +36,10 @@ public class SelectObjectives extends BaseOnboardFragment{
 
         View view = inflater.inflate(R.layout.fragment_select__objectives, container, false);
         recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view_obj);
-        FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
-        layoutm.setFlexDirection(FlexDirection.ROW);
-        layoutm.setJustifyContent(JustifyContent.CENTER);
+        StaggeredGridLayoutManager layoutm = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
+        //FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
+        //layoutm.setFlexDirection(FlexDirection.ROW);
+        //layoutm.setJustifyContent(JustifyContent.CENTER);
         recyclerView.setLayoutManager(layoutm);
         objectives_arr = new ArrayList<String>();
         objectives_arr.add("Brainstorming");

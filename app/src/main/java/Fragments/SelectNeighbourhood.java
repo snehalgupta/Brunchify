@@ -17,7 +17,9 @@ import com.google.android.flexbox.JustifyContent;
 
 import java.util.ArrayList;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import Models.User;
 import teamcool.mandeep.brunchify.R;
@@ -38,9 +40,10 @@ public class SelectNeighbourhood extends BaseOnboardFragment implements AdapterV
 
         View view = inflater.inflate(R.layout.fragment_select__neighbourhood, container, false);
         recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view_neighbourhood);
-        FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
-        layoutm.setFlexDirection(FlexDirection.ROW);
-        layoutm.setJustifyContent(JustifyContent.CENTER);
+        StaggeredGridLayoutManager layoutm = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
+        //FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
+        //layoutm.setFlexDirection(FlexDirection.ROW);
+        //layoutm.setJustifyContent(JustifyContent.CENTER);
         recyclerView.setLayoutManager(layoutm);
         delhi = new ArrayList<String>();
         delhi.add("CP");

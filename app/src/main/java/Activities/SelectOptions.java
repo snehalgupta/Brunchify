@@ -10,12 +10,15 @@ import Fragments.SelectNeighbourhood;
 import Fragments.SelectObjectives;
 import Fragments.Write_Intro;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
+
+import Models.User;
 import teamcool.mandeep.brunchify.R;
 
 import android.graphics.Color;
@@ -26,6 +29,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.content.Intent;
 import android.widget.Toast;
+
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SelectOptions extends FragmentActivity implements
         OnWizardInteractionListener {
@@ -58,13 +63,20 @@ public class SelectOptions extends FragmentActivity implements
         FragmentTransaction transaction = manager.beginTransaction();
 
         allSetFragment = new All_Set();
+        User.writeToFirestore(FirebaseFirestore.getInstance(), allSetFragment);
         transaction.replace(R.id.fragmentContainer, allSetFragment);
         transaction.commit();
     }
 
     @Override
     public void submit() {
-        completeOnboarding();
+        String msg = viewPager.updateUser();
+        if (msg!=null){
+            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        }
+        else {
+            completeOnboarding();
+        }
     }
 
     @Override

@@ -1,11 +1,6 @@
 package Models;
 
-import android.util.Log;
-
-import androidx.annotation.NonNull;
-
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -24,8 +19,8 @@ public class User {
     public ArrayList<String> neighbourhoods;
     public ArrayList<Availability_Slot> slots;
     private boolean onBoarded = false;
-    public int no_of_meetings;
-    public ArrayList<String> weekly_places;
+    public int noOfMeetings;
+    public ArrayList<String> weeklyPlaces;
 
     private static User currentUser = null;
 
@@ -45,7 +40,7 @@ public class User {
         this.upcomingMeetups = new ArrayList<>();
         this.neighbourhoods = new ArrayList<>();
         this.slots = new ArrayList<>();
-        this.weekly_places = new ArrayList<>();
+        this.weeklyPlaces = new ArrayList<>();
     }
 
     public User(String uid, String name) {
@@ -57,7 +52,7 @@ public class User {
         this.pastMeetups = new ArrayList<>();
         this.upcomingMeetups = new ArrayList<>();
         this.neighbourhoods = new ArrayList<>();
-        this.weekly_places = new ArrayList<>();
+        this.weeklyPlaces = new ArrayList<>();
         this.slots = new ArrayList<>();
     }
 
@@ -169,22 +164,34 @@ public class User {
         this.slots = slots;
     }
 
-    public static void writeToFirestore(FirebaseFirestore firestore){
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public int getNoOfMeetings() {
+        return noOfMeetings;
+    }
+
+    public void setNoOfMeetings(int noOfMeetings) {
+        this.noOfMeetings = noOfMeetings;
+    }
+
+    public ArrayList<String> getWeeklyPlaces() {
+        return weeklyPlaces;
+    }
+
+    public void setWeeklyPlaces(ArrayList<String> weeklyPlaces) {
+        this.weeklyPlaces = weeklyPlaces;
+    }
+
+    public static void writeToFirestore(FirebaseFirestore firestore, OnCompleteListener<Void> listener){
 
         //TODO: Move function to a data class
         DocumentReference userDocRef = firestore.collection("users").document(User.getCurrentUser().uid);
-        userDocRef.set(User.getCurrentUser())
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Log.d("DBOps", "firebaseUserSet: user added on firebase");
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("DBOps", "Error Registering user to firebase", e);
-                    }
-                });
+        userDocRef.set(User.getCurrentUser()).addOnCompleteListener(listener);
     }
 }
