@@ -23,11 +23,14 @@ import teamcool.mandeep.brunchify.R;
 
 import android.graphics.Color;
 import android.os.Build;
+import android.text.Html;
 import android.util.Log;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.content.Intent;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -37,6 +40,9 @@ public class SelectOptions extends FragmentActivity implements
     private static final String TAG = SelectOptions.class.getSimpleName();
     private All_Set allSetFragment;
     private OnboardingPager viewPager;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,8 @@ public class SelectOptions extends FragmentActivity implements
 
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
+
+
 
         viewPager = new OnboardingPager();
         transaction.add(R.id.fragmentContainer, viewPager);
@@ -95,20 +103,4 @@ public class SelectOptions extends FragmentActivity implements
             window.setStatusBarColor(Color.TRANSPARENT);
         }
     }
-
-    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-    };
 }

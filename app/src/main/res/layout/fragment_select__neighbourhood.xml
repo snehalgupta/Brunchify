@@ -36,10 +36,10 @@
 
         <Spinner
             android:id="@+id/neighbourhood_spinner"
-            style="@android:style/Widget.Spinner"
             android:prompt="@string/city_prompt"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
             android:layout_below="@+id/neighbourhood_text"/>
 
         <androidx.recyclerview.widget.RecyclerView

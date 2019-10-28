@@ -36,10 +36,10 @@ public class SelectObjectives extends BaseOnboardFragment{
 
         View view = inflater.inflate(R.layout.fragment_select__objectives, container, false);
         recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view_obj);
-        StaggeredGridLayoutManager layoutm = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
-        //FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
-        //layoutm.setFlexDirection(FlexDirection.ROW);
-        //layoutm.setJustifyContent(JustifyContent.CENTER);
+        //StaggeredGridLayoutManager layoutm = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
+        FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
+        layoutm.setFlexDirection(FlexDirection.ROW);
+        layoutm.setJustifyContent(JustifyContent.CENTER);
         recyclerView.setLayoutManager(layoutm);
         objectives_arr = new ArrayList<String>();
         objectives_arr.add("Brainstorming");
@@ -55,7 +55,7 @@ public class SelectObjectives extends BaseOnboardFragment{
         objectives_arr.add("Explore other companies");
         //Objectives_RV_Adapter adapter = new Objectives_RV_Adapter(getContext(),objectives_arr,mListener);
         adapter = new BaseChoiceAdapter<>(getContext(),objectives_arr,R.layout.oval_select_button);
-        adapter.setSelectedChoices(User.getCurrentUser().getObjectives());
+        //adapter.setSelectedChoices(User.getCurrentUser().getObjectives());
         recyclerView.setAdapter(adapter);
         return view;
     }

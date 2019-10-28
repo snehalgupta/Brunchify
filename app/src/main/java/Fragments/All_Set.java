@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -27,6 +29,8 @@ public class All_Set extends Fragment implements OnCompleteListener<Void> {
     private Button getStartedBtn;
     private Context context;
     private boolean firebaseWriteComplete = false;
+    private LinearLayout progressBar;
+    private LinearLayout mainLayout;
 
     public All_Set() {
     }
@@ -44,6 +48,10 @@ public class All_Set extends Fragment implements OnCompleteListener<Void> {
                 //finish();
             }
         });
+        mainLayout = (LinearLayout)view.findViewById(R.id.all_set_content);
+        progressBar = (LinearLayout)view.findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.VISIBLE);
+        mainLayout.setVisibility(View.INVISIBLE);
         return view;
     }
 
@@ -65,7 +73,8 @@ public class All_Set extends Fragment implements OnCompleteListener<Void> {
             Log.e(tag, "Error Registering user to firebase", task.getException());
             Toast.makeText(getContext(), "Error registering to server", Toast.LENGTH_LONG).show();
         }
-
+        progressBar.setVisibility(View.INVISIBLE);
+        mainLayout.setVisibility(View.VISIBLE);
         getStartedBtn.setVisibility(View.VISIBLE);
 
     }

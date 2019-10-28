@@ -40,10 +40,10 @@ public class SelectNeighbourhood extends BaseOnboardFragment implements AdapterV
 
         View view = inflater.inflate(R.layout.fragment_select__neighbourhood, container, false);
         recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view_neighbourhood);
-        StaggeredGridLayoutManager layoutm = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
-        //FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
-        //layoutm.setFlexDirection(FlexDirection.ROW);
-        //layoutm.setJustifyContent(JustifyContent.CENTER);
+        //StaggeredGridLayoutManager layoutm = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
+        FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
+        layoutm.setFlexDirection(FlexDirection.ROW);
+        layoutm.setJustifyContent(JustifyContent.CENTER);
         recyclerView.setLayoutManager(layoutm);
         delhi = new ArrayList<String>();
         delhi.add("CP");

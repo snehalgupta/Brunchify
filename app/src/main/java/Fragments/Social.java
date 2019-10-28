@@ -54,10 +54,10 @@ public class Social extends BaseOnboardFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_social, container, false);
         recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view_social);
-        StaggeredGridLayoutManager layoutm = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
-        //FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
-        //layoutm.setFlexDirection(FlexDirection.ROW);
-        //layoutm.setJustifyContent(JustifyContent.CENTER);
+        //StaggeredGridLayoutManager layoutm = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
+        FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
+        layoutm.setFlexDirection(FlexDirection.ROW);
+        layoutm.setJustifyContent(JustifyContent.CENTER);
         recyclerView.setLayoutManager(layoutm);
         social = new ArrayList<String>();
         social.add("Diversity and Inclusion");

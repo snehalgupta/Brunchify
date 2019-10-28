@@ -54,10 +54,10 @@ public class Tech extends BaseOnboardFragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tech, container, false);
         recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view_tech);
-        StaggeredGridLayoutManager layoutm = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
-        //FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
-        //layoutm.setFlexDirection(FlexDirection.ROW);
-        //layoutm.setJustifyContent(JustifyContent.CENTER);
+        //StaggeredGridLayoutManager layoutm = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
+        FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
+        layoutm.setFlexDirection(FlexDirection.ROW);
+        layoutm.setJustifyContent(JustifyContent.CENTER);
         recyclerView.setLayoutManager(layoutm);
         tech = new ArrayList<String>();
         tech.add("AI");
