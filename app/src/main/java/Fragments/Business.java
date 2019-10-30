@@ -7,6 +7,7 @@ import Adapters.BaseChoiceAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
@@ -55,7 +56,7 @@ public class Business extends BaseOnboardFragment {
         View view = inflater.inflate(R.layout.fragment_business, container, false);
         recyclerView = (RecyclerView)view.findViewById(R.id.recycler_view_business);
         StaggeredGridLayoutManager layoutm = new StaggeredGridLayoutManager(3, LinearLayoutManager.VERTICAL);
-        //FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
+         //FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
         //layoutm.setFlexDirection(FlexDirection.ROW);
         //layoutm.setJustifyContent(JustifyContent.CENTER);
         recyclerView.setLayoutManager(layoutm);

@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@android:color/white">
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="50"/>
-    <LinearLayout
-        android:id="@+id/layoutDots"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dots_height"
-        android:gravity="center"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"/>
+    android:background="@drawable/backgroundfinal">
+
     <!--<View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -31,15 +19,22 @@
         android:id="@+id/progbar"
         android:layout_margin="32dp"
         android:layout_gravity="center"/>-->
-    <ImageButton
-        android:id="@+id/google_btn"
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/group"
-        android:scaleType="centerInside"
-        android:background="@color/colorwhite"
-        android:textColor="@android:color/white" />
+        android:layout_height="500dp"
+        android:layout_marginTop="60dp" />
+
+    <LinearLayout
+        android:id="@+id/layoutDots"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dots_height"
+        android:layout_below="@+id/view_pager"
+        android:layout_marginTop="53dp"
+        android:gravity="center"
+        android:orientation="horizontal" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -63,4 +58,17 @@
             android:layout_alignParentRight="true"/>
     </RelativeLayout>
 
-</LinearLayout>
+    <ImageButton
+        android:id="@+id/google_btn"
+        android:layout_width="220dp"
+        android:layout_height="60dp"
+        android:layout_below="@+id/layoutDots"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="23dp"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/grouping"
+        android:textColor="@android:color/white" />
+
+</RelativeLayout>

@@ -8,26 +8,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:854290504353:android:4104ac5deeef4a9848aee0",
+        "mobilesdk_app_id": "1:854290504353:android:c0831ef2e58d2b3448aee0",
         "android_client_info": {
           "package_name": "teamcool.mandeep.brunchify"
         }
       },
       "oauth_client": [
         {
-          "client_id": "854290504353-o2h1tnjqr4ntjl31p1uu0sa4rouidj3p.apps.googleusercontent.com",
+          "client_id": "854290504353-l31kjicfj529somq4dq2ei43v0ababtt.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "teamcool.mandeep.brunchify",
-            "certificate_hash": "38b4f9f5d4f6713cbdd55b8f789d55aef44e1377"
-          }
-        },
-        {
-          "client_id": "854290504353-p9kf8m6imj0um02rkvrbtapb0inbsotg.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "teamcool.mandeep.brunchify",
-            "certificate_hash": "ec1081caaab187a1100bdf09ecbca504074f97bb"
+            "certificate_hash": "a17417428ac5d7a1c1f268656ccb6cb07920127b"
           }
         },
         {
