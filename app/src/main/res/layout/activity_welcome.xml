@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,33 +7,38 @@
     android:orientation="vertical"
     android:background="@drawable/backgroundfinal">
 
-    <!--<View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:alpha=".5"
-        android:background="@android:color/white" />-->
-    <!--<ProgressBar
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:visibility="invisible"
-        android:id="@+id/progbar"
-        android:layout_margin="32dp"
-        android:layout_gravity="center"/>-->
-
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:layout_marginTop="60dp" />
+        android:layout_height="550dp"
+        />
+
+    <ProgressBar
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:visibility="invisible"
+        android:id="@+id/progbar"
+        android:layout_margin="1dp"
+        android:layout_gravity="center"/>
 
     <LinearLayout
         android:id="@+id/layoutDots"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dots_height"
         android:layout_below="@+id/view_pager"
-        android:layout_marginTop="53dp"
         android:gravity="center"
         android:orientation="horizontal" />
+
+    <ImageButton
+        android:id="@+id/google_btn"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@+id/layoutDots"
+        android:layout_marginTop="30dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        android:src="@drawable/grouping"
+        android:textColor="@android:color/white" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -42,33 +47,19 @@
 
         <Button
             android:id="@+id/btn_next"
-            android:layout_width="5dp"
-            android:layout_height="16dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:background="@null"
             android:text="@string/next"
             android:textColor="@android:color/white"
             android:layout_alignParentLeft="true"/>
         <Button
             android:id="@+id/btn_skip"
-            android:layout_width="5dp"
-            android:layout_height="16dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:text="@string/skip"
             android:background="@null"
             android:textColor="@android:color/white"
             android:layout_alignParentRight="true"/>
     </RelativeLayout>
-
-    <ImageButton
-        android:id="@+id/google_btn"
-        android:layout_width="220dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/layoutDots"
-        android:layout_marginLeft="100dp"
-        android:layout_marginTop="23dp"
-        android:adjustViewBounds="true"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:src="@drawable/grouping"
-        android:textColor="@android:color/white" />
-
-</RelativeLayout>
+</LinearLayout>

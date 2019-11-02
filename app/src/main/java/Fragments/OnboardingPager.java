@@ -8,9 +8,12 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
@@ -27,7 +30,8 @@ public class OnboardingPager extends BaseOnboardFragment {
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
     private BaseOnboardFragment[] fragments;
-
+    private TextView[] dots;
+    private LinearLayout dotsLayout;
 
     public OnboardingPager() {
         // Required empty public constructor
@@ -43,10 +47,13 @@ public class OnboardingPager extends BaseOnboardFragment {
 
         initFragments();
 
+        dotsLayout = (LinearLayout) view.findViewById(R.id.layoutDots);
         viewPager = (ViewPager) view.findViewById(R.id.view_pager);
         myViewPagerAdapter = new MyViewPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(myViewPagerAdapter);
+        viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
         viewPager.setOffscreenPageLimit(fragments.length+1);
+        addBottomDots(0);
 
         return view;
     }
@@ -76,11 +83,14 @@ public class OnboardingPager extends BaseOnboardFragment {
         fragments = new BaseOnboardFragment[]{
                 new SelectObjectives(),
                 new SelectInterests(),
-                new SelectNeighbourhood(),
+                //new SelectNeighbourhood(),
                 new Write_Intro()
         };
     }
 
+    public int getNumFragments() {
+        return fragments.length;
+    }
 
     public class MyViewPagerAdapter extends FragmentPagerAdapter {
 
@@ -98,6 +108,42 @@ public class OnboardingPager extends BaseOnboardFragment {
             return fragments.length;
         }
 
+    }
+
+    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            addBottomDots(position);
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
+
+    private void addBottomDots(int currentPage) {
+        dots = new TextView[fragments.length];
+
+        int[] colorsActive = getResources().getIntArray(R.array.array_dot_active);
+        int[] colorsInactive = getResources().getIntArray(R.array.array_dot_inactive);
+
+        dotsLayout.removeAllViews();
+        for (int i = 0; i < dots.length; i++) {
+            dots[i] = new TextView(getContext());
+            dots[i].setText(Html.fromHtml("&#8226;"));
+            dots[i].setTextSize(35);
+            dots[i].setTextColor(colorsInactive[currentPage]);
+            dotsLayout.addView(dots[i]);
+        }
+
+        if (dots.length > 0)
+            dots[currentPage].setTextColor(colorsActive[currentPage]);
     }
 
 }
