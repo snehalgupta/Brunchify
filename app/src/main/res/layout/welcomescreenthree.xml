@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,48 +10,35 @@
         android:id="@+id/logoimgview"
         android:layout_width="590dp"
         android:layout_height="350dp"
-        android:scaleType="fitXY"
+        android:scaleType="fitCenter"
         android:src="@drawable/ic_email"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.083" />
+        />
 
     <TextView
         android:id="@+id/wstitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
+        android:layout_below="@+id/logoimgview"
         android:fontFamily="@font/avenir"
         android:src="@drawable/text_logo"
         android:text="@string/welcomescreenthreetext1"
         android:textAlignment="center"
         android:textColor="@color/colorBlue"
         android:textSize="28dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoimgview"
-        app:layout_constraintVertical_bias="0.0" />
+        />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="35dp"
+        android:layout_below="@+id/wstitle"
         android:fontFamily="@font/avenir"
         android:src="@drawable/text_logo"
         android:text="@string/welcomescreenthreetext2"
         android:textAlignment="center"
         android:textColor="@color/colorBlackdark"
         android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/wstitle"
-        app:layout_constraintVertical_bias="0.0" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        />
+</RelativeLayout>

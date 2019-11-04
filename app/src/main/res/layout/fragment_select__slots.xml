@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backgroundfinal"
     tools:context="Fragments.SelectSlots">
 
     <LinearLayout
@@ -65,11 +66,11 @@
 
         <Spinner
             android:id="@+id/slot_spinner"
-            style="@android:style/Widget.Spinner"
             android:prompt="@string/objective_prompt"
             android:entries="@array/objectives_array"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
+            android:layout_marginHorizontal="48dp"
             android:layout_below="@+id/primary_obj_text"/>
 
         </LinearLayout>

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroundfinal">
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclermeetings"
+        android:id="@+id/recyclerupcomingmeetings"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/custom_border"
@@ -21,11 +21,11 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="117dp"
         android:layout_marginTop="32dp"
-        android:text="Past Meetings"
         android:fontFamily="@font/avenir"
+        android:text="Upcoming Meetups"
         android:textColor="@color/lightpurple"
-        android:textStyle="bold"
-        android:textSize="25dp" />
+        android:textSize="25dp"
+        android:textStyle="bold" />
 
     <Button
         android:layout_width="140dp"

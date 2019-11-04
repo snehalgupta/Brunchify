@@ -2,6 +2,7 @@ package Activities;
 
 //import android.support.v7.app.AppCompatActivity;
 import Fragments.All_Set;
+import android.text.Html;
 import Fragments.BaseOnboardFragment;
 import Fragments.OnWizardInteractionListener;
 import Fragments.OnboardingPager;
@@ -95,20 +96,4 @@ public class SelectOptions extends FragmentActivity implements
             window.setStatusBarColor(Color.TRANSPARENT);
         }
     }
-
-    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-    };
 }
