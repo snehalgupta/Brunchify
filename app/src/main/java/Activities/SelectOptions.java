@@ -76,6 +76,7 @@ public class SelectOptions extends FragmentActivity implements
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         }
         else {
+            User.getCurrentUser().setOnBoarded(true);
             completeOnboarding();
         }
     }

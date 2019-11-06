@@ -42,6 +42,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             loginUser();
         }
         else {
+            Log.d(TAG, "Going to Sign Up");
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -54,7 +55,9 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void loginUser(){
+        Log.d(TAG, "Getting current Firebase User");
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        Log.d(TAG, "Got current Firebase User");
         final DocumentReference userDocRef = FirebaseFirestore.getInstance().collection("users")
                 .document(user.getUid());
 
@@ -64,6 +67,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot snapshot) {
                         if (snapshot.exists()) {
+                            Log.d(TAG, "User also exists in firebase");
                             // Redundant as already checked newUser
                             User.setCurrentUser(snapshot.toObject(User.class));
                             Class cls = WelcomeActivity.class;
@@ -72,7 +76,9 @@ public class SplashScreenActivity extends AppCompatActivity {
                                 Log.i(TAG, "Opening home page");
                             }
                             Intent homeintent = new Intent(SplashScreenActivity.this, cls);
+                            startActivity(homeintent);
                         } else {
+                            Log.d(TAG, "This user doesn't exist in firestore, so create");
                             // TODO: Move this registration to End of Onboarding
                             // TODO: Check for invite condition
                             User.setCurrentUser(new User(user.getUid(), user.getDisplayName()));

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,6 +48,9 @@ public class InviteActivity extends AppCompatActivity {
                                     Log.i(TAG, "Fetched Invite Successfuly");
                                     if (task.getResult().exists()){
                                         Log.d(TAG, "Already Exists");
+                                        showToast("This User is already invited");
+                                        Intent dashIntent=new Intent(InviteActivity.this,Dashboard.class);
+                                        startActivity(dashIntent);
                                     }
                                     else{
                                         Map<String, String> data = new HashMap<>();
@@ -56,9 +60,11 @@ public class InviteActivity extends AppCompatActivity {
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if(task.isSuccessful()){
                                                     Log.d(TAG, "Add user to invites succesfullly");
+                                                    showToast("Invitation Sent");
                                                 }
                                                 else{
                                                     Log.w(TAG, "Failed to add user to invites", task.getException());
+                                                    showToast("Failed to send Invite");
                                                 }
                                                 Intent dashIntent=new Intent(InviteActivity.this,Dashboard.class);
                                                 startActivity(dashIntent);
@@ -70,5 +76,9 @@ public class InviteActivity extends AppCompatActivity {
                         });
             }
         });
+    }
+
+    public void showToast(String text){
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
     }
 }
