@@ -17,8 +17,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 import Activities.Dashboard;
 import Activities.WeeklySignUp;
+import Models.User;
 import teamcool.mandeep.brunchify.R;
 
 /**
@@ -55,6 +58,7 @@ public class WeeklySignupPagerFragment extends BaseOnboardFragment {
 
     @Override
     public String updateUser() {
+        User.getCurrentUser().setLastSignupWeek(Calendar.getInstance().get(Calendar.WEEK_OF_YEAR));
         for (int i=0; i<fragments.length;i++){
             String msg = fragments[i].updateUser();
             if (msg!=null){

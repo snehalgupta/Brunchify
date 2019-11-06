@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroundfinal"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:gravity="center">
 
     <ImageView
         android:id="@+id/logoimgview"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
         android:src="@drawable/invite"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.07" />
+        android:layout_gravity="center"
+        android:layout_weight="50"/>
 
     <TextView
         android:id="@+id/invitetext"
-        android:layout_width="180dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:padding="8dp"
         android:fontFamily="@font/avenir"
         android:src="@drawable/text_logo"
         android:text="Invite your Friends"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/colorBlackdark"
-        android:textSize="20dp"
+        android:textSize="24dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logoimgview" />
@@ -38,44 +38,46 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:background="@color/colorBlack"
         app:layout_constraintTop_toBottomOf="@id/invitetext"
         tools:layout_editor_absoluteX="24dp" />
 
-    <TextView
-        android:id="@+id/email1"
-        android:layout_width="80dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="288dp"
-        android:fontFamily="@font/avenir"
-        android:src="@drawable/text_logo"
-        android:text="Email:"
-        android:textAlignment="center"
-        android:textColor="@color/colorBlackdark"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.135"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider"
-        app:layout_constraintVertical_bias="0.296" />
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="460dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.79"
-        app:layout_constraintLeft_toLeftOf="@id/email1"
-        app:layout_constraintRight_toRightOf="parent" />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="32dp"
+        android:layout_weight="20">
+        <TextView
+            android:id="@+id/email1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:fontFamily="@font/avenir"
+            android:src="@drawable/text_logo"
+            android:text="Email:"
+            android:textAlignment="center"
+            android:textColor="@color/colorBlackdark"
+            android:textSize="20dp" />
 
-    <TextView
+        <EditText
+            android:id="@+id/invite_email_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.79"
+            app:layout_constraintLeft_toLeftOf="@id/email1"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </LinearLayout>
+
+    <!--<TextView
         android:id="@+id/email2"
         android:layout_width="80dp"
         android:layout_height="40dp"
@@ -104,44 +106,82 @@
         app:layout_constraintHorizontal_bias="0.838"
 
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent" />-->
 
-    <Button
-        android:id="@+id/invitebutton"
-        android:layout_width="110dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="176dp"
-        android:background="@drawable/capsule"
-        android:fontFamily="@font/avenir"
-        android:src="@drawable/text_logo"
-        android:text="Invite"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/colorwhite"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.551"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="10"
+        android:gravity="center">
 
-    <Button
-        android:id="@+id/backbutton"
-        android:layout_width="110dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginRight="132dp"
-        android:background="@drawable/capsule"
-        android:fontFamily="@font/avenir"
-        android:src="@drawable/text_logo"
-        android:text="Back"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/colorwhite"
-        android:textSize="20dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/invitebutton" />
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Friend"
+                android:textSize="18dp"
+                android:layout_margin="8dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Peer/Colleague"
+                android:textSize="18dp"
+                android:layout_margin="8dp"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:text="Boss"
+                android:layout_margin="8dp"/>
+        </RadioGroup>
+    </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="32dp"
+        android:layout_weight="30">
+
+        <Button
+            android:id="@+id/invitebutton"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:background="@drawable/capsule"
+            android:fontFamily="@font/avenir"
+            android:src="@drawable/text_logo"
+            android:text="Invite"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/colorwhite"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.551"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <Button
+            android:id="@+id/backbutton"
+            android:layout_width="110dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/capsule"
+            android:fontFamily="@font/avenir"
+            android:src="@drawable/text_logo"
+            android:text="Back"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/colorwhite"
+            android:textSize="20dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/invitebutton" />
+
+    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -152,5 +192,6 @@
         app:layout_constraintHorizontal_bias="0.126"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:srcCompat="@android:drawable/ic_input_add" />-->
+    </LinearLayout>
+</LinearLayout>

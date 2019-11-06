@@ -15,6 +15,7 @@ public class User {
     public ArrayList<String> interests;
     public ArrayList<Meetup> pastMeetups;
     public ArrayList<Meetup> upcomingMeetups;
+    int lastSignupWeek;
     public String primaryObjective;
     public ArrayList<String> neighbourhoods;
     public ArrayList<Availability_Slot> slots;
@@ -186,6 +187,14 @@ public class User {
 
     public void setWeeklyPlaces(ArrayList<String> weeklyPlaces) {
         this.weeklyPlaces = weeklyPlaces;
+    }
+
+    public int getLastSignupWeek() {
+        return lastSignupWeek;
+    }
+
+    public void setLastSignupWeek(int lastSignupWeek) {
+        this.lastSignupWeek = lastSignupWeek;
     }
 
     public static void writeToFirestore(FirebaseFirestore firestore, OnCompleteListener<Void> listener){
