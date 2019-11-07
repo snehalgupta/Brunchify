@@ -15,13 +15,13 @@ public class User {
     public ArrayList<String> interests;
     public ArrayList<Meetup> pastMeetups;
     public ArrayList<Meetup> upcomingMeetups;
-    int lastSignupWeek;
+    public int lastSignupWeek;
     public String primaryObjective;
-    public ArrayList<String> neighbourhoods;
     public ArrayList<Availability_Slot> slots;
     private boolean onBoarded = false;
     public int noOfMeetings;
     public ArrayList<String> weeklyPlaces;
+    public String location;
 
     private static User currentUser = null;
 
@@ -39,7 +39,6 @@ public class User {
         this.interests = new ArrayList<>();
         this.pastMeetups = new ArrayList<>();
         this.upcomingMeetups = new ArrayList<>();
-        this.neighbourhoods = new ArrayList<>();
         this.slots = new ArrayList<>();
         this.weeklyPlaces = new ArrayList<>();
     }
@@ -52,13 +51,8 @@ public class User {
         this.interests = new ArrayList<>();
         this.pastMeetups = new ArrayList<>();
         this.upcomingMeetups = new ArrayList<>();
-        this.neighbourhoods = new ArrayList<>();
         this.weeklyPlaces = new ArrayList<>();
         this.slots = new ArrayList<>();
-    }
-
-    public void addNeighbourhoods(ArrayList<String> places) {
-        neighbourhoods.addAll(places);
     }
 
     public void addSlot(Availability_Slot slot) {
@@ -149,12 +143,12 @@ public class User {
         this.primaryObjective = primaryObjective;
     }
 
-    public ArrayList<String> getNeighbourhoods() {
-        return neighbourhoods;
+    public String getLocation() {
+        return location;
     }
 
-    public void setNeighbourhoods(ArrayList<String> neighbourhoods) {
-        this.neighbourhoods = neighbourhoods;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public ArrayList<Availability_Slot> getSlots() {

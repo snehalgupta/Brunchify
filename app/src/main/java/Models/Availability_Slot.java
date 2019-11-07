@@ -1,6 +1,7 @@
 package Models;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Availability_Slot {
     public String day;
@@ -38,5 +39,20 @@ public class Availability_Slot {
 
     public void setTiming(String timing) {
         this.timing = timing;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Availability_Slot that = (Availability_Slot) o;
+        return Objects.equals(day, that.day) &&
+                Objects.equals(date, that.date) &&
+                Objects.equals(timing, that.timing);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(day, date, timing);
     }
 }

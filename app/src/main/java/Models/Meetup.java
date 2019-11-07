@@ -4,17 +4,19 @@ public class Meetup {
 
     public String date;
     public String time;
-    public String match;
+    public String match1;
+    public String match2;
     public String status;
     public int rating;
 
     public Meetup() {
     }
 
-    public Meetup(String m_date, String m_time, String m_match) {
+    public Meetup(String m_date, String m_time, String m_match1, String m_match2) {
         date = m_date;
         time = m_time;
-        match = m_match;
+        match1 = m_match1;
+        match2 = m_match2;
     }
 
     public String getDate() {
@@ -31,14 +33,6 @@ public class Meetup {
 
     public void setTime(String time) {
         this.time = time;
-    }
-
-    public String getMatch() {
-        return match;
-    }
-
-    public void setMatch(String match) {
-        this.match = match;
     }
 
     public String getStatus() {
