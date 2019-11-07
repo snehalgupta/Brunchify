@@ -77,6 +77,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                             }
                             Intent homeintent = new Intent(SplashScreenActivity.this, cls);
                             startActivity(homeintent);
+                            finish();
                         } else {
                             Log.d(TAG, "This user doesn't exist in firestore, so create");
                             // TODO: Move this registration to End of Onboarding

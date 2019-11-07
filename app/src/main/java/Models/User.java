@@ -5,23 +5,33 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.*;
+import java.util.concurrent.ExecutionException;
+
+import static com.google.android.gms.tasks.Tasks.await;
 
 public class User {
 
     private String uid;
     public String name;
     public String intro;
+    public String designation;
+    public String organisation;
+
+    public String primaryObjective;
     public ArrayList<String> objectives;
     public ArrayList<String> interests;
-    public ArrayList<Meetup> pastMeetups;
-    public ArrayList<Meetup> upcomingMeetups;
-    public int lastSignupWeek;
-    public String primaryObjective;
+
     public ArrayList<Availability_Slot> slots;
-    private boolean onBoarded = false;
-    public int noOfMeetings;
     public ArrayList<String> weeklyPlaces;
     public String location;
+    public ArrayList<String> neighbourhoods;
+    public int lastSignupWeek;
+    public int noOfMeetings = 1;
+
+    public ArrayList<Meetup> pastMeetups;
+    public ArrayList<Meetup> upcomingMeetups;
+
+    private boolean onBoarded = false;
 
     private static User currentUser = null;
 
@@ -172,7 +182,7 @@ public class User {
     }
 
     public void setNoOfMeetings(int noOfMeetings) {
-        this.noOfMeetings = noOfMeetings;
+        this.noOfMeetings = 1;//noOfMeetings;
     }
 
     public ArrayList<String> getWeeklyPlaces() {
@@ -191,10 +201,52 @@ public class User {
         this.lastSignupWeek = lastSignupWeek;
     }
 
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
+
+    public String getOrganisation() {
+        return organisation;
+    }
+
+    public void setOrganisation(String organisation) {
+        this.organisation = organisation;
+    }
+
+    public ArrayList<String> getNeighbourhoods() {
+        return neighbourhoods;
+    }
+
+    public void setNeighbourhoods(ArrayList<String> neighbourhoods) {
+        this.neighbourhoods = neighbourhoods;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return uid.equals(user.uid);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(uid);
+    }
+
     public static void writeToFirestore(FirebaseFirestore firestore, OnCompleteListener<Void> listener){
 
         //TODO: Move function to a data class
         DocumentReference userDocRef = firestore.collection("users").document(User.getCurrentUser().uid);
         userDocRef.set(User.getCurrentUser()).addOnCompleteListener(listener);
+    }
+
+    public static void writeToFirestoreSync(FirebaseFirestore firestore) throws ExecutionException, InterruptedException {
+        DocumentReference userDocRef = firestore.collection("users").document(User.getCurrentUser().uid);
+        await(userDocRef.set(User.getCurrentUser()));
     }
 }

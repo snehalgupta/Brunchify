@@ -63,13 +63,12 @@ public class SelectNeighbourhood extends BaseOnboardFragment implements AdapterV
 
     @Override
     public String updateUser() {
-        /**
+        User.getCurrentUser().setLocation(selected_city);
         User.getCurrentUser().neighbourhoods.clear();
         if (neighbourhoodAdapter.getSelectedChoices().size() < 1){
             return "Please select a neighbourhood";
         }
-        User.getCurrentUser().addNeighbourhoods(neighbourhoodAdapter.getSelectedChoices());
-        **/
+        User.getCurrentUser().setNeighbourhoods(neighbourhoodAdapter.getSelectedChoices());
         return null;
     }
 

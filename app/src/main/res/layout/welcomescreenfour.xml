@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     >
 
     <ImageView
         android:id="@+id/logoimgview"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="fitCenter"
+        android:layout_height="0dp"
+        android:layout_weight="65"
+        android:padding="68dp"
         android:src="@drawable/ic_collaboration"
         />
 
@@ -17,27 +19,27 @@
         android:id="@+id/wstitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/logoimgview"
-        android:layout_marginBottom="30dp"
         android:fontFamily="@font/avenir"
         android:src="@drawable/text_logo"
-        android:text="@string/welcomescreenfourtext1"
         android:textAlignment="center"
         android:textColor="@color/colorBlue"
+        android:layout_weight="5"
         android:textSize="28dp"
+        android:text="@string/welcomescreenfourtext1"
         />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/wstitle"
+        android:layout_weight="30"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
+        android:layout_below="@+id/wstitle"
         android:fontFamily="@font/avenir"
         android:src="@drawable/text_logo"
-        android:text="@string/welcomescreenfourtext2"
         android:textAlignment="center"
         android:textColor="@color/colorBlackdark"
         android:textSize="20dp"
+        android:text="@string/welcomescreenfourtext2"
         />
-</RelativeLayout>
+</LinearLayout>

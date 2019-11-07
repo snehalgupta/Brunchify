@@ -67,6 +67,7 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
     private ImageButton googleSigninBtn;
     private FirebaseAuth mFirebaseAuth;
     private ProgressBar progbar;
+    private Button signUpBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +93,7 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
         btnSkip = (Button) findViewById(R.id.btn_skip);
         btnNext = (Button) findViewById(R.id.btn_next);
         googleSigninBtn = (ImageButton) findViewById(R.id.google_btn);
+        signUpBtn = (Button) findViewById(R.id.signup_btn);
         progbar = (ProgressBar) findViewById(R.id.progbar);
 
 
@@ -155,6 +157,13 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
             @Override
             public void onClick(View v) {
                 signIn();
+            }
+        });
+
+        signUpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(WelcomeActivity.this, DevSignUpActivity.class));
             }
         });
 

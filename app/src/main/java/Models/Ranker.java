@@ -1,5 +1,8 @@
 package Models;
 
+import android.icu.lang.UScript;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -7,12 +10,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class Algo {
+public class Ranker {
 
+    private static final String TAG = "Ranker";
     ArrayList<User> UserDB;
     HashMap<String, ArrayList<String>> hm;
 
-    public Algo(){
+    public Ranker(ArrayList<User> userDb){
+        UserDB = userDb;
         hm = new HashMap<String, ArrayList<String>>();
         String s1 = "Brainstorming";
         String s2 = "Invest Money";
@@ -72,6 +77,7 @@ public class Algo {
                 }
             }
         }
+        Log.d(TAG, u1.getName() + " and " + u2.getName() + " Objectives score = " + score);
         return score;
     }
 
@@ -82,13 +88,17 @@ public class Algo {
                 score += 1;
             }
         }
+        Log.d(TAG, u1.getName() + " and " + u2.getName() + " Interests score = " + score);
         return score;
     }
 
     public ArrayList<Meetup> matchalgo(User user){
         ArrayList<Meetup> meetups = new ArrayList<Meetup>();
-        String match1 = user.getName();
+        String match1 = user.getUid();
         for(int i=0; i<UserDB.size();i++){
+            if (UserDB.get(i).getUid().equals(User.getCurrentUser().getUid())){
+                continue;
+            }
             String date = null;
             String time = null;
             String match2 = null;
@@ -103,9 +113,12 @@ public class Algo {
                 if(date == null && time == null){
                     continue;
                 }
-                match2 = user.getName();
+                match2 = UserDB.get(i).getUid();
                 score += getObjectivesScore(user, UserDB.get(i));
                 score += getInterestsScore(user, UserDB.get(i));
+            }
+            if (UserDB.get(i).getUpcomingMeetups().size() == 0){
+                score+=50;
             }
             if (match2 != null){
             Meetup newmeet = new Meetup(date,time,match1,match2);
@@ -122,11 +135,12 @@ public class Algo {
                 return two.compareTo(one);
             }
         });
-        ArrayList<Meetup> finalans = new ArrayList<Meetup>();
+        return meetups;
+        /*ArrayList<Meetup> finalans = new ArrayList<Meetup>();
         for(int m=0; m<user.noOfMeetings;m++){
             finalans.add(meetups.get(m));
         }
-        return finalans;
+        return finalans;*/
     }
 
     public User discoveralgo(User user){
