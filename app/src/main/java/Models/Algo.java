@@ -1,7 +1,11 @@
 package Models;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class Algo {
 
@@ -73,17 +77,21 @@ public class Algo {
 
     public int getInterestsScore(User u1, User u2){
         int score = 0;
+        for(String s:u1.getInterests()){
+            if(u2.getInterests().contains(s)){
+                score += 1;
+            }
+        }
         return score;
     }
 
     public ArrayList<Meetup> matchalgo(User user){
-        HashMap<String, Integer> hm = new HashMap<String, Integer>();
         ArrayList<Meetup> meetups = new ArrayList<Meetup>();
         String match1 = user.getName();
         for(int i=0; i<UserDB.size();i++){
             String date = null;
             String time = null;
-            String match2 = UserDB.get(i).getName();
+            String match2 = null;
             int score = 0;
             if(user.location.equals(UserDB.get(i).location)){
                 for(Availability_Slot slot: UserDB.get(i).slots){
@@ -95,16 +103,35 @@ public class Algo {
                 if(date == null && time == null){
                     continue;
                 }
+                match2 = user.getName();
                 score += getObjectivesScore(user, UserDB.get(i));
                 score += getInterestsScore(user, UserDB.get(i));
             }
-            hm.put(user.name,score);
+            if (match2 != null){
+            Meetup newmeet = new Meetup(date,time,match1,match2);
+            newmeet.score = score;
+            meetups.add(newmeet);
+            }
         }
-        return meetups;
+        Collections.sort(meetups, new Comparator<Meetup>(){
+            public int compare( Meetup o1, Meetup o2 )
+            {
+                Integer one=o1.getScore();
+                Integer two =o2.getScore();
+
+                return two.compareTo(one);
+            }
+        });
+        ArrayList<Meetup> finalans = new ArrayList<Meetup>();
+        for(int m=0; m<user.noOfMeetings;m++){
+            finalans.add(meetups.get(m));
+        }
+        return finalans;
     }
 
     public User discoveralgo(User user){
         User suggestion = user;
+
         return suggestion;
     }
 }

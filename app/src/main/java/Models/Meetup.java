@@ -8,6 +8,31 @@ public class Meetup {
     public String match2;
     public String status;
     public int rating;
+    public int score;
+
+    public String getMatch1() {
+        return match1;
+    }
+
+    public void setMatch1(String match1) {
+        this.match1 = match1;
+    }
+
+    public String getMatch2() {
+        return match2;
+    }
+
+    public void setMatch2(String match2) {
+        this.match2 = match2;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public Meetup() {
     }
