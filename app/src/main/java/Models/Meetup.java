@@ -10,30 +10,6 @@ public class Meetup {
     public int rating;
     public int score;
 
-    public String getMatch1() {
-        return match1;
-    }
-
-    public void setMatch1(String match1) {
-        this.match1 = match1;
-    }
-
-    public String getMatch2() {
-        return match2;
-    }
-
-    public void setMatch2(String match2) {
-        this.match2 = match2;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-
     public Meetup() {
     }
 
@@ -60,6 +36,22 @@ public class Meetup {
         this.time = time;
     }
 
+    public String getMatch1() {
+        return match1;
+    }
+
+    public void setMatch1(String match1) {
+        this.match1 = match1;
+    }
+
+    public String getMatch2() {
+        return match2;
+    }
+
+    public void setMatch2(String match2) {
+        this.match2 = match2;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -76,11 +68,11 @@ public class Meetup {
         this.rating = rating;
     }
 
-    public void update_status(String m_status) {
-        status = m_status;
+    public int getScore() {
+        return score;
     }
 
-    public void rate_meetup(int m_rating) {
-        rating = m_rating;
+    public void setScore(int score) {
+        this.score = score;
     }
 }

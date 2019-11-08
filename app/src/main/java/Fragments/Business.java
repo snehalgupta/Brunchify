@@ -1,5 +1,6 @@
 package Fragments;
 
+import android.icu.lang.UScript;
 import android.os.Bundle;
 
 import Adapters.BaseChoiceAdapter;
@@ -73,6 +74,13 @@ public class Business extends BaseOnboardFragment {
         //Toast.makeText(getContext(),type,Toast.LENGTH_LONG).show();
         //mAdapter = new Business_RV_Adapter(getContext(),business,mListener);
         mAdapter = new BaseChoiceAdapter<>(getContext(), business, R.layout.oval_select_button);
+        ArrayList<String> selected = new ArrayList<String>();
+        for (String interest: business){
+            if (User.getCurrentUser().interests.contains(interest)){
+                selected.add(interest);
+            }
+        }
+        mAdapter.setSelectedChoices(selected);
         recyclerView.setAdapter(mAdapter);
         return view;
     }

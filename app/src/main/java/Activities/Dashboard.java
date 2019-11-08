@@ -92,8 +92,8 @@ public class Dashboard extends AppCompatActivity {
         });
 
 
-        //RankAsyncTask ranker = new RankAsyncTask();
-        //ranker.execute();
+        RankAsyncTask ranker = new RankAsyncTask();
+        ranker.execute();
 
 
         /*getSupportActionBar().setDisplayShowHomeEnabled(true);

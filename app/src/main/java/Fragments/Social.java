@@ -69,6 +69,14 @@ public class Social extends BaseOnboardFragment {
         social.add("Social Impact");
         //Social_RV_Adapter adapter = new Social_RV_Adapter(getContext(),social,mListener);
         adapter = new BaseChoiceAdapter<>(getContext(),social,R.layout.oval_select_button);
+
+        ArrayList<String> selected = new ArrayList<String>();
+        for (String interest: social){
+            if (User.getCurrentUser().interests.contains(interest)){
+                selected.add(interest);
+            }
+        }
+        adapter.setSelectedChoices(selected);
         recyclerView.setAdapter(adapter);
         return view;
     }

@@ -19,6 +19,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.net.UnknownServiceException;
+
 import teamcool.mandeep.brunchify.R;
 
 public class Write_Intro extends BaseOnboardFragment {
@@ -57,8 +59,11 @@ public class Write_Intro extends BaseOnboardFragment {
         View view = inflater.inflate(R.layout.fragment_write__intro, container, false);
         subject = (TextView)view.findViewById(R.id.msg_text);
         intro = (EditText)view.findViewById(R.id.bio_textbox);
+        intro.setText(User.getCurrentUser().getIntro());
         designationEtv = (EditText) view.findViewById(R.id.designation_etv);
+        designationEtv.setText(User.getCurrentUser().getDesignation());
         orgEtv = (EditText) view.findViewById(R.id.org_etv);
+        orgEtv.setText(User.getCurrentUser().getOrganisation());
         String temp = subject.getText().toString();
         String added = "To: ";
         added += "You";

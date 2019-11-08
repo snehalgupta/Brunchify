@@ -68,6 +68,14 @@ public class Tech extends BaseOnboardFragment {
         tech.add("VR/AR");
 //        Tech_RV_Adapter adapter = new Tech_RV_Adapter(getContext(),tech,mListener);
         adapter = new BaseChoiceAdapter<>(getContext(),tech,R.layout.oval_select_button);
+
+        ArrayList<String> selected = new ArrayList<String>();
+        for (String interest: tech){
+            if (User.getCurrentUser().interests.contains(interest)){
+                selected.add(interest);
+            }
+        }
+        adapter.setSelectedChoices(selected);
         recyclerView.setAdapter(adapter);
         return view;
     }
