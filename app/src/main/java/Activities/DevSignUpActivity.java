@@ -32,6 +32,7 @@ public class DevSignUpActivity extends AppCompatActivity {
     private EditText emailEtv;
     private EditText nameEtv;
     private Button signupBtn;
+    private Button loginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -80,6 +81,29 @@ public class DevSignUpActivity extends AppCompatActivity {
                         });
             }
         });
+
+        loginBtn = (Button) findViewById(R.id.login_btn);
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d(TAG, "Backdoor Login clicked");
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(emailEtv.getText().toString(), "devpass")
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "signInWithCredential:success");
+                                    startSignup(FirebaseAuth.getInstance().getCurrentUser());
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "devSignIn:failure", task.getException());
+                                }
+                            }
+                        });
+            }
+        });
+
     }
 
     private void startSignup(final FirebaseUser user) {

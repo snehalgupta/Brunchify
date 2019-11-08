@@ -269,8 +269,9 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
 
         progbar.setVisibility(View.VISIBLE);
         Log.d(TAG,"Attempting Firebase login with google account");
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        mFirebaseAuth.signInWithCredential(credential)
+        //AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+        //mFirebaseAuth.signInWithCredential(credential)
+        mFirebaseAuth.signInWithEmailAndPassword(acct.getEmail(), "devpass")
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

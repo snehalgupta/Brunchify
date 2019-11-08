@@ -92,8 +92,8 @@ public class Dashboard extends AppCompatActivity {
         });
 
 
-        RankAsyncTask ranker = new RankAsyncTask();
-        ranker.execute();
+        //RankAsyncTask ranker = new RankAsyncTask();
+        //ranker.execute();
 
 
         /*getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -159,6 +159,7 @@ public class Dashboard extends AppCompatActivity {
 
         @Override
         protected ArrayList<Meetup> doInBackground(Void... v) {
+
             Task<QuerySnapshot> task = FirebaseFirestore.getInstance().collection("users")
                     .get();
             try {
