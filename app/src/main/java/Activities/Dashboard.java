@@ -9,6 +9,7 @@ import Models.User;
 import teamcool.mandeep.brunchify.R;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,7 +40,9 @@ import java.util.concurrent.ExecutionException;
 import static com.google.android.gms.tasks.Tasks.await;
 
 public class Dashboard extends AppCompatActivity {
-
+    Button buttyes;
+    Button buttno;
+    Button buttmaybe;
     private static final String TAG = "Dashboard";
     Button invitebutton;
     Button Signupweekbutton;
@@ -61,6 +64,10 @@ public class Dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
+        buttmaybe=(Button)findViewById(R.id.editmaybe);
+        buttno=(Button)findViewById(R.id.editno);
+        buttyes=(Button)findViewById(R.id.edityes);
+
         invitebutton=(Button)findViewById(R.id.edithree);
         Signupweekbutton=(Button)findViewById(R.id.edittwo);
         editprofile=(ImageView)findViewById(R.id.edittitle);
@@ -69,7 +76,7 @@ public class Dashboard extends AppCompatActivity {
         logoutBtn = (Button)findViewById(R.id.logout_btn);
         discoverNameTv = (TextView)findViewById(R.id.discover_name_tv);
         discoverInfoTv = (TextView)findViewById(R.id.discover_info_tv);
-        discoverResponse = findViewById(R.id.discover_response);
+        //discoverResponse = findViewById(R.id.discover_response);
 
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
@@ -120,16 +127,75 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-        discoverResponse.setOnClickListener(new View.OnClickListener() {
+//        discoverResponse.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+        buttyes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDiscover();
+                buttyes.setBackgroundResource(R.drawable.capsule);
+                buttyes.setTextColor(Color.WHITE);
+                Thread timer = new Thread() {
+                    public void run(){
+                        try {
+                            sleep(1000);
+                            showDiscover();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                };
+                timer.start();
+
+            }
+        });
+        buttno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buttno.setBackgroundResource(R.drawable.capsule);
+                buttno.setTextColor(Color.WHITE);
+                Thread timer = new Thread() {
+                    public void run(){
+                        try {
+                            sleep(1000);
+                            showDiscover();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                };
+                timer.start();
+                //showDiscover();
+            }
+        });
+        buttmaybe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buttmaybe.setBackgroundResource(R.drawable.capsule);
+                buttmaybe.setTextColor(Color.WHITE);
+                Thread timer = new Thread() {
+                    public void run(){
+                        try {
+                            sleep(1000);
+                            showDiscover();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                };
+                timer.start();
+                //showDiscover();
             }
         });
 
-
-        RankAsyncTask ranker = new RankAsyncTask();
-        ranker.execute();
+//        RankAsyncTask ranker = new RankAsyncTask();
+//        ranker.execute();
 
 
         /*getSupportActionBar().setDisplayShowHomeEnabled(true);
