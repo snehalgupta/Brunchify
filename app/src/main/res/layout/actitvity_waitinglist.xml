@@ -51,7 +51,7 @@
         app:srcCompat="@drawable/logotext" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/logout_btn"
         android:layout_width="110dp"
         android:textAllCaps="false"
         android:layout_height="wrap_content"

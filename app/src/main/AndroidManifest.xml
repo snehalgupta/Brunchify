@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="teamcool.mandeep.brunchify">
 
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,16 +12,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="Activities.SelectOptions"></activity>
-        <!--<activity android:name="Activities.MailActivity">
-        </activity>-->
-        <activity android:name="Activities.DevSignUpActivity"></activity>
-        <activity android:name="Activities.WelcomeActivity"></activity>
-        <activity android:name="Activities.Dashboard"/>
-        <activity android:name="Activities.WeeklySignUp"/>
-        <activity android:name="Activities.InviteActivity"/>
-        <activity android:name="Activities.pastmeetingsactivity"/>
-        <activity android:name="Activities.upcomingmeetupsactivity"/>
+        <activity android:name="Activities.WaitingListActivity"></activity>
+        <activity android:name="Activities.SelectOptions" />
+        <!--
+<activity android:name="Activities.MailActivity">
+        </activity>
+        -->
+        <activity android:name="Activities.DevSignUpActivity" />
+        <activity android:name="Activities.WelcomeActivity" />
+        <activity android:name="Activities.Dashboard" />
+        <activity android:name="Activities.WeeklySignUp" />
+        <activity android:name="Activities.InviteActivity" />
+        <activity android:name="Activities.pastmeetingsactivity" />
+        <activity android:name="Activities.upcomingmeetupsactivity" />
         <activity android:name="Activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,7 +32,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>-->
     </application>
 
 </manifest>

@@ -295,39 +295,61 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
                                     }
                                 });
                     }
-                    else{
-                        mFirebaseAuth.createUserWithEmailAndPassword(acct.getEmail(), "devpass")
-                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    else {
+                        FirebaseFirestore.getInstance().collection("invites")
+                                .document(acct.getEmail())
+                                .get()
+                                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                     @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                         if (task.isSuccessful()) {
-                                            // Sign in success, update UI with the signed-in user's information
-                                            Log.d(TAG, "createUserWithEmail:success");
-                                            final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                                    .setDisplayName(acct.getDisplayName())
-                                                    //.setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
-                                                    .build();
+                                            if (task.getResult().exists()) {
+                                                //User has been invited
+                                                Log.d(TAG, "User has been invited, continue sign up");
+                                                mFirebaseAuth.createUserWithEmailAndPassword(acct.getEmail(), "devpass")
+                                                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                                if (task.isSuccessful()) {
+                                                                    // Sign in success, update UI with the signed-in user's information
+                                                                    Log.d(TAG, "createUserWithEmail:success");
+                                                                    final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                                                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                                            .setDisplayName(acct.getDisplayName())
+                                                                            //.setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
+                                                                            .build();
 
-                                            user.updateProfile(profileUpdates)
-                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                            if (task.isSuccessful()) {
-                                                                Log.d(TAG, "User profile updated.");
-                                                                signInFromGoogleResult();
+                                                                    user.updateProfile(profileUpdates)
+                                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                @Override
+                                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                                    if (task.isSuccessful()) {
+                                                                                        Log.d(TAG, "User profile updated.");
+                                                                                        signInFromGoogleResult();
+                                                                                    }
+                                                                                }
+                                                                            });
+                                                                } else {
+                                                                    // If sign in fails, display a message to the user.
+                                                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                                                    Toast.makeText(WelcomeActivity.this, "Authentication failed.",
+                                                                            Toast.LENGTH_SHORT).show();
+                                                                }
+
                                                             }
-                                                        }
-                                                    });
+                                                        });
+                                            } else {
+                                                // User not invited
+                                                Log.d(TAG, "User not invited, skip sign up take to  waitlist");
+                                                startActivity(new Intent(WelcomeActivity.this, WaitingListActivity.class));
+                                                finish();
+                                            }
                                         } else {
-                                            // If sign in fails, display a message to the user.
-                                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                            Toast.makeText(WelcomeActivity.this, "Authentication failed.",
-                                                    Toast.LENGTH_SHORT).show();
+                                            Log.w(TAG, "createUserWithEmail:failure while fetching invites", task.getException());
                                         }
-
                                     }
                                 });
+
                     }
                 }
                 else{
