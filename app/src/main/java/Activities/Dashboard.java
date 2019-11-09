@@ -330,7 +330,7 @@ public class Dashboard extends AppCompatActivity {
                                     "Please try to commit and meet your connection.\n" +
                                     "Mutual respect and reliability is what makes our community special.");
 
-//                    sm.execute();
+                    sm.execute();
                     mailer = sm;
                 } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();

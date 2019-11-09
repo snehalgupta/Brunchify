@@ -105,23 +105,38 @@ public class Ranker {
             String time = null;
             String match2 = null;
             int score = 0;
-            if(user.location.equals(UserDB.get(i).location)){
-                for(Availability_Slot slot: UserDB.get(i).slots){
-                    if(user.slots.contains(slot)){
-                        date = slot.getDate();
-                        time = slot.getTiming();
+
+            Log.d("livelife",user.email);
+                int flag=0;
+                if(user.location.equals(UserDB.get(i).location)){
+                    for(Availability_Slot slot: UserDB.get(i).slots){
+                        for(int j=0;j<user.slots.size();i++){
+                            if(user.slots.get(j).date.equals(slot.date) && user.slots.get(j).timing.equals(slot.timing) ){
+                                date = slot.getDate();
+                                time = slot.getTiming();
+                                if(flag==0)
+                                    flag=1;
+                                break;
+                            }
+
+                        }
+                        if(flag==1)
+                            break;
+
                     }
-                }
                 /*if(date == null && time == null){
                     continue;
                 }*/
-                match2 = UserDB.get(i).getUid();
-                score += getObjectivesScore(user, UserDB.get(i));
-                score += getInterestsScore(user, UserDB.get(i));
-            }
-            if (UserDB.get(i).getUpcomingMeetups().size() == 0){
-                score+=50;
-            }
+                    match2 = UserDB.get(i).getUid();
+
+                    score += getObjectivesScore(user, UserDB.get(i));
+                    score += getInterestsScore(user, UserDB.get(i));
+                }
+                if (UserDB.get(i).getUpcomingMeetups().size() == 0){
+                    score+=50;
+                }
+
+
             if (match2 != null){
             Meetup newmeet = new Meetup(date,time,match1,match2);
             newmeet.score = score;

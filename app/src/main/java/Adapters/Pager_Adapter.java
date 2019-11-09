@@ -20,8 +20,8 @@ public class Pager_Adapter extends FragmentStatePagerAdapter {
         fragments = new BaseOnboardFragment[]
                 {
                     Business.newInstance(0),
-                    Social.newInstance(1),
-                    Tech.newInstance(2)
+                    Tech.newInstance(1),
+                    Social.newInstance(2)
                 };
     }
 
