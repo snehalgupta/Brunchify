@@ -20,6 +20,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="Activities.DevSignUpActivity"></activity>
         <activity android:name="Activities.WelcomeActivity"></activity>
         <activity android:name="Activities.Dashboard"/>
         <activity android:name="Activities.WeeklySignUp"/>

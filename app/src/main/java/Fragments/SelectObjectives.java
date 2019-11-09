@@ -55,7 +55,7 @@ public class SelectObjectives extends BaseOnboardFragment{
         objectives_arr.add("Explore other companies");
         //Objectives_RV_Adapter adapter = new Objectives_RV_Adapter(getContext(),objectives_arr,mListener);
         adapter = new BaseChoiceAdapter<>(getContext(),objectives_arr,R.layout.oval_select_button);
-        //adapter.setSelectedChoices(User.getCurrentUser().getObjectives());
+        adapter.setSelectedChoices(User.getCurrentUser().getObjectives());
         recyclerView.setAdapter(adapter);
         return view;
     }

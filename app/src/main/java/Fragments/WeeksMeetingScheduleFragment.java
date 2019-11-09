@@ -133,6 +133,7 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
         }
         User.getCurrentUser().weeklyPlaces = wsAdapter.getSelectedChoices();
         User.getCurrentUser().noOfMeetings = selected_no_of_meetings;
+        User.getCurrentUser().location = selected_city;
         return null;
     }
 

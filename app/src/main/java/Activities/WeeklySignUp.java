@@ -16,6 +16,9 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import Models.User;
 import teamcool.mandeep.brunchify.R;
 
 public class WeeklySignUp extends FragmentActivity implements OnWizardInteractionListener {
@@ -43,6 +46,7 @@ public class WeeklySignUp extends FragmentActivity implements OnWizardInteractio
     }
 
     private void completeWeeklySignup(){
+        User.writeToFirestore(FirebaseFirestore.getInstance(), null);
         startActivity(new Intent(WeeklySignUp.this, Dashboard.class));
         finish();
     }

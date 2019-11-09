@@ -2,6 +2,7 @@ package Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.icu.lang.UScript;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -18,6 +19,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.net.UnknownServiceException;
+
 import teamcool.mandeep.brunchify.R;
 
 public class Write_Intro extends BaseOnboardFragment {
@@ -28,6 +31,8 @@ public class Write_Intro extends BaseOnboardFragment {
     private EditText intro;
     private Button doneBtn;
     private PreferenceManager prefManager;
+    private EditText designationEtv;
+    private EditText orgEtv;
 
     public Write_Intro() {
     }
@@ -54,6 +59,11 @@ public class Write_Intro extends BaseOnboardFragment {
         View view = inflater.inflate(R.layout.fragment_write__intro, container, false);
         subject = (TextView)view.findViewById(R.id.msg_text);
         intro = (EditText)view.findViewById(R.id.bio_textbox);
+        intro.setText(User.getCurrentUser().getIntro());
+        designationEtv = (EditText) view.findViewById(R.id.designation_etv);
+        designationEtv.setText(User.getCurrentUser().getDesignation());
+        orgEtv = (EditText) view.findViewById(R.id.org_etv);
+        orgEtv.setText(User.getCurrentUser().getOrganisation());
         String temp = subject.getText().toString();
         String added = "To: ";
         added += "You";
@@ -67,6 +77,8 @@ public class Write_Intro extends BaseOnboardFragment {
     @Override
     public String updateUser() {
         User.getCurrentUser().intro = intro.getText().toString();
+        User.getCurrentUser().setDesignation(designationEtv.getText().toString());
+        User.getCurrentUser().setOrganisation(orgEtv.getText().toString());
         return null;
     }
 
