@@ -96,7 +96,7 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
         signUpBtn = (Button) findViewById(R.id.signup_btn);
         progbar = (ProgressBar) findViewById(R.id.progbar);
 
-
+        //signUpBtn.setVisibility(View.GONE);
 
         // Checking for first time launch - before calling setContentView()
         /*prefManager = new PreferenceManager(this);

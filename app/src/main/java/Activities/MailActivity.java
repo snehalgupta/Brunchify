@@ -30,17 +30,17 @@ public class MailActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activitytwoemail);
+        setContentView(R.layout.fragment_select__slots);
 
-        //Initializing the views
-        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
-        editTextSubject = (EditText) findViewById(R.id.editTextSubject);
-        editTextMessage = (EditText) findViewById(R.id.editTextMessage);
-
-        buttonSend = (Button) findViewById(R.id.buttonSend);
-
-        //Adding click listener
-        buttonSend.setOnClickListener(this);
+//        //Initializing the views
+//        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
+//        editTextSubject = (EditText) findViewById(R.id.editTextSubject);
+//        editTextMessage = (EditText) findViewById(R.id.editTextMessage);
+//
+//        buttonSend = (Button) findViewById(R.id.buttonSend);
+//
+//        //Adding click listener
+//        buttonSend.setOnClickListener(this);
     }
 
 
@@ -49,7 +49,6 @@ public class MailActivity extends AppCompatActivity implements View.OnClickListe
         String email = editTextEmail.getText().toString().trim();
         String subject = editTextSubject.getText().toString().trim();
         String message = editTextMessage.getText().toString().trim();
-
         //Creating SendMail object
         SendMail sm = new SendMail(this, email, subject, message);
 

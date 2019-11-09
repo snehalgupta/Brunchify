@@ -3,6 +3,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:background="@drawable/backgroundfinal"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
@@ -29,8 +30,7 @@
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/colorwhite"
-        android:textSize="20dp"
-        />
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/text_2"
@@ -54,26 +54,25 @@
         android:layout_below="@id/text_2"
         android:layout_marginVertical="16dp"
         android:layout_marginTop="50dp"
-        android:textAlignment="center"
-        android:textStyle="bold"
-        android:textColor="@color/colorBlackdark"
         android:fontFamily="@font/avenir"
+        android:text="or"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlackdark"
         android:textSize="20dp"
-        android:text="or" />
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/pass_btn"
         android:layout_width="160dp"
-        android:layout_marginVertical="16dp"
         android:layout_height="40dp"
         android:layout_below="@+id/text_2"
         android:layout_centerHorizontal="true"
+        android:layout_marginVertical="16dp"
         android:background="@drawable/capsule"
         android:fontFamily="@font/avenir"
         android:text="Pass this week"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/colorwhite"
-        android:textSize="20dp"
-        />
+        android:textSize="20dp" />
 </LinearLayout>
