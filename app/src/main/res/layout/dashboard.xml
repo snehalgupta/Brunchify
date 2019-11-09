@@ -34,6 +34,7 @@
             tools:text="Test User"/>
 
         <TextView
+            android:id="@+id/user_info_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/avenir"
@@ -108,7 +109,7 @@
             android:src="@drawable/profile" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/discover_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -119,12 +120,12 @@
             android:textSize="22dp"/>
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/discover_info_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView3"
+            android:layout_alignStart="@+id/discover_name_tv"
             android:layout_marginBottom="20dp"
-            android:layout_below="@id/textView3"
+            android:layout_below="@id/discover_name_tv"
             android:text="CEO at Pied Piper"
             android:textColor="@color/colorBlackdark"
             android:textSize="20dp" />
@@ -144,6 +145,7 @@
         android:textSize="18dp" />
 
     <LinearLayout
+        android:id="@+id/discover_response"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -234,7 +236,7 @@
 
     <Button
         android:id="@+id/editpastmeetups"
-        android:layout_width="250dp"
+        android:layout_width="200dp"
         android:layout_height="30dp"
         android:layout_marginTop="52dp"
         android:paddingHorizontal="8dp"
@@ -265,7 +267,7 @@
 
     <Button
         android:id="@+id/edithree"
-        android:layout_width="250dp"
+        android:layout_width="200dp"
         android:layout_height="30dp"
         android:layout_marginTop="8dp"
         android:paddingHorizontal="8dp"
@@ -280,7 +282,7 @@
 
     <Button
         android:id="@+id/editone"
-        android:layout_width="250dp"
+        android:layout_width="200dp"
         android:layout_height="30dp"
         android:layout_marginTop="8dp"
         android:paddingHorizontal="8dp"
@@ -291,6 +293,21 @@
         android:textAllCaps="false"
         android:textColor="@color/colorwhite"
         android:textSize="18dp"
-        android:text="View Upcoming Meetups" />
+        android:text="Upcoming Meetups" />
+
+    <Button
+        android:id="@+id/logout_btn"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:paddingHorizontal="8dp"
+        android:background="@drawable/capsule"
+        android:fontFamily="@font/avenir"
+        android:src="@drawable/text_logo"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/colorwhite"
+        android:textSize="18dp"
+        android:text="Logout" />
 
 </LinearLayout>

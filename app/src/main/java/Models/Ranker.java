@@ -71,9 +71,10 @@ public class Ranker {
     public int getObjectivesScore(User u1, User u2){
         int score = 0;
         for(String o:u1.getObjectives()){
-            for(String o_:hm.get(o)){
-                if(u2.getObjectives().contains(o)){
+            for(String o1:hm.get(o)){
+                if(u2.getObjectives().contains(o1)){
                     score += 1;
+                    Log.v(TAG,"Match " + o + " with " + o1);
                 }
             }
         }
@@ -86,6 +87,7 @@ public class Ranker {
         for(String s:u1.getInterests()){
             if(u2.getInterests().contains(s)){
                 score += 1;
+                Log.v(TAG,"Match " + s);
             }
         }
         Log.d(TAG, u1.getName() + " and " + u2.getName() + " Interests score = " + score);
@@ -110,9 +112,9 @@ public class Ranker {
                         time = slot.getTiming();
                     }
                 }
-                if(date == null && time == null){
+                /*if(date == null && time == null){
                     continue;
-                }
+                }*/
                 match2 = UserDB.get(i).getUid();
                 score += getObjectivesScore(user, UserDB.get(i));
                 score += getInterestsScore(user, UserDB.get(i));
