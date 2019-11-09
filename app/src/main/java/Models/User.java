@@ -59,7 +59,8 @@ public class User {
 
     public void addNeighbourhoods(ArrayList<String> places) {
         neighbourhoods.addAll(places);
-    }
+     String primaryObjective;
+     ArrayList<String> neighbourhoods; }
 
     public void addSlot(Availability_Slot slot) {
         slots.add(slot);

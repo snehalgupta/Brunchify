@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name="Activities.SelectOptions"></activity>
-        <activity android:name="Activities.SplashScreenActivity">
+        <activity android:name="Activities.MailActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,7 +26,8 @@
         <activity android:name="Activities.InviteActivity"/>
         <activity android:name="Activities.pastmeetingsactivity"/>
         <activity android:name="Activities.upcomingmeetupsactivity"/>
-<!--            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>-->
+        <activity android:name="Activities.SplashScreenActivity"> </activity>
+        <!--            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>-->
     </application>
 
 </manifest>
