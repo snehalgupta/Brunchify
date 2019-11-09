@@ -11,7 +11,6 @@ import Models.User;
 import teamcool.mandeep.brunchify.R;
 
 import android.util.Log;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -82,7 +81,7 @@ public class SplashScreenActivity extends AppCompatActivity {
                             Log.d(TAG, "This user doesn't exist in firestore, so create");
                             // TODO: Move this registration to End of Onboarding
                             // TODO: Check for invite condition
-                            User.setCurrentUser(new User(user.getUid(), user.getDisplayName()));
+                            User.setCurrentUser(new User(user.getUid(), user.getDisplayName(), user.getEmail()));
                             userDocRef.set(User.getCurrentUser())
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override

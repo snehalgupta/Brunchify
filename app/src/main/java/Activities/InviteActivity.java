@@ -17,6 +17,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +41,9 @@ public class InviteActivity extends AppCompatActivity {
             public void onClick(View v){
                 final String email = emailText.getText().toString().trim();
 
-                SendMail sm = new SendMail(InviteActivity.this, email, "You have been invited to start your career with brunchify", "Brunchify is an invite-only service that connects mutually relevant, opportunistic people on 1:1 brunch. Every week, people explore new possibilities, talk about emerging fields and make a real life connection.");
+                SendMail sm = new SendMail(InviteActivity.this, Collections.singletonList(email),
+                        "You have been invited to start your career with brunchify",
+                        "Brunchify is an invite-only service that connects mutually relevant, opportunistic people on 1:1 brunch. Every week, people explore new possibilities, talk about emerging fields and make a real life connection.");
                 //Executing sendmail to send email
                 sm.execute();
                 final DocumentReference docRef = FirebaseFirestore.getInstance()

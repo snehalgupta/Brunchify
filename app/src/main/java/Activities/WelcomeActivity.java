@@ -233,7 +233,7 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
                     } else {
                         // TODO: Move this registration to End of Onboarding
                         // TODO: Check for invite condition
-                        User.setCurrentUser(new User(user.getUid(), user.getDisplayName()));
+                        User.setCurrentUser(new User(user.getUid(), user.getDisplayName(), user.getEmail()));
                         userDocRef.set(User.getCurrentUser())
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override

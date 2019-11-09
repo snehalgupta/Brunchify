@@ -13,6 +13,7 @@ public class User {
 
     private String uid;
     public String name;
+    public String email;
     public String intro;
     public String designation;
     public String organisation;
@@ -53,9 +54,10 @@ public class User {
         this.weeklyPlaces = new ArrayList<>();
     }
 
-    public User(String uid, String name) {
+    public User(String uid, String name, String email) {
         this.uid = uid;
         this.name = name;
+        this.email = email;
         this.objectives = new ArrayList<>();
         this.primaryObjective = "";
         this.interests = new ArrayList<>();
@@ -230,6 +232,14 @@ public class User {
 
     public void setNeighbourhoods(ArrayList<String> neighbourhoods) {
         this.neighbourhoods = neighbourhoods;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
