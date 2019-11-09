@@ -36,6 +36,8 @@ public class User {
 
     private static User currentUser = null;
 
+    public static Map<String, User> userDb;
+
     public static User getCurrentUser() {
         return currentUser;
     }

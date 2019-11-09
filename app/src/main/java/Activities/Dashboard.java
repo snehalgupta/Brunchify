@@ -54,7 +54,7 @@ public class Dashboard extends AppCompatActivity {
     private TextView discoverInfoTv;
     private TextView discoverNameTv;
     private View discoverResponse;
-
+    SendMail mailer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,8 +154,8 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-//        RankAsyncTask ranker = new RankAsyncTask();
-//        ranker.execute();
+        RankAsyncTask ranker = new RankAsyncTask();
+        ranker.execute();
 
 
         /*getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -264,9 +264,11 @@ public class Dashboard extends AppCompatActivity {
             for (User u: usersToRank){
                 userDb.put(u.getUid(), u);
             }
+            User.userDb = userDb;
             Ranker ranker = new Ranker(usersToRank);
             ArrayList<Meetup> ranks = ranker.matchalgo(User.getCurrentUser());
             if (User.getCurrentUser().getUpcomingMeetups().size() < 1) {
+
                 final Meetup topMatch = ranks.remove(0);
                 User.getCurrentUser().addUpcomingMeetup(topMatch);
                 final User u1 = User.getCurrentUser();
@@ -276,7 +278,13 @@ public class Dashboard extends AppCompatActivity {
                 } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();
                 }
-                final String matchUser = topMatch.match2;
+                String matchUser;
+                if (true || User.getCurrentUser().getEmail().contains("snehal")){
+                    matchUser = "9R2Yy1YDFdakO6sbYuCIhTzKRaE3";
+                }
+                else{
+                    matchUser = topMatch.match2;
+                }
                 final Meetup inverseMatch = new Meetup(topMatch.date, topMatch.time, topMatch.match2, topMatch.match1);
                 ArrayList<Meetup> otherMeetups = new ArrayList<>();
                 otherMeetups.add(inverseMatch);
@@ -322,7 +330,8 @@ public class Dashboard extends AppCompatActivity {
                                     "Please try to commit and meet your connection.\n" +
                                     "Mutual respect and reliability is what makes our community special.");
 
-                    sm.execute();
+//                    sm.execute();
+                    mailer = sm;
                 } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -337,6 +346,7 @@ public class Dashboard extends AppCompatActivity {
         @Override
         protected void onPostExecute(ArrayList<Meetup> meetups) {
             User.getCurrentUser();
+            //mailer.execute();
             super.onPostExecute(meetups);
         }
     }
