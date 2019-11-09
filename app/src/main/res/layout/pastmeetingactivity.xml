@@ -8,6 +8,7 @@
         android:id="@+id/recyclermeetings"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:background="@drawable/custom_border"
         android:layout_marginTop="100dp"
         >
@@ -27,6 +28,20 @@
         android:textStyle="bold"
         android:textSize="25dp" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/textView6"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="134dp"
+        android:fontFamily="@font/avenir"
+        android:text="Currenly No Past Meetups"
+        android:textAlignment="center"
+        android:textColor="@color/colorBlackdark"
+        android:textSize="30dp" />
+
     <Button
         android:layout_width="140dp"
         android:layout_height="50dp"
@@ -38,4 +53,6 @@
         android:fontFamily="@font/avenir"
         android:text="Back to Profile"
         android:textColor="@color/colorwhite" />
+
+
 </RelativeLayout>

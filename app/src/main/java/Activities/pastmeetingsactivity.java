@@ -1,6 +1,7 @@
 package Activities;
 
 import android.os.Bundle;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class pastmeetingsactivity extends AppCompatActivity {
         movieList.add(movie);
         movie = new Movie("ABC","CEO XYZ","2019");
         movieList.add(movie);
-
+        recyclerView.setVisibility(View.GONE);
         mAdapter.notifyDataSetChanged();
     }
 }
