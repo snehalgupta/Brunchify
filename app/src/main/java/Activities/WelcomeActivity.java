@@ -43,11 +43,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.auth.SignInMethodQueryResult;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -209,7 +209,8 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
         finish();
     }
 
-    private void signInFromGoogleResult(GoogleSignInAccount acct, AuthResult googleSignInResult){
+    //private void signInFromGoogleResult(GoogleSignInAccount acct, AuthResult googleSignInResult){
+    private void signInFromGoogleResult(){
         final FirebaseUser user = mFirebaseAuth.getCurrentUser();
         Intent intent;
         //googleSignInResult.getAdditionalUserInfo().getProfile()
@@ -271,23 +272,72 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
         Log.d(TAG,"Attempting Firebase login with google account");
         //AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         //mFirebaseAuth.signInWithCredential(credential)
-        mFirebaseAuth.signInWithEmailAndPassword(acct.getEmail(), "devpass")
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            signInFromGoogleResult(acct, task.getResult());
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            progbar.setVisibility(View.INVISIBLE);
-                        }
+        mFirebaseAuth.fetchSignInMethodsForEmail(acct.getEmail()).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+            @Override
+            public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                if (task.isSuccessful()){
+                    if (!task.getResult().getSignInMethods().isEmpty()) {
+                        mFirebaseAuth.signInWithEmailAndPassword(acct.getEmail(), "devpass")
+                                .addOnCompleteListener(WelcomeActivity.this, new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
+                                            // Sign in success, update UI with the signed-in user's information
+                                            Log.d(TAG, "signInWithCredential:success");
+                                            signInFromGoogleResult();
+                                        } else {
+                                            // If sign in fails, display a message to the user.
+                                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                                            progbar.setVisibility(View.INVISIBLE);
+                                        }
 
-                        // ...
+                                        // ...
+                                    }
+                                });
                     }
-                });
+                    else{
+                        mFirebaseAuth.createUserWithEmailAndPassword(acct.getEmail(), "devpass")
+                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
+                                            // Sign in success, update UI with the signed-in user's information
+                                            Log.d(TAG, "createUserWithEmail:success");
+                                            final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                                    .setDisplayName(acct.getDisplayName())
+                                                    //.setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
+                                                    .build();
+
+                                            user.updateProfile(profileUpdates)
+                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        @Override
+                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                            if (task.isSuccessful()) {
+                                                                Log.d(TAG, "User profile updated.");
+                                                                signInFromGoogleResult();
+                                                            }
+                                                        }
+                                                    });
+                                        } else {
+                                            // If sign in fails, display a message to the user.
+                                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                            Toast.makeText(WelcomeActivity.this, "Authentication failed.",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+
+                                    }
+                                });
+                    }
+                }
+                else{
+                    Log.w(TAG, "Error checking if user exists");
+                }
+
+            }
+        });
+
+
     }
 
 
