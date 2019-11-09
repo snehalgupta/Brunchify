@@ -13,9 +13,6 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -26,7 +23,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -58,7 +54,7 @@ public class Dashboard extends AppCompatActivity {
     private TextView discoverInfoTv;
     private TextView discoverNameTv;
     private View discoverResponse;
-
+    SendMail mailer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,8 +154,8 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-//        RankAsyncTask ranker = new RankAsyncTask();
-//        ranker.execute();
+        RankAsyncTask ranker = new RankAsyncTask();
+        ranker.execute();
 
 
         /*getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -268,18 +264,27 @@ public class Dashboard extends AppCompatActivity {
             for (User u: usersToRank){
                 userDb.put(u.getUid(), u);
             }
+            User.userDb = userDb;
             Ranker ranker = new Ranker(usersToRank);
             ArrayList<Meetup> ranks = ranker.matchalgo(User.getCurrentUser());
             if (User.getCurrentUser().getUpcomingMeetups().size() < 1) {
-                Meetup topMatch = ranks.remove(0);
+
+                final Meetup topMatch = ranks.remove(0);
                 User.getCurrentUser().addUpcomingMeetup(topMatch);
+                final User u1 = User.getCurrentUser();
                 try {
                     User.writeToFirestoreSync(FirebaseFirestore.getInstance());
                     Log.i(TAG, "Added meetup to current user " + User.getCurrentUser().getName());
                 } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();
                 }
-                final String matchUser = topMatch.match2;
+                String matchUser;
+                if (true || User.getCurrentUser().getEmail().contains("snehal")){
+                    matchUser = "9R2Yy1YDFdakO6sbYuCIhTzKRaE3";
+                }
+                else{
+                    matchUser = topMatch.match2;
+                }
                 final Meetup inverseMatch = new Meetup(topMatch.date, topMatch.time, topMatch.match2, topMatch.match1);
                 ArrayList<Meetup> otherMeetups = new ArrayList<>();
                 otherMeetups.add(inverseMatch);
@@ -292,6 +297,7 @@ public class Dashboard extends AppCompatActivity {
                     await(updateTask);
                     Log.d(TAG, "Got other user from Firestore");
                     match = task.getResult().getDocuments().get(0).toObject(User.class);
+                    final User u2 = match;
                     match.addUpcomingMeetup(inverseMatch);
                     Log.d(TAG, "Seinding other user update");
                     Task<Void> updateTask2 = docRef.set(match);
@@ -308,12 +314,29 @@ public class Dashboard extends AppCompatActivity {
                     //.update("upcomingMeetups",  FieldValue.arrayUnion(inverseMatch)));
                     //Log.i(TAG, "Added meetup to matched user " + matchUser);
                     ranks.remove(matchUser);
+
+                    //TODO: notify both users.
+                    SendMail sm = new SendMail(getBaseContext(),
+                            new ArrayList<String>(){
+                                {
+                                    add(u1.getEmail());
+                                    add(u2.getEmail());
+                                }
+                            },
+                            "Your match for this week!",
+                            "Hi " + u1.getName() + " and " + u2.getName() + ",\n" +
+                                    "You both have been matched with each other.\n" +
+                                    "Use this email as a medium to break the ice and coordinate the exact meeting time and location.\n" +
+                                    "Please try to commit and meet your connection.\n" +
+                                    "Mutual respect and reliability is what makes our community special.");
+
+//                    sm.execute();
+                    mailer = sm;
                 } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();
                 }
-                //TODO: notify both users.
             } else {
-                User otherUser = new User(User.getCurrentUser().getUpcomingMeetups().get(0).match2, "");
+                User otherUser = new User(User.getCurrentUser().getUpcomingMeetups().get(0).match2, "", "");
                 ranks.remove(otherUser);
             }
             possibleMeetups = ranks;
@@ -323,6 +346,7 @@ public class Dashboard extends AppCompatActivity {
         @Override
         protected void onPostExecute(ArrayList<Meetup> meetups) {
             User.getCurrentUser();
+            //mailer.execute();
             super.onPostExecute(meetups);
         }
     }

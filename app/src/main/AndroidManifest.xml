@@ -14,10 +14,6 @@
         android:theme="@style/AppTheme">
         <activity android:name="Activities.WaitingListActivity"></activity>
         <activity android:name="Activities.SelectOptions" />
-        <!--
-<activity android:name="Activities.MailActivity">
-        </activity>
-        -->
         <activity android:name="Activities.DevSignUpActivity" />
         <activity android:name="Activities.WelcomeActivity" />
         <activity android:name="Activities.Dashboard" />

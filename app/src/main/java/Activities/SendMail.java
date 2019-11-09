@@ -5,13 +5,17 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
+import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -24,7 +28,7 @@ public class SendMail extends AsyncTask<Void, Void, Void> {
     private Session session;
 
     //Information to send email
-    private String email;
+    private List<String> email;
     private String subject;
     private String message;
 
@@ -32,7 +36,7 @@ public class SendMail extends AsyncTask<Void, Void, Void> {
     private ProgressDialog progressDialog;
 
     //Class Constructor
-    public SendMail(Context context, String email, String subject, String message){
+    public SendMail(Context context, List<String> email, String subject, String message){
         //Initializing variables
         this.context = context;
         this.email = email;
@@ -44,14 +48,14 @@ public class SendMail extends AsyncTask<Void, Void, Void> {
     protected void onPreExecute() {
         super.onPreExecute();
         //Showing progress dialog while sending email
-        progressDialog = ProgressDialog.show(context,"Sending message","Please wait...",false,false);
+        //progressDialog = ProgressDialog.show(context,"Sending message","Please wait...",false,false);
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
         //Dismissing the progress dialog
-        progressDialog.dismiss();
+        //progressDialog.dismiss();
         //Showing a success message
         Toast.makeText(context,"Message Sent", Toast.LENGTH_LONG).show();
     }
@@ -85,7 +89,7 @@ public class SendMail extends AsyncTask<Void, Void, Void> {
             //Setting sender address
             mm.setFrom(new InternetAddress(Config.EMAIL));
             //Adding receiver
-            mm.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+            mm.addRecipients(Message.RecipientType.TO, getAddresses());
             //Adding subject
             mm.setSubject(subject);
             //Adding message
@@ -98,5 +102,13 @@ public class SendMail extends AsyncTask<Void, Void, Void> {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private Address[] getAddresses() throws AddressException {
+        Address[] emails = new Address[email.size()];
+        for (int i=0; i<emails.length; i++){
+            emails[i] = new InternetAddress(email.get(i));
+        }
+        return emails;
     }
 }
