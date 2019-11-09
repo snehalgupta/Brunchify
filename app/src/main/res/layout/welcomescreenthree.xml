@@ -11,7 +11,7 @@
         android:id="@+id/logoimgview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="65"
+        android:layout_weight="35"
         android:padding="68dp"
         android:src="@drawable/ic_email"
         />
@@ -31,8 +31,8 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="30"
+        android:layout_height="100dp"
+        android:layout_weight="18"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
         android:layout_below="@+id/wstitle"

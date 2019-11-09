@@ -10,9 +10,9 @@
     <ImageView
         android:id="@+id/logoimgview"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="65"
-        android:padding="68dp"
+        android:layout_height="20dp"
+        android:layout_weight="35"
+        android:padding="80dp"
         android:src="@drawable/ic_settings"
         />
 
@@ -20,27 +20,25 @@
         android:id="@+id/wstitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="4"
         android:fontFamily="@font/avenir"
         android:src="@drawable/text_logo"
+        android:text="@string/welcomescreenfivetext1"
         android:textAlignment="center"
         android:textColor="@color/colorBlue"
-        android:layout_weight="5"
-        android:textSize="28dp"
-        android:text="@string/welcomescreenfivetext1"
-        />
+        android:textSize="28dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="30"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp"
         android:layout_below="@+id/wstitle"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
+        android:layout_weight="20"
         android:fontFamily="@font/avenir"
         android:src="@drawable/text_logo"
+        android:text="@string/welcomescreenfivetext2"
         android:textAlignment="center"
         android:textColor="@color/colorBlackdark"
-        android:textSize="20dp"
-        android:text="@string/welcomescreenfivetext2"
-        />
+        android:textSize="20dp" />
 </LinearLayout>

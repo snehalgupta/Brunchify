@@ -9,8 +9,8 @@
     <ImageView
         android:id="@+id/logoimgview"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="65"
+        android:layout_height="50dp"
+        android:layout_weight="50"
         android:padding="68dp"
         android:src="@drawable/ic_collaboration"
         />
@@ -19,27 +19,25 @@
         android:id="@+id/wstitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="5"
         android:fontFamily="@font/avenir"
         android:src="@drawable/text_logo"
+        android:text="@string/welcomescreenfourtext1"
         android:textAlignment="center"
         android:textColor="@color/colorBlue"
-        android:layout_weight="5"
-        android:textSize="28dp"
-        android:text="@string/welcomescreenfourtext1"
-        />
+        android:textSize="28dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="30"
+        android:layout_below="@+id/wstitle"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
-        android:layout_below="@+id/wstitle"
+        android:layout_weight="30"
         android:fontFamily="@font/avenir"
         android:src="@drawable/text_logo"
+        android:text="@string/welcomescreenfourtext2"
         android:textAlignment="center"
         android:textColor="@color/colorBlackdark"
-        android:textSize="20dp"
-        android:text="@string/welcomescreenfourtext2"
-        />
+        android:textSize="20dp" />
 </LinearLayout>

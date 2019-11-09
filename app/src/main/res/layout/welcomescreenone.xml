@@ -17,15 +17,14 @@
         android:id="@+id/wstitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
         android:layout_below="@+id/logoimgview"
+        android:layout_marginTop="147dp"
         android:fontFamily="@font/avenir"
         android:src="@drawable/text_logo"
         android:text="@string/welcomescreenonetext1"
         android:textAlignment="center"
         android:textColor="@color/colorBlackdark"
-        android:textSize="23dp"
-        />
+        android:textSize="23dp" />
 
     <TextView
         android:layout_width="match_parent"
