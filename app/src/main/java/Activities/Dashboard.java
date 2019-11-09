@@ -87,7 +87,7 @@ public class Dashboard extends AppCompatActivity {
         });
 
         ((TextView)findViewById(R.id.name_tv)).setText(User.getCurrentUser().getName());
-        String desig = User.getCurrentUser().designation + " at " + User.getCurrentUser().organisation;
+        final String desig = User.getCurrentUser().designation + " at " + User.getCurrentUser().organisation;
         ((TextView)findViewById(R.id.user_info_tv)).setText(desig);
 
 
@@ -138,19 +138,7 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View v) {
                 buttyes.setBackgroundResource(R.drawable.capsule);
                 buttyes.setTextColor(Color.WHITE);
-                Thread timer = new Thread() {
-                    public void run(){
-                        try {
-                            sleep(1000);
-                            showDiscover();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                };
-                timer.start();
-
+                discoverResponse();
             }
         });
         buttno.setOnClickListener(new View.OnClickListener() {
@@ -158,19 +146,7 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View v) {
                 buttno.setBackgroundResource(R.drawable.capsule);
                 buttno.setTextColor(Color.WHITE);
-                Thread timer = new Thread() {
-                    public void run(){
-                        try {
-                            sleep(1000);
-                            showDiscover();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                };
-                timer.start();
-                //showDiscover();
+                discoverResponse();
             }
         });
         buttmaybe.setOnClickListener(new View.OnClickListener() {
@@ -178,19 +154,7 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View v) {
                 buttmaybe.setBackgroundResource(R.drawable.capsule);
                 buttmaybe.setTextColor(Color.WHITE);
-                Thread timer = new Thread() {
-                    public void run(){
-                        try {
-                            sleep(1000);
-                            showDiscover();
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                };
-                timer.start();
-                //showDiscover();
+                discoverResponse();
             }
         });
 
@@ -202,6 +166,22 @@ public class Dashboard extends AppCompatActivity {
         getSupportActionBar().setLogo(R.drawable.logo);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setTitle("Brunchify");*/
+    }
+
+    private void discoverResponse(){
+        Thread timer = new Thread() {
+            public void run(){
+                try {
+                    sleep(1000);
+                    showDiscover();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        };
+        timer.start();
+        //showDiscover();
     }
 
     private void getDiscoverUser(){
@@ -228,9 +208,15 @@ public class Dashboard extends AppCompatActivity {
     }
 
     private void showDiscover() {
-        User mUsr = userDb.get(possibleMeetups.get(currentDiscover++ % possibleMeetups.size()).match2);
-        discoverNameTv.setText(mUsr.getName());
-        discoverInfoTv.setText(mUsr.getDesignation() + " at " + mUsr.getOrganisation());
+        buttmaybe.setTextColor(Color.BLACK);
+        buttmaybe.setBackgroundResource(R.drawable.capsulewhite);
+        buttno.setTextColor(Color.BLACK);
+        buttno.setBackgroundResource(R.drawable.capsulewhite);
+        buttyes.setTextColor(Color.BLACK);
+        buttyes.setBackgroundResource(R.drawable.capsulewhite);
+//        User mUsr = userDb.get(possibleMeetups.get(currentDiscover++ % possibleMeetups.size()).match2);
+//        discoverNameTv.setText(mUsr.getName());
+//        discoverInfoTv.setText(mUsr.getDesignation() + " at " + mUsr.getOrganisation());
     }
 
     /*@Override
