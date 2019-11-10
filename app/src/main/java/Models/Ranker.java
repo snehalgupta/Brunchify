@@ -110,7 +110,7 @@ public class Ranker {
                 int flag=0;
                 if(user.location.equals(UserDB.get(i).location)){
                     for(Availability_Slot slot: UserDB.get(i).slots){
-                        for(int j=0;j<user.slots.size();i++){
+                        for(int j=0;j<user.slots.size();j++){
                             if(user.slots.get(j).date.equals(slot.date) && user.slots.get(j).timing.equals(slot.timing) ){
                                 date = slot.getDate();
                                 time = slot.getTiming();
