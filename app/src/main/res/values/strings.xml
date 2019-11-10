@@ -13,7 +13,7 @@
     <string name="welcomescreenfourtext2">Commit to making your connection \n - mutual respect and reliability is \n what makes our community special</string>
     <string name="welcomescreenfivetext1">Give Feedback!</string>
     <string name="welcomescreenfivetext2">Your feedback about the meeting \n helps us provide you with more \n relevant matches.</string>
-    <string name="bioname">Subject: Your match for this week!\nFrom: Brunchify\n</string>
+    <string name="bioname">Subject: Your match for this week!\nFrom: Brunchify\nTo: You, Your Match\n</string>
     <string name="next">NEXT</string>
     <string name="skip">SKIP</string>
     <string name="start">GOT IT</string>

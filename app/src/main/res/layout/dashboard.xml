@@ -233,52 +233,20 @@
         tools:layout_editor_absoluteX="0dp" />
 
 
-
     <Button
-        android:id="@+id/editpastmeetups"
+        android:id="@+id/matchfinderbutton"
         android:layout_width="200dp"
         android:layout_height="30dp"
         android:layout_marginTop="52dp"
         android:paddingHorizontal="8dp"
         android:background="@drawable/capsule"
+        android:text="Find My Match"
         android:fontFamily="@font/avenir"
         android:src="@drawable/text_logo"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/colorwhite"
-        android:textSize="18dp"
-        android:text="@string/editpastmeetups" />
-
-    <Button
-        android:id="@+id/edittwo"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:paddingHorizontal="8dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/capsule"
-        android:fontFamily="@font/avenir"
-        android:src="@drawable/text_logo"
-        android:text="Sign Up for this week"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/colorwhite"
-        android:textSize="18dp"
-        android:visibility="gone"/>
-
-    <Button
-        android:id="@+id/edithree"
-        android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="8dp"
-        android:paddingHorizontal="8dp"
-        android:background="@drawable/capsule"
-        android:fontFamily="@font/avenir"
-        android:src="@drawable/text_logo"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/colorwhite"
-        android:textSize="18dp"
-        android:text="Invite your friends" />
+        android:textSize="18dp"/>
 
     <Button
         android:id="@+id/editone"
@@ -296,6 +264,36 @@
         android:text="Upcoming Meetups" />
 
     <Button
+        android:id="@+id/editpastmeetups"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:paddingHorizontal="8dp"
+        android:background="@drawable/capsule"
+        android:fontFamily="@font/avenir"
+        android:src="@drawable/text_logo"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/colorwhite"
+        android:textSize="18dp"
+        android:text="@string/editpastmeetups" />
+
+    <Button
+        android:id="@+id/edithree"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:paddingHorizontal="8dp"
+        android:background="@drawable/capsule"
+        android:fontFamily="@font/avenir"
+        android:src="@drawable/text_logo"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/colorwhite"
+        android:textSize="18dp"
+        android:text="Invite Friends" />
+
+    <Button
         android:id="@+id/logout_btn"
         android:layout_width="200dp"
         android:layout_height="30dp"
@@ -310,10 +308,6 @@
         android:textSize="18dp"
         android:text="Logout" />
 
-    <Button
-        android:id="@+id/matchfinderbutton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Match Me" />
+
 
 </LinearLayout>

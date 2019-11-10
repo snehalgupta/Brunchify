@@ -108,58 +108,51 @@ public class Ranker {
             int score = 0;
 
             Log.d("livelife",user.email);
-                int flag=0;
-<<<<<<< HEAD
-                if(user.location.equals(UserDB.get(i).location)){
-                    for(Availability_Slot slot: UserDB.get(i).slots){
-                        for(int j=0;j<user.slots.size();j++){
-                            if(user.slots.get(j).date.equals(slot.date) && user.slots.get(j).timing.equals(slot.timing) ){
-=======
-                if(user.location.equals(UserDB.get(i).location)) {
-                    for (Availability_Slot slot : UserDB.get(i).slots) {
-                        Log.i(TAG,"Total number of slots " + user.slots.size()+"");
-                        for (int j = 0; j < user.slots.size(); j++) {
-                            Log.i(TAG,"Checking slot " + slot + " with current user, " + j);
-                            Log.i(TAG, user.slots.get(j).date + " " + slot.date  + " " + user.slots.get(j).timing + " " + slot.timing);
-                            if (user.slots.get(j).date.equals(slot.date) && user.slots.get(j).timing.equals(slot.timing)) {
->>>>>>> 6062f5f47b824351d1ec4a5456dd0eaf8efe07ec
-                                date = slot.getDate();
-                                time = slot.getTiming();
-                                if (flag == 0)
-                                    flag = 1;
-                                break;
-                            }
-
-                        }
-                        Log.d(TAG, "checked slot for " + i);
-                        if (flag == 1) {
-                            // Check if .contains is working:
-                            System.out.println("manual check shows slot is there, .contains - " + user.slots.contains(slot));
+            int flag=0;
+            if(user.location.equals(UserDB.get(i).location)) {
+                for (Availability_Slot slot : UserDB.get(i).slots) {
+                    Log.i(TAG,"Total number of slots " + user.slots.size()+"");
+                    for (int j = 0; j < user.slots.size(); j++) {
+                        Log.i(TAG,"Checking slot " + slot + " with current user, " + j);
+                        Log.i(TAG, user.slots.get(j).date + " " + slot.date  + " " + user.slots.get(j).timing + " " + slot.timing);
+                        if (user.slots.get(j).date.equals(slot.date) && user.slots.get(j).timing.equals(slot.timing)) {
+                            date = slot.getDate();
+                            time = slot.getTiming();
+                            if (flag == 0)
+                                flag = 1;
                             break;
                         }
 
                     }
-                    Log.d(TAG, "checked all slots");
-                    if (date == null && time == null) {
-                        continue;
+                    Log.d(TAG, "checked slot for " + i);
+                    if (flag == 1) {
+                        // Check if .contains is working:
+                        System.out.println("manual check shows slot is there, .contains - " + user.slots.contains(slot));
+                        break;
                     }
-                    match2 = UserDB.get(i).getUid();
 
-                    score += getObjectivesScore(user, UserDB.get(i));
-                    score += getInterestsScore(user, UserDB.get(i));
                 }
-                else{
-                    Log.i(TAG,"User " + i + " location doesn't match");
+                Log.d(TAG, "checked all slots");
+                if (date == null && time == null) {
+                    continue;
                 }
-                if (UserDB.get(i).getUpcomingMeetups().size() == 0){
-                    score+=50;
-                }
+                match2 = UserDB.get(i).getUid();
+
+                score += getObjectivesScore(user, UserDB.get(i));
+                score += getInterestsScore(user, UserDB.get(i));
+            }
+            else{
+                Log.i(TAG,"User " + i + " location doesn't match");
+            }
+            if (UserDB.get(i).getUpcomingMeetups().size() == 0){
+                score+=50;
+            }
 
 
             if (match2 != null){
-            Meetup newmeet = new Meetup(date,time,match1,match2);
-            newmeet.score = score;
-            meetups.add(newmeet);
+                Meetup newmeet = new Meetup(date,time,match1,match2);
+                newmeet.score = score;
+                meetups.add(newmeet);
             }
         }
         Collections.sort(meetups, new Comparator<Meetup>(){

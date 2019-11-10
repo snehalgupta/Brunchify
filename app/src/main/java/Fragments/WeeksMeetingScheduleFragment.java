@@ -168,9 +168,9 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
         mDoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //mListener.submit();
                       RankAsyncTask ranker = new RankAsyncTask();
                         ranker.execute();
+                        mListener.submit();
             }
         });
     }
