@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import Activities.Dashboard;
 import Activities.SendMail;
 import Adapters.BaseChoiceAdapter;
 import Models.Meetup;
@@ -90,10 +91,10 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),R.array.cities_array,android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s1.setAdapter(adapter1);
-        s2 = (Spinner)view.findViewById(R.id.ws_spinner2);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getContext(),R.array.days_array,android.R.layout.simple_spinner_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        s2.setAdapter(adapter2);
+        //s2 = (Spinner)view.findViewById(R.id.ws_spinner2);
+        //ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getContext(),R.array.days_array,android.R.layout.simple_spinner_item);
+        //adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //s2.setAdapter(adapter2);
         FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
         layoutm.setFlexDirection(FlexDirection.ROW);
         layoutm.setJustifyContent(JustifyContent.CENTER);
@@ -130,18 +131,18 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
             }
         });
 
-       s2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-           @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-               Object item = adapterView.getItemAtPosition(i);
-               selected_no_of_meetings = Integer.parseInt(item.toString());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+//       s2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//           @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//               Object item = adapterView.getItemAtPosition(i);
+//               selected_no_of_meetings = Integer.parseInt(item.toString());
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
         return view;
     }
 
@@ -168,7 +169,7 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
         mDoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //mListener.submit();
+                mListener.submit();
                       RankAsyncTask ranker = new RankAsyncTask();
                         ranker.execute();
             }
@@ -201,9 +202,11 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
             User.userDb = userDb;
             Ranker ranker = new Ranker(usersToRank);
             ArrayList<Meetup> ranks = ranker.matchalgo(User.getCurrentUser());
+            Log.d("size",ranks.size()+"");
             if (User.getCurrentUser().getUpcomingMeetups().size() < 1) {
 
                 final Meetup topMatch = ranks.remove(0);
+                //Log.d("top")
                 User.getCurrentUser().addUpcomingMeetup(topMatch);
                 final User u1 = User.getCurrentUser();
                 try {
@@ -250,22 +253,22 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
                     ranks.remove(matchUser);
 
                     //TODO: notify both users.
-                    SendMail sm = new SendMail(getContext(),
-                            new ArrayList<String>(){
-                                {
-                                    add(u1.getEmail());
-                                    add(u2.getEmail());
-                                }
-                            },
-                            "Your match for this week!",
-                            "Hi " + u1.getName() + " and " + u2.getName() + ",\n" +
-                                    "You both have been matched with each other.\n" +
-                                    "Use this email as a medium to break the ice and coordinate the exact meeting time and location.\n" +
-                                    "Please try to commit and meet your connection.\n" +
-                                    "Mutual respect and reliability is what makes our community special.");
-
-                    sm.execute();
-                    mailer = sm;
+//                    SendMail sm = new SendMail(getContext(),
+//                            new ArrayList<String>(){
+//                                {
+//                                    add(u1.getEmail());
+//                                    add(u2.getEmail());
+//                                }
+//                            },
+//                            "Your match for this week!",
+//                            "Hi " + u1.getName() + " and " + u2.getName() + ",\n" +
+//                                    "You both have been matched with each other.\n" +
+//                                    "Use this email as a medium to break the ice and coordinate the exact meeting time and location.\n" +
+//                                    "Please try to commit and meet your connection.\n" +
+//                                    "Mutual respect and reliability is what makes our community special.");
+//
+//                    sm.execute();
+//                    mailer = sm;
                 } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();
                 }

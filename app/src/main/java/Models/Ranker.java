@@ -109,20 +109,10 @@ public class Ranker {
 
             Log.d("livelife",user.email);
                 int flag=0;
-<<<<<<< HEAD
-                if(user.location.equals(UserDB.get(i).location)){
+                if(user.location!=null && UserDB.get(i).location!=null &&user.location.equals(UserDB.get(i).location)){
                     for(Availability_Slot slot: UserDB.get(i).slots){
                         for(int j=0;j<user.slots.size();j++){
                             if(user.slots.get(j).date.equals(slot.date) && user.slots.get(j).timing.equals(slot.timing) ){
-=======
-                if(user.location.equals(UserDB.get(i).location)) {
-                    for (Availability_Slot slot : UserDB.get(i).slots) {
-                        Log.i(TAG,"Total number of slots " + user.slots.size()+"");
-                        for (int j = 0; j < user.slots.size(); j++) {
-                            Log.i(TAG,"Checking slot " + slot + " with current user, " + j);
-                            Log.i(TAG, user.slots.get(j).date + " " + slot.date  + " " + user.slots.get(j).timing + " " + slot.timing);
-                            if (user.slots.get(j).date.equals(slot.date) && user.slots.get(j).timing.equals(slot.timing)) {
->>>>>>> 6062f5f47b824351d1ec4a5456dd0eaf8efe07ec
                                 date = slot.getDate();
                                 time = slot.getTiming();
                                 if (flag == 0)

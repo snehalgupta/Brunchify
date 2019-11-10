@@ -25,23 +25,22 @@ public class upcomingmeetupsactivity extends AppCompatActivity {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
-        /*Movie movie = new Movie("ABC","CEO XYZ","2019");
-        movieList.add(movie);
-        movie = new Movie("ABC","CEO XYZ","2019");
-        movieList.add(movie);
-        movie = new Movie("ABC","CEO XYZ","2019");
-        movieList.add(movie);
-        movie = new Movie("ABC","CEO XYZ","2019");
-        movieList.add(movie);
-        movie = new Movie("ABC","CEO XYZ","2019");
-        movieList.add(movie);
-        movie = new Movie("ABC","CEO XYZ","2019");
-        movieList.add(movie);
-        movie = new Movie("ABC","CEO XYZ","2019");
-        movieList.add(movie);*/
+//        Movie movie = new Movie("ABC","CEO XYZ","2019");
+//        movieList.add(movie);
+//        movie = new Movie("ABC","CEO XYZ","2019");
+//        movieList.add(movie);
+//        movie = new Movie("ABC","CEO XYZ","2019");
+//        movieList.add(movie);
+//        movie = new Movie("ABC","CEO XYZ","2019");
+//        movieList.add(movie);
+//        movie = new Movie("ABC","CEO XYZ","2019");
+//        movieList.add(movie);
+//        movie = new Movie("ABC","CEO XYZ","2019");
+//        movieList.add(movie);
+//        movie = new Movie("ABC","CEO XYZ","2019");
+//        movieList.add(movie);
         Meetup meetup = User.getCurrentUser().getUpcomingMeetups().get(0);
         movieList.add(new Movie(User.userDb.get(meetup.match2).getName(), meetup.date, meetup.time));
-
         mAdapter.notifyDataSetChanged();
     }
 }
