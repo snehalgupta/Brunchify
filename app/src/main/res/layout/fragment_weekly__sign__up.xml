@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,31 +14,32 @@
             android:id="@+id/ws_text1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="35dp"
+            android:layout_marginTop="240dp"
+            android:fontFamily="@font/avenir"
             android:text="Signing Up in?"
             android:textAlignment="center"
-            android:textStyle="bold"
             android:textColor="@color/colorBlackdark"
-            android:fontFamily="@font/avenir"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/ws_spinner1"
-            android:prompt="@string/city_prompt"
-            android:entries="@array/cities_array"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
+            android:layout_below="@id/ws_text1"
+            android:layout_marginTop="15dp"
             android:background="@drawable/custombacktwo"
-            android:layout_marginHorizontal="48dp"
-            android:layout_below="@+id/ws_text1"/>
+            android:entries="@array/cities_array"
+            android:prompt="@string/city_prompt" />
 
         <TextView
             android:id="@+id/ws_text2"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ws_spinner1"
-            android:layout_marginVertical="20dp"
-            android:layout_marginTop="24dp"
+            android:layout_below="@id/ws_spinner1"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="44dp"
             android:fontFamily="@font/avenir"
             android:text="Where would you be \n able to meet?"
             android:textAlignment="center"
@@ -51,44 +53,27 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ws_text2"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="25dp"></androidx.recyclerview.widget.RecyclerView>
-
-        <TextView
-            android:id="@+id/ws_text3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ws_recycler_view"
-            android:layout_marginVertical="30dp"
-            android:layout_marginTop="64dp"
-            android:fontFamily="@font/avenir"
-            android:text="How many meetings would \n you like this week?"
-            android:textAlignment="center"
-            android:textColor="@color/colorBlackdark"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <Spinner
-            android:id="@+id/ws_spinner2"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:layout_below="@+id/ws_text3"
-            android:layout_marginHorizontal="60dp"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/custombacktwo"
-            android:entries="@array/days_array"
-            android:prompt="@string/no_of_meetings" />
+            android:layout_marginTop="29dp"></androidx.recyclerview.widget.RecyclerView>
 
         <Button
             android:id="@+id/done_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
             android:layout_below="@+id/bio_textbox"
-            android:text="Done"
-            android:textColor="@color/colorwhite"
-            android:background="@color/lightpurple"
+            android:layout_alignParentBottom="true"
             android:layout_margin="16dp"
-            android:layout_alignParentBottom="true"/>
+            android:layout_marginTop="100dp"
+            android:background="@color/lightpurple"
+            android:text="Done"
+            android:textColor="@color/colorwhite" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/ic_navigating" />
 
     </RelativeLayout>
 

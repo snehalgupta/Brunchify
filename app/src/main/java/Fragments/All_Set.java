@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
+import Activities.Dashboard;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import android.widget.LinearLayout;
@@ -44,7 +45,7 @@ public class All_Set extends Fragment implements OnCompleteListener<Void> {
         getStartedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(context, WeeklySignUp.class));
+                startActivity(new Intent(context, Dashboard.class));
                 //finish();
             }
         });

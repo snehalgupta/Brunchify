@@ -36,6 +36,7 @@ import java.util.concurrent.ExecutionException;
 import static com.google.android.gms.tasks.Tasks.await;
 
 public class Dashboard extends AppCompatActivity {
+    Button bmatchfinder;
     Button buttyes;
     Button buttno;
     Button buttmaybe;
@@ -63,7 +64,7 @@ public class Dashboard extends AppCompatActivity {
         buttmaybe=(Button)findViewById(R.id.editmaybe);
         buttno=(Button)findViewById(R.id.editno);
         buttyes=(Button)findViewById(R.id.edityes);
-
+        bmatchfinder=(Button)findViewById(R.id.matchfinderbutton);
         invitebutton=(Button)findViewById(R.id.edithree);
         Signupweekbutton=(Button)findViewById(R.id.edittwo);
         editprofile=(ImageView)findViewById(R.id.edittitle);
@@ -82,9 +83,9 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-        ((TextView)findViewById(R.id.name_tv)).setText(User.getCurrentUser().getName());
-        final String desig = User.getCurrentUser().designation + " at " + User.getCurrentUser().organisation;
-        ((TextView)findViewById(R.id.user_info_tv)).setText(desig);
+//        ((TextView)findViewById(R.id.name_tv)).setText(User.getCurrentUser().getName());
+//        final String desig = User.getCurrentUser().designation + " at " + User.getCurrentUser().organisation;
+//        ((TextView)findViewById(R.id.user_info_tv)).setText(desig);
 
 
         invitebutton.setOnClickListener(new View.OnClickListener() {
@@ -123,6 +124,7 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
+
 //        discoverResponse.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -154,8 +156,13 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-        RankAsyncTask ranker = new RankAsyncTask();
-        ranker.execute();
+            bmatchfinder.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(Dashboard.this, WeeklySignUp.class));
+                }
+            });
+
 
 
         /*getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -240,116 +247,7 @@ public class Dashboard extends AppCompatActivity {
     }
 
 
-    class RankAsyncTask extends AsyncTask<Void, Void, ArrayList<Meetup>>{
-        final String TAG = "RankAsync";
 
-        @Override
-        protected ArrayList<Meetup> doInBackground(Void... v) {
-
-            Task<QuerySnapshot> task = FirebaseFirestore.getInstance().collection("users")
-                    .get();
-            try {
-                await(task);
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            QuerySnapshot result = task.getResult();
-            Log.d(TAG, "get result");
-            ArrayList<User> usersToRank = new ArrayList<User>();
-            for (DocumentSnapshot snapshot : result.getDocuments()) {
-                usersToRank.add(snapshot.toObject(User.class));
-            }
-            for (User u: usersToRank){
-                userDb.put(u.getUid(), u);
-            }
-            User.userDb = userDb;
-            Ranker ranker = new Ranker(usersToRank);
-            ArrayList<Meetup> ranks = ranker.matchalgo(User.getCurrentUser());
-            if (User.getCurrentUser().getUpcomingMeetups().size() < 1) {
-
-                final Meetup topMatch = ranks.remove(0);
-                User.getCurrentUser().addUpcomingMeetup(topMatch);
-                final User u1 = User.getCurrentUser();
-                try {
-                    User.writeToFirestoreSync(FirebaseFirestore.getInstance());
-                    Log.i(TAG, "Added meetup to current user " + User.getCurrentUser().getName());
-                } catch (ExecutionException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-                String matchUser;
-                if (true || User.getCurrentUser().getEmail().contains("snehal")){
-                    matchUser = "9R2Yy1YDFdakO6sbYuCIhTzKRaE3";
-                }
-                else{
-                    matchUser = topMatch.match2;
-                }
-                final Meetup inverseMatch = new Meetup(topMatch.date, topMatch.time, topMatch.match2, topMatch.match1);
-                ArrayList<Meetup> otherMeetups = new ArrayList<>();
-                otherMeetups.add(inverseMatch);
-                Map<String, Object> updateMap = new HashMap<>();
-                updateMap.put("upcomingMeetups", otherMeetups);
-                try {
-                    Log.d(TAG, "Updating other user");
-                    DocumentReference docRef = FirebaseFirestore.getInstance().collection("users").document(matchUser);
-                    Task<DocumentSnapshot> updateTask = docRef.get();
-                    await(updateTask);
-                    Log.d(TAG, "Got other user from Firestore");
-                    match = task.getResult().getDocuments().get(0).toObject(User.class);
-                    final User u2 = match;
-                    match.addUpcomingMeetup(inverseMatch);
-                    Log.d(TAG, "Seinding other user update");
-                    Task<Void> updateTask2 = docRef.set(match);
-                    await(updateTask2);
-                    if (updateTask2.isSuccessful()) {
-                        Log.d(TAG, "Successfully updated the other user");
-                    }
-                    else{
-                        Log.d(TAG, "Error updating other user " + updateTask2.getException());
-                    }
-                    //await(FirebaseFirestore.getInstance().collection("users").document(matchUser)
-                    //.update("upcomingMeetups", otherMeetups));
-                    //        .update(updateMap));
-                    //.update("upcomingMeetups",  FieldValue.arrayUnion(inverseMatch)));
-                    //Log.i(TAG, "Added meetup to matched user " + matchUser);
-                    ranks.remove(matchUser);
-
-                    //TODO: notify both users.
-                    SendMail sm = new SendMail(getBaseContext(),
-                            new ArrayList<String>(){
-                                {
-                                    add(u1.getEmail());
-                                    add(u2.getEmail());
-                                }
-                            },
-                            "Your match for this week!",
-                            "Hi " + u1.getName() + " and " + u2.getName() + ",\n" +
-                                    "You both have been matched with each other.\n" +
-                                    "Use this email as a medium to break the ice and coordinate the exact meeting time and location.\n" +
-                                    "Please try to commit and meet your connection.\n" +
-                                    "Mutual respect and reliability is what makes our community special.");
-
-                    sm.execute();
-                    mailer = sm;
-                } catch (ExecutionException | InterruptedException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                User otherUser = new User(User.getCurrentUser().getUpcomingMeetups().get(0).match2, "", "");
-                ranks.remove(otherUser);
-            }
-            possibleMeetups = ranks;
-            return ranks;
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<Meetup> meetups) {
-            User.getCurrentUser();
-            //mailer.execute();
-            super.onPostExecute(meetups);
-        }
-    }
 
 
 }

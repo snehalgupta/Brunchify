@@ -310,4 +310,10 @@
         android:textSize="18dp"
         android:text="Logout" />
 
+    <Button
+        android:id="@+id/matchfinderbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Match Me" />
+
 </LinearLayout>
