@@ -36,9 +36,10 @@
 
         <Spinner
             android:id="@+id/neighbourhood_spinner"
-            android:background="@drawable/bg_spinner"
+            android:background="@drawable/custombacktwo"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
+
             android:layout_below="@+id/neighbourhood_text"
             android:layout_marginHorizontal="24dp"
             android:prompt="@string/city_prompt" />

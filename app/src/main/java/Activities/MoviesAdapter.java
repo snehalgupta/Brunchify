@@ -35,7 +35,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.profilecard, parent, false);
+                .inflate(R.layout.profilecardtwo, parent, false);
 
         return new MyViewHolder(itemView);
     }
