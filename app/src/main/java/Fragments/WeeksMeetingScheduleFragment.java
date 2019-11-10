@@ -213,12 +213,15 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
                     e.printStackTrace();
                 }
                 String matchUser;
+                /**
                 if (true || User.getCurrentUser().getEmail().contains("snehal")){
                     matchUser = "9R2Yy1YDFdakO6sbYuCIhTzKRaE3";
                 }
                 else{
                     matchUser = topMatch.match2;
                 }
+                 **/
+                matchUser = topMatch.match2;
                 final Meetup inverseMatch = new Meetup(topMatch.date, topMatch.time, topMatch.match2, topMatch.match1);
                 ArrayList<Meetup> otherMeetups = new ArrayList<>();
                 otherMeetups.add(inverseMatch);

@@ -64,11 +64,6 @@ public class Write_Intro extends BaseOnboardFragment {
         designationEtv.setText(User.getCurrentUser().getDesignation());
         orgEtv = (EditText) view.findViewById(R.id.org_etv);
         orgEtv.setText(User.getCurrentUser().getOrganisation());
-        String temp = subject.getText().toString();
-        String added = "To: ";
-        added += "You";
-        added += ", Your Match";
-        subject.setText(temp+added);
         prefManager = new PreferenceManager(getContext());
         initDoneBtn(view);
         return view;
