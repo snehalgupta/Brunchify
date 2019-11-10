@@ -89,6 +89,7 @@ public class SelectSlots extends BaseOnboardFragment implements AdapterView.OnIt
         layoutm.setJustifyContent(JustifyContent.FLEX_START);
         recyclerView.setLayoutManager(layoutm);
         slotsRvAdapter = new Slots_RV_Adapter(getContext(),arr);
+        slotsRvAdapter.setSelectedChoices(User.getCurrentUser().slots);
         //adapter = new BaseChoiceAdapter<>(getContext(), arr, R.layout.slot_item);
 
 

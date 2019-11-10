@@ -43,6 +43,7 @@ public class Availability_Slot {
 
     @Override
     public boolean equals(Object o) {
+        System.out.println("Checking equals of Slot");
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Availability_Slot that = (Availability_Slot) o;
