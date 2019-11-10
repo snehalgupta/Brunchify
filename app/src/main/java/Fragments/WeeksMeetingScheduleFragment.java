@@ -66,7 +66,7 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
         initDoneBtn(view);
         selected_city = User.getCurrentUser().location;
         recyclerView = (RecyclerView)view.findViewById(R.id.ws_recycler_view);
-        s1 = (Spinner)view.findViewById(R.id.ws_spinner1);
+        s1 = (Spinner)view.findViewById(R.id.neighbourhood_spinner);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),R.array.cities_array,android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s1.setAdapter(adapter1);
@@ -110,18 +110,18 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
             }
         });
 
-        s2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Object item = adapterView.getItemAtPosition(i);
-                selected_no_of_meetings = Integer.parseInt(item.toString());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+//        s2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                Object item = adapterView.getItemAtPosition(i);
+//                selected_no_of_meetings = Integer.parseInt(item.toString());
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
         return view;
     }
 
