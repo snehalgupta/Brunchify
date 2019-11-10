@@ -51,12 +51,18 @@ public class Slots_RV_Adapter extends RecyclerView.Adapter<Slots_RV_Adapter.View
         return selected_slots;
     }
 
+    public void setSelectedChoices(ArrayList<Availability_Slot> selectedChoices) {
+        this.selected_slots = selectedChoices;
+        notifyDataSetChanged();
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder{
         public final View mview;
         public final Button btn1;
         public final Button btn2;
         public final Button btn3;
         public final Button btn4;
+        public ArrayList<Button> buttons;
         public final TextView textView;
         public Context context;
         public Availability_Slot add_slot;
@@ -68,6 +74,12 @@ public class Slots_RV_Adapter extends RecyclerView.Adapter<Slots_RV_Adapter.View
             btn2 = (Button)view.findViewById(R.id.slot_2);
             btn3 = (Button)view.findViewById(R.id.slot_3);
             btn4 = (Button)view.findViewById(R.id.slot_4);
+            buttons = new ArrayList<>();
+            buttons.add(btn1);
+            buttons.add(btn2);
+            buttons.add(btn3);
+            buttons.add(btn4);
+
             textView = (TextView)view.findViewById(R.id.slot_date);
             context = cont;
         }
@@ -80,6 +92,19 @@ public class Slots_RV_Adapter extends RecyclerView.Adapter<Slots_RV_Adapter.View
             // Assuming all items are for the same day
             String te = item.get(0).day+" "+item.get(0).date;
             textView.setText(te);
+            for (int i=0; i<4; i++){
+                Availability_Slot thisSlot = item.get(i);
+                boolean isSelected = selected_slots.contains(thisSlot);
+                Log.d(TAG, "isSelected for slot " + thisSlot.timing + " in " + te + " is " + isSelected);
+                if(!isSelected){
+                    buttons.get(i).setBackground(ContextCompat.getDrawable(context, R.drawable.capsulewhite));
+                    buttons.get(i).setTextColor(Color.BLACK);
+                }
+                else{
+                    buttons.get(i).setBackground(ContextCompat.getDrawable(context, R.drawable.capsuleselected));
+                    buttons.get(i).setTextColor(Color.WHITE);
+                }
+            }
             btn1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

@@ -177,7 +177,7 @@ public class Dashboard extends AppCompatActivity {
             }
         };
         timer.start();
-        //showDiscover();
+        showDiscover();
     }
 
     private void getDiscoverUser(){
@@ -210,9 +210,9 @@ public class Dashboard extends AppCompatActivity {
         buttno.setBackgroundResource(R.drawable.capsulewhite);
         buttyes.setTextColor(Color.BLACK);
         buttyes.setBackgroundResource(R.drawable.capsulewhite);
-//        User mUsr = userDb.get(possibleMeetups.get(currentDiscover++ % possibleMeetups.size()).match2);
-//        discoverNameTv.setText(mUsr.getName());
-//        discoverInfoTv.setText(mUsr.getDesignation() + " at " + mUsr.getOrganisation());
+        User mUsr = userDb.get(possibleMeetups.get(currentDiscover++ % possibleMeetups.size()).match2);
+        discoverNameTv.setText(mUsr.getName());
+        discoverInfoTv.setText(mUsr.getDesignation() + " at " + mUsr.getOrganisation());
     }
 
     /*@Override
@@ -266,7 +266,9 @@ public class Dashboard extends AppCompatActivity {
             }
             User.userDb = userDb;
             Ranker ranker = new Ranker(usersToRank);
+            Log.d(TAG,"Laucnhing Match Algo");
             ArrayList<Meetup> ranks = ranker.matchalgo(User.getCurrentUser());
+            Log.i(TAG, "Match Algo returned " + ranks.size() + " possible matches");
             if (User.getCurrentUser().getUpcomingMeetups().size() < 1) {
 
                 final Meetup topMatch = ranks.remove(0);

@@ -64,7 +64,7 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
         View view = inflater.inflate(R.layout.fragment_weekly__sign__up, container, false);
 
         initDoneBtn(view);
-
+        selected_city = User.getCurrentUser().location;
         recyclerView = (RecyclerView)view.findViewById(R.id.ws_recycler_view);
         s1 = (Spinner)view.findViewById(R.id.ws_spinner1);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),R.array.cities_array,android.R.layout.simple_spinner_item);

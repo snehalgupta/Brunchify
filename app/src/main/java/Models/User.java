@@ -1,11 +1,15 @@
 package Models;
 
+import android.os.Build;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
+import java.util.function.Predicate;
 
 import static com.google.android.gms.tasks.Tasks.await;
 
@@ -178,6 +182,27 @@ public class User {
 
     public void setSlots(ArrayList<Availability_Slot> slots) {
         this.slots = slots;
+        Date now = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(now);
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        String day = sdf.format(calendar.getTime());
+        sdf = new SimpleDateFormat("MMM");
+        String month = sdf.format(calendar.getTime());
+        sdf = new SimpleDateFormat("yyyy");
+        String year = sdf.format(calendar.getTime());
+        sdf = new SimpleDateFormat("dd");
+        String date = sdf.format(calendar.getTime());
+        final String today = month + " " + date + ", " + year;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Predicate<Availability_Slot> predicate = new Predicate<Availability_Slot>() {
+                @Override
+                public boolean test(Availability_Slot availability_slot) {
+                    return availability_slot.date.compareTo(today) < 0;
+                }
+            };
+            this.slots.removeIf(predicate);
+        }
     }
 
     public String getUid() {
