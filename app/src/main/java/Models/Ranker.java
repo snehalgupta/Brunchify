@@ -139,7 +139,7 @@ public class Ranker {
                 match2 = UserDB.get(i).getUid();
 
                 score += getObjectivesScore(user, UserDB.get(i));
-                //score += getInterestsScore(user, UserDB.get(i));
+                score += getInterestsScore(user, UserDB.get(i));
             }
             else{
                 Log.i(TAG,"User " + i + " location doesn't match");

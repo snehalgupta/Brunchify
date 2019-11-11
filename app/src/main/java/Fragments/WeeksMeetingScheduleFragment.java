@@ -90,10 +90,10 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(getContext(),R.array.cities_array,android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s1.setAdapter(adapter1);
-        s2 = (Spinner)view.findViewById(R.id.ws_spinner2);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getContext(),R.array.days_array,android.R.layout.simple_spinner_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        s2.setAdapter(adapter2);
+        //s2 = (Spinner)view.findViewById(R.id.ws_spinner2);
+        //ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(getContext(),R.array.days_array,android.R.layout.simple_spinner_item);
+        //adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //s2.setAdapter(adapter2);
         FlexboxLayoutManager layoutm = new FlexboxLayoutManager(getContext());
         layoutm.setFlexDirection(FlexDirection.ROW);
         layoutm.setJustifyContent(JustifyContent.CENTER);
@@ -130,18 +130,18 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
             }
         });
 
-       s2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-           @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-               Object item = adapterView.getItemAtPosition(i);
-               selected_no_of_meetings = Integer.parseInt(item.toString());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+//       s2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//           @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//               Object item = adapterView.getItemAtPosition(i);
+//               selected_no_of_meetings = Integer.parseInt(item.toString());
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
         return view;
     }
 
@@ -168,9 +168,9 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
         mDoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                      //RankAsyncTask ranker = new RankAsyncTask();
-                        //ranker.execute();
-                        mListener.submit();
+                RankAsyncTask ranker = new RankAsyncTask();
+                ranker.execute();
+                mListener.submit();
             }
         });
     }
@@ -201,6 +201,7 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
             User.userDb = userDb;
             Ranker ranker = new Ranker(usersToRank);
             ArrayList<Meetup> ranks = ranker.matchalgo(User.getCurrentUser());
+            Log.d(TAG,"Raker returned " + ranks.size()+"matches");
             if (User.getCurrentUser().getUpcomingMeetups().size() < 1) {
 
                 final Meetup topMatch = ranks.remove(0);
@@ -267,7 +268,7 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
                                     "Please try to commit and meet your connection.\n" +
                                     "Mutual respect and reliability is what makes our community special.");
 
-                    sm.execute();
+//                    sm.execute();
                     mailer = sm;
                 } catch (ExecutionException | InterruptedException e) {
                     e.printStackTrace();
@@ -283,7 +284,8 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
         @Override
         protected void onPostExecute(ArrayList<Meetup> meetups) {
             User.getCurrentUser();
-            //mailer.execute();
+            mailer.execute();
+            //TODO: Launch Dashboard when done
             super.onPostExecute(meetups);
         }
     }

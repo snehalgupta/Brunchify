@@ -37,7 +37,6 @@ public class User {
     public ArrayList<Meetup> upcomingMeetups;
 
     private boolean onBoarded = false;
-    private boolean matched = false;
 
     private static User currentUser = null;
 
@@ -59,14 +58,6 @@ public class User {
         this.upcomingMeetups = new ArrayList<>();
         this.slots = new ArrayList<>();
         this.weeklyPlaces = new ArrayList<>();
-    }
-
-    public boolean isMatched() {
-        return matched;
-    }
-
-    public void setMatched(boolean matched) {
-        this.matched = matched;
     }
 
     public User(String uid, String name, String email) {
