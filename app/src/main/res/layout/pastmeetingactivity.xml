@@ -18,36 +18,35 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="117dp"
         android:layout_marginTop="32dp"
-        android:text="Past Meetings"
+        android:layout_centerHorizontal="true"
         android:fontFamily="@font/avenir"
         android:textColor="@color/lightpurple"
         android:textStyle="bold"
-        android:textSize="25dp" />
+        android:textSize="25dp"
+        android:text="Past Meetings" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:layout_below="@id/textView6"
+        android:gravity="center"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="134dp"
         android:fontFamily="@font/avenir"
-        android:text="Currenly No Past Meetups"
+        android:text="You haven't been to any Meetups yet"
         android:textAlignment="center"
         android:textColor="@color/colorBlackdark"
         android:textSize="30dp" />
 
     <Button
+        android:id="@+id/back_to_profile_btn"
         android:layout_width="140dp"
         android:layout_height="50dp"
-        android:layout_alignStart="@+id/textView6"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="15dp"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="68dp"
         android:background="@drawable/capsule"
         android:fontFamily="@font/avenir"

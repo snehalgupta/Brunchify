@@ -116,7 +116,6 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-
 //        discoverResponse.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -155,6 +154,9 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
+        showDiscover();
+
+
         bmatchfinder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -192,6 +194,19 @@ public class Dashboard extends AppCompatActivity {
         timer.start();
         //showDiscover();
     }*/
+
+    @Override
+    protected void onResume() {
+        if (User.getCurrentUser().getUpcomingMeetups().size() > 0){
+            bmatchfinder.setVisibility(View.GONE);
+            viewupcomingmeeting.setVisibility(View.VISIBLE);
+        }
+        else {
+            bmatchfinder.setVisibility(View.VISIBLE);
+            viewupcomingmeeting.setVisibility(View.GONE);
+        }
+        super.onResume();
+    }
 
     private void getDiscoverUser(){
         FirebaseFirestore.getInstance().collection("users")

@@ -146,7 +146,10 @@ public class Ranker {
                 Log.i(TAG,"User " + i + " location doesn't match");
             }
             if (UserDB.get(i).getUpcomingMeetups().size() == 0){
-                score+=50;
+                score+=60;
+            }
+            else {
+                score-=60;
             }
 
 

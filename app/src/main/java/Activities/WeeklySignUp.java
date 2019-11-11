@@ -169,7 +169,10 @@ public class WeeklySignUp extends FragmentActivity implements OnWizardInteractio
             Ranker ranker = new Ranker(new ArrayList<User>(User.userDb.values()));
             ArrayList<Meetup> ranks = ranker.matchalgo(User.getCurrentUser());
             Log.d(TAG,"Raker returned " + ranks.size()+"matches");
-            if (User.getCurrentUser().getUpcomingMeetups().size() < 1) {
+            if (ranks.get(0).score < 0){
+                Log.d(TAG, "No user available for matching");
+            }
+            else if (User.getCurrentUser().getUpcomingMeetups().size() < 1) {
 
                 final Meetup topMatch = ranks.remove(0);
                 User.getCurrentUser().addUpcomingMeetup(topMatch);
@@ -220,7 +223,7 @@ public class WeeklySignUp extends FragmentActivity implements OnWizardInteractio
                     //Log.i(TAG, "Added meetup to matched user " + matchUser);
                     ranks.remove(matchUser);
 
-                    //TODO: notify both users.
+                    //TODO: notify both users via notification
                     SendMail sm = new SendMail(WeeklySignUp.this,
                             new ArrayList<String>(){
                                 {
@@ -253,10 +256,13 @@ public class WeeklySignUp extends FragmentActivity implements OnWizardInteractio
 
         @Override
         protected void onPostExecute(ArrayList<Meetup> meetups) {
-            User.getCurrentUser();
-            mailer.execute();
+            if (User.getCurrentUser().getUpcomingMeetups().size() == 0){
+                Toast.makeText(WeeklySignUp.this, "No meetups found, we'll keep trying", Toast.LENGTH_LONG).show();
+            }
+            else {
+                mailer.execute();
+            }
             completeListener.onComplete(null);
-            //TODO: Launch Dashboard when done
             super.onPostExecute(meetups);
         }
     }
