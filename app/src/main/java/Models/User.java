@@ -4,6 +4,7 @@ import android.os.Build;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
@@ -36,17 +37,26 @@ public class User {
     public ArrayList<Meetup> pastMeetups;
     public ArrayList<Meetup> upcomingMeetups;
 
+    @Exclude
+    public ArrayList<String> possibleMeetups;
+
     private boolean onBoarded = false;
 
     private static User currentUser = null;
 
-    public static Map<String, User> userDb;
+    public static Map<String, User> userDb = new HashMap<>();
 
     public static User getCurrentUser() {
         return currentUser;
     }
 
     public static void setCurrentUser(User currentUser) {
+        currentUser.possibleMeetups = new ArrayList<String>(userDb.keySet());
+        currentUser.possibleMeetups.remove(currentUser.getUid());
+        for (Meetup m : currentUser.getUpcomingMeetups()) {
+            currentUser.possibleMeetups.remove(m.match1);
+            currentUser.possibleMeetups.remove(m.match2);
+        }
         User.currentUser = currentUser;
     }
 

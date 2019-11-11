@@ -1,6 +1,7 @@
 package Activities;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 //import android.support.v7.app.AppCompatActivity;
@@ -23,6 +24,12 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
+import static com.google.android.gms.tasks.Tasks.await;
 
 public class SplashScreenActivity extends AppCompatActivity {
     private static final String TAG = "SplashScreen";
@@ -60,15 +67,30 @@ public class SplashScreenActivity extends AppCompatActivity {
         final DocumentReference userDocRef = FirebaseFirestore.getInstance().collection("users")
                 .document(user.getUid());
 
-        Log.d(TAG,"Fetching user info from Firestore");
-        userDocRef.get()
-                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//        Log.d(TAG,"Fetching user info from Firestore");
+//        userDocRef.get()
+//                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//                    @Override
+//                    public void onSuccess(DocumentSnapshot snapshot) {
+//                        if (snapshot.exists()) {
+        FirebaseFirestore.getInstance().collection("users")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
-                    public void onSuccess(DocumentSnapshot snapshot) {
-                        if (snapshot.exists()) {
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        Log.i(TAG,"Loaded users collection");
+                        ArrayList<User> usersToRank = new ArrayList<User>();
+                        for (DocumentSnapshot snapshot : queryDocumentSnapshots.getDocuments()) {
+                            usersToRank.add(snapshot.toObject(User.class));
+                        }
+                        for (User u : usersToRank) {
+                            User.userDb.put(u.getUid(), u);
+                        }
+                        if (User.userDb.containsKey(user.getUid())){
                             Log.d(TAG, "User also exists in firebase");
                             // Redundant as already checked newUser
-                            User.setCurrentUser(snapshot.toObject(User.class));
+                            //User.setCurrentUser(snapshot.toObject(User.class));
+                            User.setCurrentUser(User.userDb.get(user.getUid()));
                             Class cls = WelcomeActivity.class;
                             if (User.getCurrentUser().isOnBoarded()) {
                                 cls = Dashboard.class;
@@ -79,8 +101,6 @@ public class SplashScreenActivity extends AppCompatActivity {
                             finish();
                         } else {
                             Log.d(TAG, "This user doesn't exist in firestore, so create");
-                            // TODO: Move this registration to End of Onboarding
-                            // TODO: Check for invite condition
                             User.setCurrentUser(new User(user.getUid(), user.getDisplayName(), user.getEmail()));
                             userDocRef.set(User.getCurrentUser())
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -122,4 +142,25 @@ public class SplashScreenActivity extends AppCompatActivity {
                 });
     }
 
+    /*private void loadUserData(){
+        Task<QuerySnapshot> task = FirebaseFirestore.getInstance().collection("users")
+                .get();
+        try {
+            await(task);
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        QuerySnapshot result = task.getResult();
+        Log.d(TAG, "get result");
+        ArrayList<User> usersToRank = new ArrayList<User>();
+        for (DocumentSnapshot snapshot : result.getDocuments()) {
+            usersToRank.add(snapshot.toObject(User.class));
+        }
+        for (User u : usersToRank) {
+            User.userDb.put(u.getUid(), u);
+        }
+    }
+*/
 }

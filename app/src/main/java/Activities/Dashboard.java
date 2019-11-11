@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -47,30 +48,30 @@ public class Dashboard extends AppCompatActivity {
     Button viewupcomingmeeting;
     User discoverUser;
     private Button logoutBtn;
-    Map<String, User> userDb = new HashMap<String, User>();
-    ArrayList<Meetup> possibleMeetups;
+    //ArrayList<Meetup> possibleMeetups;
     User match;
     int currentDiscover = 0;
     private TextView discoverInfoTv;
     private TextView discoverNameTv;
     private View discoverResponse;
     SendMail mailer;
+    private Handler mHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard);
-        buttmaybe=(Button)findViewById(R.id.editmaybe);
-        buttno=(Button)findViewById(R.id.editno);
-        buttyes=(Button)findViewById(R.id.edityes);
-        bmatchfinder=(Button)findViewById(R.id.matchfinderbutton);
-        invitebutton=(Button)findViewById(R.id.edithree);
-        editprofile=(ImageView)findViewById(R.id.edittitle);
-        viewupcomingmeeting=(Button)findViewById(R.id.editone);
-        pastmeetings=(Button)findViewById(R.id.editpastmeetups);
-        logoutBtn = (Button)findViewById(R.id.logout_btn);
-        discoverNameTv = (TextView)findViewById(R.id.discover_name_tv);
-        discoverInfoTv = (TextView)findViewById(R.id.discover_info_tv);
+        buttmaybe = (Button) findViewById(R.id.editmaybe);
+        buttno = (Button) findViewById(R.id.editno);
+        buttyes = (Button) findViewById(R.id.edityes);
+        bmatchfinder = (Button) findViewById(R.id.matchfinderbutton);
+        invitebutton = (Button) findViewById(R.id.edithree);
+        editprofile = (ImageView) findViewById(R.id.edittitle);
+        viewupcomingmeeting = (Button) findViewById(R.id.editone);
+        pastmeetings = (Button) findViewById(R.id.editpastmeetups);
+        logoutBtn = (Button) findViewById(R.id.logout_btn);
+        discoverNameTv = (TextView) findViewById(R.id.discover_name_tv);
+        discoverInfoTv = (TextView) findViewById(R.id.discover_info_tv);
         //discoverResponse = findViewById(R.id.discover_response);
 
 
@@ -81,15 +82,15 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-        ((TextView)findViewById(R.id.name_tv)).setText(User.getCurrentUser().getName());
+        ((TextView) findViewById(R.id.name_tv)).setText(User.getCurrentUser().getName());
         final String desig = User.getCurrentUser().designation + " at " + User.getCurrentUser().organisation;
-        ((TextView)findViewById(R.id.user_info_tv)).setText(desig);
+        ((TextView) findViewById(R.id.user_info_tv)).setText(desig);
 
 
         invitebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent inviteintent=new Intent(Dashboard.this,InviteActivity.class);
+                Intent inviteintent = new Intent(Dashboard.this, InviteActivity.class);
                 startActivity(inviteintent);
             }
         });
@@ -100,7 +101,7 @@ public class Dashboard extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        viewupcomingmeeting.setOnClickListener (new View.OnClickListener() {
+        viewupcomingmeeting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Dashboard.this, upcomingmeetupsactivity.class);
@@ -122,12 +123,15 @@ public class Dashboard extends AppCompatActivity {
 //
 //            }
 //        });
+
+        mHandler = new Handler();
         buttyes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 buttyes.setBackgroundResource(R.drawable.capsule);
                 buttyes.setTextColor(Color.WHITE);
-                discoverResponse();
+                //discoverResponse();
+                mHandler.postDelayed(discoverResponseRunnable, 1000);
             }
         });
         buttno.setOnClickListener(new View.OnClickListener() {
@@ -135,7 +139,9 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View v) {
                 buttno.setBackgroundResource(R.drawable.capsule);
                 buttno.setTextColor(Color.WHITE);
-                discoverResponse();
+
+                //discoverResponse();
+                mHandler.postDelayed(discoverResponseRunnable, 1000);
             }
         });
         buttmaybe.setOnClickListener(new View.OnClickListener() {
@@ -143,16 +149,18 @@ public class Dashboard extends AppCompatActivity {
             public void onClick(View v) {
                 buttmaybe.setBackgroundResource(R.drawable.capsule);
                 buttmaybe.setTextColor(Color.WHITE);
-                discoverResponse();
+
+                //discoverResponse();
+                mHandler.postDelayed(discoverResponseRunnable, 1000);
             }
         });
 
-            bmatchfinder.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(Dashboard.this, WeeklySignUp.class));
-                }
-            });
+        bmatchfinder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Dashboard.this, WeeklySignUp.class));
+            }
+        });
 
 
 
@@ -162,7 +170,14 @@ public class Dashboard extends AppCompatActivity {
         getSupportActionBar().setTitle("Brunchify");*/
     }
 
-    private void discoverResponse(){
+    private Runnable discoverResponseRunnable = new Runnable() {
+        @Override
+        public void run() {
+            showDiscover();
+        }
+    };
+
+    /*private void discoverResponse(){
         Thread timer = new Thread() {
             public void run(){
                 try {
@@ -175,8 +190,8 @@ public class Dashboard extends AppCompatActivity {
             }
         };
         timer.start();
-        showDiscover();
-    }
+        //showDiscover();
+    }*/
 
     private void getDiscoverUser(){
         FirebaseFirestore.getInstance().collection("users")
@@ -208,7 +223,9 @@ public class Dashboard extends AppCompatActivity {
         buttno.setBackgroundResource(R.drawable.capsulewhite);
         buttyes.setTextColor(Color.BLACK);
         buttyes.setBackgroundResource(R.drawable.capsulewhite);
-        User mUsr = userDb.get(possibleMeetups.get(currentDiscover++ % possibleMeetups.size()).match2);
+        int index = currentDiscover++ % User.getCurrentUser().possibleMeetups.size();
+        Log.d(TAG, "Discover index " + index);
+        User mUsr = User.userDb.get(User.getCurrentUser().possibleMeetups.get(index));
         discoverNameTv.setText(mUsr.getName());
         discoverInfoTv.setText(mUsr.getDesignation() + " at " + mUsr.getOrganisation());
     }

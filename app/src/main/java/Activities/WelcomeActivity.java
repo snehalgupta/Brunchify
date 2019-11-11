@@ -171,6 +171,7 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
 
     private void signIn(){
         Intent intent=Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
+        googleApiClient.clearDefaultAccountAndReconnect();
         startActivityForResult(intent,REQ_CODE);
 
     }

@@ -109,6 +109,7 @@ public class Ranker {
 
             Log.d("livelife",user.email);
             int flag=0;
+            //TODO: Check for other user's time!!
             if(user.location.equals(UserDB.get(i).location)) {
                 for (Availability_Slot slot : UserDB.get(i).slots) {
                     Log.i(TAG,"Total number of slots " + user.slots.size()+"");
