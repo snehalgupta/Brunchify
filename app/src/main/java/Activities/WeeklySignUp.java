@@ -1,6 +1,5 @@
 package Activities;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -11,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import Fragments.All_Set;
+import Fragments.CompleteWeeklySignUp;
 import Fragments.OnWizardInteractionListener;
 import Fragments.WeeklySignUpStart;
 import Fragments.WeeklySignupPagerFragment;
@@ -46,7 +46,7 @@ public class WeeklySignUp extends FragmentActivity implements OnWizardInteractio
     //private MyViewPagerAdapter myViewPagerAdapter;
     private WeeklySignUpStart weeklySignUpStart;
     private WeeklySignupPagerFragment viewPagerFragment;
-    private All_Set allSetFragment;
+    private CompleteWeeklySignUp completeFragment;
     private SendMail mailer;
 
     @Override
@@ -70,12 +70,12 @@ public class WeeklySignUp extends FragmentActivity implements OnWizardInteractio
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
 
-        allSetFragment = new All_Set("Finding Your Match ...", true);
+        completeFragment = new CompleteWeeklySignUp();
 
-        RankAsyncTask matchTask = new RankAsyncTask(allSetFragment);
+        RankAsyncTask matchTask = new RankAsyncTask(completeFragment);
         matchTask.execute();
-        //User.writeToFirestore(FirebaseFirestore.getInstance(), allSetFragment);
-        transaction.replace(R.id.fragmentContainer, allSetFragment);
+        //User.writeToFirestore(FirebaseFirestore.getInstance(), completeFragment);
+        transaction.replace(R.id.fragmentContainer, completeFragment);
         transaction.commit();
         //startActivity(new Intent(WeeklySignUp.this, Dashboard.class));
         //finish();
@@ -138,7 +138,7 @@ public class WeeklySignUp extends FragmentActivity implements OnWizardInteractio
         final String TAG = "RankAsync";
         private final OnCompleteListener<Void> completeListener;
 
-        public RankAsyncTask(All_Set allSetFragment) {
+        public RankAsyncTask(CompleteWeeklySignUp allSetFragment) {
             this.completeListener = allSetFragment;
         }
 
@@ -184,14 +184,14 @@ public class WeeklySignUp extends FragmentActivity implements OnWizardInteractio
                     e.printStackTrace();
                 }
                 String matchUser;
-                /**
-                 if (true || User.getCurrentUser().getEmail().contains("snehal")){
-                 matchUser = "9R2Yy1YDFdakO6sbYuCIhTzKRaE3";
+
+                 /*if (true || User.getCurrentUser().getEmail().contains("snehal")){
+                 matchUser = "z3X5n4x5YQS47SZ0oEf9a5B9wsD2";
                  }
                  else{
                  matchUser = topMatch.match2;
-                 }
-                 **/
+                 }*/
+
                 matchUser = topMatch.match2;
                 final Meetup inverseMatch = new Meetup(topMatch.date, topMatch.time, topMatch.match2, topMatch.match1);
                 ArrayList<Meetup> otherMeetups = new ArrayList<>();

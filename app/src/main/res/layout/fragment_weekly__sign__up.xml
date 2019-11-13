@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backgroundfinal"
     tools:context="Fragments.WeeksMeetingScheduleFragment">
 
     <RelativeLayout
@@ -53,9 +52,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ws_text2"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="29dp"></androidx.recyclerview.widget.RecyclerView>
+            android:layout_marginTop="29dp"/>
 
-        <Button
+        <!--<Button
             android:id="@+id/done_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,7 +64,7 @@
             android:layout_marginTop="100dp"
             android:background="@color/lightpurple"
             android:text="Done"
-            android:textColor="@color/colorwhite" />
+            android:textColor="@color/colorwhite" />-->
 
         <ImageView
             android:id="@+id/imageView6"

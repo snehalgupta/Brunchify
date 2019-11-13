@@ -29,13 +29,24 @@ public class InviteActivity extends AppCompatActivity {
     private static final String TAG = "InviteActivity";
     private Button inviteBtn;
     private EditText emailText;
+    private Button backBtn;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.inviteactivity);
 
         inviteBtn = (Button) findViewById(R.id.invitebutton);
+        backBtn = (Button) findViewById(R.id.backbutton);
         emailText = (EditText) findViewById(R.id.invite_email_text);
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(InviteActivity.this, Dashboard.class));
+                finish();
+            }
+        });
+
         inviteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){

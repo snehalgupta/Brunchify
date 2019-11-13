@@ -65,7 +65,7 @@ public class Write_Intro extends BaseOnboardFragment {
         orgEtv = (EditText) view.findViewById(R.id.org_etv);
         orgEtv.setText(User.getCurrentUser().getOrganisation());
         prefManager = new PreferenceManager(getContext());
-        initDoneBtn(view);
+        //initDoneBtn(view);
         return view;
     }
 
@@ -76,37 +76,5 @@ public class Write_Intro extends BaseOnboardFragment {
         User.getCurrentUser().setOrganisation(orgEtv.getText().toString());
         return null;
     }
-
-    /*************** Code for last fragment of Onboarding Wizard ****************/
-
-    private void initDoneBtn(View view) {
-        doneBtn = (Button) view.findViewById(R.id.done_onboarding_btn);
-        doneBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.submit();
-            }
-        });
-    }
-
-    private OnWizardInteractionListener mListener;
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnWizardInteractionListener) {
-            mListener = (OnWizardInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /*************** #################################### ****************/
 
 }

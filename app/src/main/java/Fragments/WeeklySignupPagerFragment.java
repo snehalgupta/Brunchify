@@ -17,6 +17,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.Calendar;
 
 import Activities.Dashboard;
@@ -34,6 +36,8 @@ public class WeeklySignupPagerFragment extends BaseOnboardFragment {
     private ViewPager viewPager;
     private MyViewPagerAdapter myViewPagerAdapter;
     private BaseOnboardFragment[] fragments;
+    private Button mDoneBtn;
+    private TabLayout tabLayout;
 
 
     public WeeklySignupPagerFragment() {
@@ -48,11 +52,16 @@ public class WeeklySignupPagerFragment extends BaseOnboardFragment {
         View view = inflater.inflate(R.layout.fragment_weekly_signup_pager, container, false);
 
         initFragments();
+        initDoneBtn(view);
 
         viewPager = (ViewPager) view.findViewById(R.id.view_pager_);
         myViewPagerAdapter = new MyViewPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(myViewPagerAdapter);
+        viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
         viewPager.setOffscreenPageLimit(fragments.length+1);
+
+        tabLayout = (TabLayout) view.findViewById(R.id.tab_layout);
+        tabLayout.setupWithViewPager(viewPager, true);
         return view;
     }
 
@@ -95,5 +104,63 @@ public class WeeklySignupPagerFragment extends BaseOnboardFragment {
         }
 
     }
+
+    /*************** Code for last fragment of Onboarding Wizard ****************/
+
+    private void initDoneBtn(View view) {
+        mDoneBtn = (Button) view.findViewById(R.id.done_btn);
+        mDoneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.submit();
+            }
+        });
+    }
+    private OnWizardInteractionListener mListener;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnWizardInteractionListener) {
+            mListener = (OnWizardInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /*************** #################################### ****************/
+
+    ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            //addBottomDots(position);
+            toggleDoneBtn(position);
+        }
+
+        private void toggleDoneBtn(int position) {
+            if (position == fragments.length-1){
+                mDoneBtn.setVisibility(View.VISIBLE);
+            }
+            else{
+                mDoneBtn.setVisibility(View.INVISIBLE);
+            }
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
+    };
 
 }

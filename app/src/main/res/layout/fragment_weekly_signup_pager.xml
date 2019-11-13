@@ -1,13 +1,44 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backgroundfinal"
     tools:context="Fragments.WeeklySignupPagerFragment">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager_"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    </androidx.viewpager.widget.ViewPager>
+        <!--<fragment
+            tools:layout="@layout/fragment_select__slots"-->
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager_"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="100"
+            />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabBackground="@drawable/tab_selector"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp" />
+
+        <Button
+            android:id="@+id/done_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="16dp"
+            android:background="@color/lightpurple"
+            android:paddingHorizontal="12dp"
+            android:text="Done"
+            android:textColor="@color/colorwhite"
+            android:visibility="invisible" />
+    </LinearLayout>
+
 </FrameLayout>

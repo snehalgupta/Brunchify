@@ -83,7 +83,7 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
 
         View view = inflater.inflate(R.layout.fragment_weekly__sign__up, container, false);
 
-        initDoneBtn(view);
+        //initDoneBtn(view);
         selected_city = User.getCurrentUser().location;
         recyclerView = (RecyclerView)view.findViewById(R.id.ws_recycler_view);
         s1 = (Spinner)view.findViewById(R.id.ws_spinner1);
@@ -158,38 +158,5 @@ public class WeeksMeetingScheduleFragment extends BaseOnboardFragment{
         User.getCurrentUser().location = selected_city;
         return null;
     }
-
-
-
-    /*************** Code for last fragment of Onboarding Wizard ****************/
-
-    private void initDoneBtn(View view) {
-        mDoneBtn = (Button) view.findViewById(R.id.done_btn);
-        mDoneBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.submit();
-            }
-        });
-    }
-    private OnWizardInteractionListener mListener;
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnWizardInteractionListener) {
-            mListener = (OnWizardInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /*************** #################################### ****************/
 
 }

@@ -11,10 +11,13 @@ import teamcool.mandeep.brunchify.R;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -60,7 +63,13 @@ public class Dashboard extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.logo);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle("Brunchify");*/
+
         setContentView(R.layout.dashboard);
+
         buttmaybe = (Button) findViewById(R.id.editmaybe);
         buttno = (Button) findViewById(R.id.editno);
         buttyes = (Button) findViewById(R.id.edityes);
@@ -82,7 +91,7 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
-        ((TextView) findViewById(R.id.name_tv)).setText(User.getCurrentUser().getName());
+        ((TextView) findViewById(R.id.name_tv)).setText(convertToTitleCaseIteratingChars(User.getCurrentUser().getName()));
         final String desig = User.getCurrentUser().designation + " at " + User.getCurrentUser().organisation;
         ((TextView) findViewById(R.id.user_info_tv)).setText(desig);
 
@@ -163,13 +172,6 @@ public class Dashboard extends AppCompatActivity {
                 startActivity(new Intent(Dashboard.this, WeeklySignUp.class));
             }
         });
-
-
-
-        /*getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(R.drawable.logo);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setTitle("Brunchify");*/
     }
 
     private Runnable discoverResponseRunnable = new Runnable() {
@@ -241,7 +243,7 @@ public class Dashboard extends AppCompatActivity {
         int index = currentDiscover++ % User.getCurrentUser().possibleMeetups.size();
         Log.d(TAG, "Discover index " + index);
         User mUsr = User.userDb.get(User.getCurrentUser().possibleMeetups.get(index));
-        discoverNameTv.setText(mUsr.getName());
+        discoverNameTv.setText(convertToTitleCaseIteratingChars(mUsr.getName()));
         discoverInfoTv.setText(mUsr.getDesignation() + " at " + mUsr.getOrganisation());
     }
 
@@ -266,7 +268,33 @@ public class Dashboard extends AppCompatActivity {
 
     private void logout() {
         FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(Dashboard.this, WelcomeActivity.class));
+        Intent intent = new Intent(Dashboard.this, WelcomeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+    public static String convertToTitleCaseIteratingChars(String text) {
+        if (text == null || text.isEmpty()) {
+            return text;
+        }
+
+        StringBuilder converted = new StringBuilder();
+
+        boolean convertNext = true;
+        for (char ch : text.toCharArray()) {
+            if (Character.isSpaceChar(ch)) {
+                convertNext = true;
+            } else if (convertNext) {
+                ch = Character.toTitleCase(ch);
+                convertNext = false;
+            } else {
+                ch = Character.toLowerCase(ch);
+            }
+            converted.append(ch);
+        }
+
+        return converted.toString();
     }
 
 }

@@ -57,6 +57,7 @@ public class User {
             currentUser.possibleMeetups.remove(m.match1);
             currentUser.possibleMeetups.remove(m.match2);
         }
+        Collections.shuffle(currentUser.possibleMeetups);
         User.currentUser = currentUser;
     }
 

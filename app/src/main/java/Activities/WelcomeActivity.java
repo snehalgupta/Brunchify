@@ -316,7 +316,7 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
                                                                     Log.d(TAG, "createUserWithEmail:success");
                                                                     final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                                                                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                                                            .setDisplayName(acct.getDisplayName())
+                                                                            .setDisplayName(convertToTitleCaseIteratingChars(acct.getDisplayName()))
                                                                             //.setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
                                                                             .build();
 
@@ -465,5 +465,28 @@ public class WelcomeActivity extends AppCompatActivity implements GoogleApiClien
             View view = (View) object;
             container.removeView(view);
         }
+    }
+
+    public static String convertToTitleCaseIteratingChars(String text) {
+        if (text == null || text.isEmpty()) {
+            return text;
+        }
+
+        StringBuilder converted = new StringBuilder();
+
+        boolean convertNext = true;
+        for (char ch : text.toCharArray()) {
+            if (Character.isSpaceChar(ch)) {
+                convertNext = true;
+            } else if (convertNext) {
+                ch = Character.toTitleCase(ch);
+                convertNext = false;
+            } else {
+                ch = Character.toLowerCase(ch);
+            }
+            converted.append(ch);
+        }
+
+        return converted.toString();
     }
 }

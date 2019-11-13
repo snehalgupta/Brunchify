@@ -16,11 +16,13 @@
         <activity android:name="Activities.SelectOptions" />
         <activity android:name="Activities.DevSignUpActivity" />
         <activity android:name="Activities.WelcomeActivity" />
-        <activity android:name="Activities.Dashboard" />
+        <activity android:name="Activities.Dashboard"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity android:name="Activities.WeeklySignUp" />
         <activity android:name="Activities.InviteActivity" />
         <activity android:name="Activities.pastmeetingsactivity" />
-        <activity android:name="Activities.upcomingmeetupsactivity" />
+        <activity android:name="Activities.upcomingmeetupsactivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity android:name="Activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

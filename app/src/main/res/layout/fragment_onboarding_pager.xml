@@ -1,37 +1,47 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/backgroundfinal"
     tools:context="Fragments.OnboardingPager">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-<!--        android:layout_above="@id/layoutDots"/>-->
+        <!--        android:layout_above="@id/layoutDots"/>-->
 
-        <RelativeLayout
-            android:id="@+id/layoutRelative"
+        <!--<fragment
+            tools:layout="@layout/fragment_write__intro"-->
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
             android:layout_width="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="705dp"
-            android:layout_height="@dimen/dots_height"
-            >
-        <LinearLayout
-            android:id="@+id/layoutDots"
+            android:layout_height="0dp"
+            android:layout_above="@id/tab_layout"
+            android:layout_weight="100" />
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabBackground="@drawable/tab_selector"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp" />
+
+        <Button
+            android:id="@+id/done_onboarding_btn"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal"
-            />
-            />
-        </RelativeLayout>
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="16dp"
+            android:background="@color/lightpurple"
+            android:paddingHorizontal="12dp"
+            android:text="Done"
+            android:textColor="@color/colorwhite"
+            android:visibility="invisible" />
+    </LinearLayout>
 
 </FrameLayout>

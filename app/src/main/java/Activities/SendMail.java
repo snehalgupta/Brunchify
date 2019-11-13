@@ -3,6 +3,7 @@ package Activities;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import javax.mail.internet.MimeMessage;
 //Class is extending AsyncTask because this class is going to perform a networking operation
 public class SendMail extends AsyncTask<Void, Void, Void> {
 
+    private static final String TAG = "SendMail";
     //Declaring Variables
     private Context context;
     private Session session;
@@ -58,6 +60,13 @@ public class SendMail extends AsyncTask<Void, Void, Void> {
         //progressDialog.dismiss();
         //Showing a success message
         Toast.makeText(context,"Message Sent", Toast.LENGTH_LONG).show();
+        Log.i(TAG,"Send mail execute complete");
+    }
+
+    @Override
+    protected void onCancelled(Void aVoid) {
+        super.onCancelled(aVoid);
+        Log.e(TAG, "Error sending mail....");
     }
 
     @Override
@@ -83,6 +92,7 @@ public class SendMail extends AsyncTask<Void, Void, Void> {
                 });
 
         try {
+            Log.i(TAG,"Attempting to send a mail");
             //Creating MimeMessage object
             MimeMessage mm = new MimeMessage(session);
 

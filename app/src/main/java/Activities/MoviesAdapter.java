@@ -16,13 +16,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
     private List<Movie> moviesList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, year, genre;
+        public TextView title, genre;//, year;
 
         public MyViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.textView3);
             genre = (TextView) view.findViewById(R.id.textView4);
-            year = (TextView) view.findViewById(R.id.textView5);
+            //year = (TextView) view.findViewById(R.id.textView5);
         }
     }
 
@@ -45,7 +45,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MyViewHold
         Movie movie = moviesList.get(position);
         holder.title.setText(movie.getTitle());
         holder.genre.setText(movie.getGenre());
-        holder.year.setText(movie.getYear());
+        //holder.year.setText(movie.getYear());
     }
 
     @Override

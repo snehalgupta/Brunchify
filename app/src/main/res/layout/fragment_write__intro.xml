@@ -14,7 +14,7 @@
             android:id="@+id/intro_img"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="40"
+            android:layout_weight="30"
             android:padding="48dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_share" />
@@ -49,119 +49,123 @@
 
         </LinearLayout>-->
 
-        <TextView
-            android:id="@+id/intro_text"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/intro_img"
-            android:layout_marginVertical="16dp"
-            android:fontFamily="@font/avenir"
-            android:text="How would you like \n to be introduced?"
-            android:textAlignment="center"
-            android:textColor="@color/colorBlackdark"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingHorizontal="48dp">
-            <EditText
-                android:id="@+id/designation_etv"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@id/at_tv"
-                android:fontFamily="@font/avenir"
-                android:textSize="15sp"
-                android:hint="Designation"/>
+            android:layout_height="0dp"
+            android:layout_weight="60"
+            android:orientation="vertical"
+            android:padding="32dp"
+            >
 
             <TextView
-                android:id="@+id/at_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:paddingHorizontal="16dp"
-                android:layout_alignBaseline="@id/designation_etv"
-                android:textSize="20sp"
-                android:text="at"/>
-        </RelativeLayout>
-
-        <EditText
-            android:id="@+id/org_etv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="48dp"
-            android:textSize="15sp"
-            android:fontFamily="@font/avenir"
-            android:hint="Organisation" />
-
-        <RelativeLayout
-            android:layout_width="320dp"
-            android:layout_height="190dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="48dp"
-            android:background="@drawable/custom_border">
-
-            <LinearLayout
-                android:id="@+id/linear_layout_2"
+                android:id="@+id/intro_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginHorizontal="10dp"
-                android:paddingBottom="10dp"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
+                android:layout_below="@id/intro_img"
+                android:layout_marginVertical="16dp"
+                android:fontFamily="@font/avenir"
+                android:text="How would you like \n to be introduced?"
+                android:textAlignment="center"
+                android:textColor="@color/colorBlackdark"
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
-                <ImageView
-                    android:id="@+id/msg_img"
-                    android:layout_width="50dp"
-                    android:layout_height="70dp"
-                    android:layout_marginRight="8dp"
-                    android:paddingTop="1dp"
-                    android:src="@drawable/message" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <EditText
+                    android:id="@+id/designation_etv"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/at_tv"
+                    android:fontFamily="@font/avenir"
+                    android:hint="Designation"
+                    android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/msg_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="70dp"
-                    android:fontFamily="@font/avenir"
-                    android:gravity="left"
-                    android:paddingTop="1dp"
-                    android:paddingBottom="3dp"
-                    android:text="@string/bioname"
-                    android:textColor="@color/colorBlue"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
+                    android:id="@+id/at_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@id/designation_etv"
+                    android:layout_alignParentRight="true"
+                    android:paddingHorizontal="16dp"
+                    android:text="at"
+                    android:textSize="20sp" />
+            </RelativeLayout>
 
             <EditText
-                android:id="@+id/bio_textbox"
+                android:id="@+id/org_etv"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_below="@+id/linear_layout_2"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/avenir"
-                android:layout_centerHorizontal="true"
-                android:layout_marginHorizontal="20dp"
-                android:background="@drawable/textbox"
-                android:textSize="15sp"
-                android:hint="Enter introduction here...\n\n"
-                android:padding="10dp" />
+                android:hint="Organisation"
+                android:textSize="15sp" />
 
-        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="10dp"
+                android:padding="16dp"
+                android:background="@drawable/custom_border">
 
-        <Button
-            android:id="@+id/done_onboarding_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_margin="16dp"
-            android:paddingHorizontal="12dp"
-            android:layout_gravity="center"
-            android:background="@color/lightpurple"
-            android:text="Done"
-            android:textColor="@color/colorwhite" />
+                <LinearLayout
+                    android:id="@+id/linear_layout_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/msg_img"
+                        android:layout_width="50dp"
+                        android:layout_height="70dp"
+                        android:layout_marginRight="8dp"
+                        android:paddingTop="1dp"
+                        android:src="@drawable/message" />
+
+                    <TextView
+                        android:id="@+id/msg_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:fontFamily="@font/avenir"
+                        android:gravity="left"
+                        android:paddingTop="1dp"
+                        android:paddingBottom="3dp"
+                        android:text="@string/bioname"
+                        android:textColor="@color/colorBlue"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <EditText
+                    android:id="@+id/bio_textbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_below="@+id/linear_layout_2"
+                    android:layout_centerHorizontal="true"
+                    android:background="@drawable/textbox"
+                    android:fontFamily="@font/avenir"
+                    android:hint="Enter introduction here...\n\n"
+                    android:padding="10dp"
+                    android:textSize="15sp" />
+
+            </RelativeLayout>
+
+            <!--<Button
+                android:id="@+id/done_onboarding_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="16dp"
+                android:paddingHorizontal="12dp"
+                android:layout_gravity="center"
+                android:background="@color/lightpurple"
+                android:text="Done"
+                android:textColor="@color/colorwhite" />-->
+        </LinearLayout>
     </LinearLayout>
 
 </FrameLayout>
